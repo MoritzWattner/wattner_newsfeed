@@ -243,29 +243,54 @@ def extract(
     meta = {
         "checked_at": ts,
         "strategy": used_strategy,
-        "selectors": sel_list,
+        "selectors": sel_list,  # aus config
+        # NEU: tatsächlich genutzte Selektoren/Fallback
+        "selectors_used": sel_list if matches else [used_strategy.replace("fallback:", "(fallback: ") + ")"],
         "used_nodes": node_labels,
     }
     return content, meta
 
 # --- Sichtbare Item-Beschreibung bauen ---
 def build_item_description(ev: Dict[str, Any]) -> str:
+    def _fmt(ts: str) -> str:
+        # hübsches RFC-2822; fällt auf Original zurück, falls Parsing scheitert
+        try:
+            return rfc2822(ts)
+        except Exception:
+            return ts or ""
+
+    fetched_at = ev.get('fetched_at', '')
+    checked_at = ev.get('checked_at', '')
+    selectors_used = ev.get('selectors_used') or ev.get('selectors') or []
+    selectors_txt = ", ".join(selectors_used) if selectors_used else "—"
+    used_nodes = ev.get('used_nodes', '')
+    excerpt = ev.get('content_excerpt', '') or ""
+
     header = (
-        f"<p><strong>Stand (Inhalt):</strong> {ev['fetched_at']}Z<br>"
-        f"<strong>Zuletzt geprüft:</strong> {ev.get('checked_at','')}Z<br>"
-        f"<strong>Selektoren:</strong> {', '.join(ev.get('selectors', [])) or '—'}<br>"
-        f"<strong>Genutzte Elemente:</strong> {html.escape(ev.get('used_nodes',''))}</p>"
+        f"<p><strong>Stand (Inhalt):</strong> {rss_escape(_fmt(fetched_at))}<br>"
+        f"<strong>Zuletzt geprüft:</strong> {rss_escape(_fmt(checked_at))}<br>"
+        f"<strong>Selektoren:</strong> {rss_escape(selectors_txt)}<br>"
+        f"<strong>Genutzte Elemente:</strong> {rss_escape(used_nodes)}</p>"
     )
+
     changes = (
         "<h3>Änderungen (neue Zeilen)</h3>"
         f"{ev.get('diff_added_html','')}"
         "<h3>Diff (komplett)</h3>"
         f"{ev.get('diff_html','')}"
     )
-    content_block = (
-        "<h3>Aktueller Inhalt (Auszug)</h3>"
-        f"<pre>{html.escape(ev.get('content_excerpt',''))}</pre>"
-    )
+
+    if excerpt.strip():
+        content_block = (
+            "<h3>Aktueller Inhalt (Auszug)</h3>"
+            f"<pre>{html.escape(excerpt)}</pre>"
+        )
+    else:
+        content_block = (
+            "<h3>Aktueller Inhalt (Auszug)</h3>"
+            "<p><em>Kein Text extrahiert. Prüfe Selektoren oder nutze den Fallback (main/body).</em></p>"
+        )
+
     return header + "<hr/>" + changes + "<hr/>" + content_block
 
 # --- Processing (ohne DB, mit state.json) ---
@@ -315,10 +340,11 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
         "name": cfg.name,
         "bundesland": cfg.bundesland,
         "url": cfg.url,
-        "fetched_at": now_iso,            # Stand (Inhalt)
-        "checked_at": meta["checked_at"], # Zuletzt geprüft
+        "fetched_at": now_iso,  # Stand (Inhalt)
+        "checked_at": meta["checked_at"],  # Zuletzt geprüft (ECHTES Datum)
         "strategy": meta["strategy"],
-        "selectors": meta["selectors"],
+        "selectors": meta["selectors"],  # aus config
+        "selectors_used": meta["selectors_used"],  # NEU: real genutzt (oder Fallback)
         "used_nodes": meta["used_nodes"],
         "diff_html": diff_html,
         "diff_added_html": diff_added_html,
