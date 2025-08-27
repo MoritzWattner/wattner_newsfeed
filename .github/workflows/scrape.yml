@@ -2,8 +2,8 @@ name: scrape-feeds
 
 on:
   schedule:
-    - cron: "*/60 * * * *"   # alle 60 Minuten
-  workflow_dispatch: {}       # manuell startbar
+    - cron: "*/15 * * * *"
+  workflow_dispatch: {}
 
 permissions:
   contents: write
@@ -19,6 +19,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Show workspace (before)
+        run: |
+          echo "PWD=$(pwd)"
+          ls -lah
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -30,26 +35,46 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run scraper
+        env:
+          PYTHONUNBUFFERED: "1"
         run: |
+          set -euxo pipefail
           mkdir -p data feeds logs
           python scraper.py --once
 
-      - name: Commit updated state.json
+      - name: Show workspace (after)
         run: |
-          if git diff --quiet -- data/state.json; then
-            echo "No state changes"
-          else
-            git config user.name "github-actions"
-            git config user.email "actions@github.com"
-            git add data/state.json
-            git commit -m "Update state.json [skip ci]" || true
-            git push
+          echo "== data =="
+          ls -lah data || true
+          echo "== feeds =="
+          ls -lah feeds || true
+          echo "== logs =="
+          ls -lah logs || true
+          [ -f data/state.json ] && head -n 20 data/state.json || true
+
+      - name: Upload logs (artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs
+          path: logs
+          if-no-files-found: warn
+
+      - name: Commit state.json (handles untracked)
+        run: |
+          set -euxo pipefail
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          # untracked Files erkennen:
+          if [ -f data/state.json ]; then
+            git add -A
+            git commit -m "Update state.json [skip ci]" || echo "no changes to commit"
+            git push || true
           fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload feeds artifact
+      - name: Upload feeds artifact (for Pages)
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./feeds
