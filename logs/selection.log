@@ -12283,3 +12283,948 @@
   matches=1
   used_nodes=div#main.all_colors
   text_len=4015 hash=5e6c0821b178
+[2025-08-27T19:25:43.825431+00:00] site=Regionalverband Braunschweig - Regionaler Raumordnungsplan
+  url=https://www.regionalverband-braunschweig.de/region-raum/planung-verfahren/regionalplanung/rrop-neuaufstelllung
+  strategy=selectors(#page-content)
+  selectors=[#page-content]
+  matches=1
+  used_nodes=div#page-content.main-part.bp-page-content.main-section
+  text_len=2389 hash=df5bbfe01fa4
+[2025-08-27T19:25:44.125631+00:00] site=Landkreis Celle - Regionaler Raumordnungsplan
+  url=https://www.landkreis-celle.de/index.php?ModID=7&FID=3314.15511.1&object=tx|3314.15511.1
+  strategy=selectors(main.site-content.wrapper)
+  selectors=[main.site-content.wrapper]
+  matches=1
+  used_nodes=main.site-content.wrapper
+  text_len=3305 hash=9e8061d705f4
+[2025-08-27T19:25:44.170770+00:00] site=Landkreis Lueneburg - Regionaler Raumordnungsplan
+  url=https://www.landkreis-lueneburg.de/fuer-unsere-buergerinnen-und-buerger/bauen-und-planen/regionalplanung/neuaufstellung-des-regionalen-raumordnungsprogramms.html
+  strategy=selectors(#MainContent)
+  selectors=[#MainContent]
+  matches=1
+  used_nodes=main#MainContent.Main
+  text_len=10968 hash=f89264bce95b
+[2025-08-27T19:25:44.240032+00:00] site=Landkreis Heidekreis - Regionaler Raumordnungsplan
+  url=https://www.heidekreis.de/bauen-planen/regional-und-bauleitplanung.html
+  strategy=selectors(main)
+  selectors=[main]
+  matches=1
+  used_nodes=main
+  text_len=13111 hash=befd45029502
+[2025-08-27T19:25:44.369463+00:00] site=Landkreis Goettingen - Regionaler Raumordnungsplan
+  url=https://www.landkreisgoettingen.de/Themen-Leistungen/Bauen-Infrastruktur/Regionalplanung/Neuaufstellung-Regionales-Raumordnungsprogramm/
+  strategy=selectors(.site-main.wrapper)
+  selectors=[.site-main.wrapper]
+  matches=1
+  used_nodes=main.site-main.wrapper
+  text_len=7535 hash=fce84b455179
+[2025-08-27T19:25:44.583490+00:00] site=Landkreis Hildesheim - Regionaler Raumordnungsplan
+  url=https://www.landkreishildesheim.de/Politik-Verwaltung/Verwaltung/Projekte/RROP/
+  strategy=selectors(#mtp_content)
+  selectors=[#mtp_content]
+  matches=1
+  used_nodes=div#mtp_content
+  text_len=2030 hash=845514afb436
+[2025-08-27T19:25:44.641224+00:00] site=Landkreis Hameln-Pyrmont - Regionaler Raumordnungsplan
+  url=https://www.hameln-pyrmont.de/Wirtschaft-Klima/Weitere-Themen/Regionalplanung-/
+  strategy=selectors(.inhalt)
+  selectors=[.inhalt]
+  matches=1
+  used_nodes=article.inhalt
+  text_len=1460 hash=54f9ea0dca42
+[2025-08-27T19:25:44.885425+00:00] site=Regionalverband Hannover- Regionaler Raumordnungsplan
+  url=https://www.hannover.de/Leben-in-der-Region-Hannover/Planen,-Bauen,-Wohnen/Raumordnung-Regionalentwicklung/Regionalplanung
+  strategy=selectors(.main-content-wrapper)
+  selectors=[.main-content-wrapper]
+  matches=1
+  used_nodes=div.main-content-wrapper
+  text_len=6514 hash=b1c49f86d9d7
+[2025-08-27T19:25:44.975153+00:00] site=Landkreis Vechta  - Regionaler Raumordnungsplan
+  url=https://www.landkreis-vechta.de/bauen-und-umwelt/planen-und-bauen/raumordnung/rrop.html
+  strategy=selectors(#col3)
+  selectors=[#col3]
+  matches=1
+  used_nodes=div#col3.col-lg-7
+  text_len=1013 hash=2713f7d350c2
+[2025-08-27T19:25:45.024113+00:00] site=Landkreis Northeim - Regionaler Raumordnungsplan
+  url=https://www.landkreis-northeim.de/portal/seiten/neuaufstellung-des-regionalen-raumordnungsprogramms-fuer-den-landkreis-northeim-900000239-23900.html
+  strategy=selectors(#nolis_content)
+  selectors=[#nolis_content]
+  matches=1
+  used_nodes=div#nolis_content
+  text_len=5626 hash=19625b99c559
+[2025-08-27T19:25:45.061227+00:00] site=Landkreis Holzminden - Regionaler Raumordnungsplan
+  url=https://www.landkreis-holzminden.de/portal/seiten/regionales-raumordnungsprogramm-rrop--900000126-25600.html
+  strategy=selectors(#middle)
+  selectors=[#middle]
+  matches=1
+  used_nodes=div#middle.innenw
+  text_len=3671 hash=9f052f00c4c4
+[2025-08-27T19:25:45.104239+00:00] site=Landkreis Luechow-Dannenberg - Regionaler Raumordnungsplan
+  url=https://www.luechow-dannenberg.de/portal/meldungen/neuaufstellung-des-regionalen-raumordnungsprogramms-rrop--900000258-38100.html
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=div#content
+  text_len=9015 hash=389693d7223d
+[2025-08-27T19:25:45.184974+00:00] site=Landkreis Harburg - Regionaler Raumordnungsplan
+  url=https://www.landkreis-harburg.de/portal/seiten/regionales-raumordnungsprogramm-rrop-2025-fuer-den-landkreis-harburg-901000407-20100.html
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=div#content
+  text_len=4307 hash=34f7772a86dc
+[2025-08-27T19:25:45.201000+00:00] site=Landkreis Schaumburg - Regionaler Raumordnungsplan
+  url=https://www.serviceportal-schaumburg.de/buergerservice/dienstleistungen/raumordnung-landesplanung-und-regionalplanung-900000734-24500.html
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=div#content
+  text_len=7798 hash=28a69815e5f0
+[2025-08-27T19:25:45.268737+00:00] site=Landkreis Emsland - Regionaler Raumordnungsplan
+  url=https://www.emsland.de/wirtschaft-struktur/raumplanung-und-bauen/regionalplanung/regionalplanung.html
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=div#content
+  text_len=6517 hash=3b87e341a54d
+[2025-08-27T19:25:45.312185+00:00] site=Landkreis Leer - Regionaler Raumordnungsplan
+  url=https://www.landkreis-leer.de/Themen/Bauen-Umwelt/Planung/Regionale-Raumordnung/
+  strategy=selectors(#readthis)
+  selectors=[#readthis]
+  matches=1
+  used_nodes=div#readthis
+  text_len=4467 hash=2f1382eb4d8d
+[2025-08-27T19:25:45.325178+00:00] site=Landkreis Nienburg-Weser - Regionaler Raumordnungsplan
+  url=https://www.lk-nienburg.de/politik-verwaltung/planen-bauen/regionalplanung/neuaufstellung-rrop/
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=div#content
+  text_len=4242 hash=75802a9e7b7b
+[2025-08-27T19:25:45.339251+00:00] site=Grafschaft Bentheim  - Regionaler Raumordnungsplan
+  url=https://www.grafschaft-bentheim.de/grafschaft/buergerservice/?ansicht=dienstleistung&eintrag=316
+  strategy=selectors(#blockBody)
+  selectors=[#blockBody]
+  matches=1
+  used_nodes=div#blockBody
+  text_len=422 hash=c0614c3eb213
+[2025-08-27T19:25:45.398638+00:00] site=Landkreis Wittmund - Regionaler Raumordnungsplan
+  url=https://www.landkreis-wittmund.de/Leben-Wohnen/Wohnen/Bauen-und-Planen/Regionalplanung/
+  strategy=selectors(.site-content.wrapper)
+  selectors=[.site-content.wrapper]
+  matches=1
+  used_nodes=section.site-content.wrapper
+  text_len=4296 hash=c1c543244b69
+[2025-08-27T19:25:45.426904+00:00] site=Landkreis Ammerland - Regionaler Raumordnungsplan
+  url=https://www.ammerland.de/Service/Von-A-Z/Dienstleistungen/Regionalplanung-Regionales-Raumordnungsprogramm-RROP-.php?ModID=10&FID=2843.2080.1
+  strategy=selectors(.column-md-1.column-4x5)
+  selectors=[.column-md-1.column-4x5]
+  matches=1
+  used_nodes=div.column-md-1.column-4x5
+  text_len=4368 hash=cc406c768188
+[2025-08-27T19:25:45.623631+00:00] site=Landkreis Osnabrueck  - Regionaler Raumordnungsplan
+  url=https://www.landkreis-osnabrueck.de/fachthemen/bauen/regionales-raumordnungsprogramm-rrop
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=section#content
+  text_len=24541 hash=f619a370779e
+[2025-08-27T19:25:45.761139+00:00] site=Landkreis Cuxhaven - Regionaler Raumordnungsplan
+  url=https://www.landkreis-cuxhaven.de/Themenbereiche/Bauen-Planen/Regionalplanung/
+  strategy=selectors(.inhalt.column-2.clearfix)
+  selectors=[.inhalt.column-2.clearfix]
+  matches=1
+  used_nodes=section.inhalt.column-2.clearfix
+  text_len=4309 hash=ec4c92524d41
+[2025-08-27T19:25:45.799168+00:00] site=Landkreis Cuxhaven - Regionaler Raumordnungsplan - Neuaufstellungen
+  url=https://www.landkreis-cuxhaven.de/Themenbereiche/Bauen-Planen/Regionalplanung/Neuaufstellung-des-RROP/
+  strategy=selectors(.inhalt.column-2.clearfix)
+  selectors=[.inhalt.column-2.clearfix]
+  matches=1
+  used_nodes=section.inhalt.column-2.clearfix
+  text_len=830 hash=74f753863ca2
+[2025-08-27T19:25:45.832918+00:00] site=Landkreis Cuxhaven - Regionaler Raumordnungsplan - RROP2012
+  url=https://www.landkreis-cuxhaven.de/Themenbereiche/Bauen-Planen/Regionalplanung/RROP-2012/
+  strategy=selectors(.inhalt.column-2.clearfix)
+  selectors=[.inhalt.column-2.clearfix]
+  matches=1
+  used_nodes=section.inhalt.column-2.clearfix
+  text_len=5402 hash=51d2268b00a2
+[2025-08-27T19:25:45.861569+00:00] site=Landkreis Friesland - Regionaler Raumordnungsplan
+  url=https://www.friesland.de/buergerservice/dienstleistungen/regionalplanung-regionales-raumordnungsprogramm-rrop--901001864-0.html
+  strategy=selectors(#middle)
+  selectors=[#middle]
+  matches=1
+  used_nodes=div#middle
+  text_len=18144 hash=090bd338d4b8
+[2025-08-27T19:25:45.869354+00:00] site=Landkreis Cloppenburg - Regionaler Raumordnungsplan
+  url=https://www.lkclp.de/unser-landkre/bauen--umwel/plane/raumordnung/regionales-raumordnungsprogramm-rrop
+  strategy=selectors(.main-inner)
+  selectors=[.main-inner]
+  matches=1
+  used_nodes=div.main-inner
+  text_len=2429 hash=5a756cff5237
+[2025-08-27T19:25:45.990273+00:00] site=Landkreis Aurich - Regionaler Raumordnungsplan
+  url=https://www.landkreis-aurich.de/bildung-wirtschaft/regionalplanung-und-kreisentwicklung/raumordnung/neuaufstellung-des-regionalen-raumordnungsprogramms-rrop.html
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=section#content.container
+  text_len=3082 hash=86cccdde632c
+[2025-08-27T19:25:46.099978+00:00] site=Landkreis Oldenburg - Regionaler Raumordnungsplan
+  url=https://www.oldenburg-kreis.de/planen-und-bauen/raumordnung-und-bauleitplanung/regionales-raumordnungsprogramm/neuaufstellung-des-regionalen-raumordnungsprogrammes-rrop-/
+  strategy=selectors(#nolis_content)
+  selectors=[#nolis_content]
+  matches=1
+  used_nodes=div#nolis_content
+  text_len=2413 hash=2a389c7bb929
+[2025-08-27T19:25:46.164702+00:00] site=Landkreis Stade - Regionaler Raumordnungsplan
+  url=https://www.landkreis-stade.de/portal/seiten/neuaufstellung-des-regionalen-raumordnungsprogramms-901001078-20350.html
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=div#content
+  text_len=2273 hash=a044a9c97fa0
+[2025-08-27T19:25:46.404360+00:00] site=Regierungspräsidium Kassel - Nordosthessen (Regionalplanung & Landesentwicklung)
+  url=https://rp-kassel.hessen.de/landesentwicklung
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main.col-12.col-lg-5
+  text_len=15466 hash=fc4762c3b0ea
+[2025-08-27T19:25:46.436970+00:00] site=Planregion NordOst-Hessen - Regionaler Raumordnungsplan
+  url=https://landesplanung.hessen.de/regionalplanung/nordosthessen
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main.col-12.col-lg-5
+  text_len=2544 hash=1b23c9b1357f
+[2025-08-27T19:25:46.466412+00:00] site=Landesplanung Hessen - Mittelhessen RP und Teilplan Energie
+  url=https://landesplanung.hessen.de/regionalplanung/mittelhessen
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main.col-12.col-lg-5
+  text_len=2995 hash=a1648ace17b0
+[2025-08-27T19:25:46.497326+00:00] site=Landkreis Rotenburg-Wuemme - Regionaler Raumordnungsplan
+  url=https://www.lk-row.de/portal/seiten/regionales-raumordnungsprogramm-rrop-des-landkreises-1072-23700.html
+  strategy=selectors(#nolis_content)
+  selectors=[#nolis_content]
+  matches=1
+  used_nodes=div#nolis_content
+  text_len=3358 hash=248bbd3df2ec
+[2025-08-27T19:25:46.533067+00:00] site=Landesplanung Hessen - Südhessen Regionalplanung
+  url=https://landesplanung.hessen.de/regionalplanung/suedhessen
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main.col-12.col-lg-5
+  text_len=4198 hash=589463fc9e3a
+[2025-08-27T19:25:46.572266+00:00] site=Landkreis Osterholz - Regionaler Raumordnungsplan
+  url=https://www.lk-row.de/portal/seiten/regionales-raumordnungsprogramm-rrop-des-landkreises-1072-23700.html
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=div#content
+  text_len=4560 hash=a3fd4b8f13ef
+[2025-08-27T19:25:46.589656+00:00] site=Landkreis Uelzen - Regionaler Raumordnungsplan
+  url=https://www.landkreis-uelzen.de/home/bauen-umwelt-tiere-und-lebensmittel/bauen/regionalplanung/neuaufstellung-des-regionalen-raumordnungsprogrammes-rrop-fuer-den-landkreis-uelzen-2019.aspx
+  strategy=selectors(#ctl01_contentpane)
+  selectors=[#ctl01_contentpane]
+  matches=1
+  used_nodes=div#ctl01_contentpane.row
+  text_len=3946 hash=7f0a65c7a40d
+[2025-08-27T19:25:46.637577+00:00] site=Regierungspräsidium Gießen - Regionalplanung Rundbriefe Regionalversammlung
+  url=https://rp-giessen.hessen.de/wirtschaft-und-planung/regionalplanung/rundbriefe-regionalversammlung
+  strategy=selectors(#main-content)
+  selectors=[#main-content]
+  matches=1
+  used_nodes=main#main-content.main.pb-5
+  text_len=3525 hash=3498db03c80a
+[2025-08-27T19:25:46.711493+00:00] site=Regierungspräsidium Gießen - Regionalplan Mittelhessen
+  url=https://rp-giessen.hessen.de/wirtschaft-und-planung/regionalplanung/regionalplan-mittelhessen
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main.col-12.col-lg-5
+  text_len=11195 hash=62989f0c2f4e
+[2025-08-27T19:25:46.847476+00:00] site=Landkreis Wesermarsch - Regionaler Raumordnungsplan
+  url=https://wesermarsch.de/services/bauen-planen/regionale-raumordnung/
+  strategy=selectors(.post-content)
+  selectors=[.post-content]
+  matches=1
+  used_nodes=div.post-content
+  text_len=7844 hash=8f9ac0f0b6a5
+[2025-08-27T19:25:46.891837+00:00] site=Regierungspräsidium Darmstadt - Regionalplan Südhessen & Teilplan EE und 1. Änderung
+  url=https://rp-darmstadt.hessen.de/infrastruktur-und-wirtschaft/regionalplanung/regionalplan-suedhessen/teilplan-erneuerbare-energien-2019
+  strategy=selectors(#main-content)
+  selectors=[#main-content]
+  matches=1
+  used_nodes=main#main-content.main.pb-5
+  text_len=12250 hash=1fb1d5d1b519
+[2025-08-27T19:25:46.922682+00:00] site=Landesplanung Hessen - Potenzialflächenkataster
+  url=https://landesplanung.hessen.de/potenzialflaechenkataster
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main.col-12.col-lg-5
+  text_len=2929 hash=bc7f3c5bda56
+[2025-08-27T19:25:46.954830+00:00] site=Landesplanung Hessen - Regionalplanung
+  url=https://landesplanung.hessen.de/regionalplanung
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main.col-12.col-lg-5
+  text_len=1845 hash=2feb11923556
+[2025-08-27T19:25:46.981451+00:00] site=Regierungspräsidium Darmstadt - Regionalplan Südhessen & Regionaler Flächennutzungsplan
+  url=https://rp-darmstadt.hessen.de/infrastruktur-und-wirtschaft/regionalplanung/regionalplan-suedhessen/regionalplan-suedhessen-regionaler-flaechennutzungsplan
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main.col-12.col-lg-5
+  text_len=1879 hash=6bf2950ed14f
+[2025-08-27T19:25:47.018450+00:00] site=Landesplanung Hessen - Geodaten Regionalpläne
+  url=https://landesplanung.hessen.de/geodaten/regionalplaene
+  strategy=selectors(#main-content)
+  selectors=[#main-content]
+  matches=1
+  used_nodes=main#main-content.main.pb-5
+  text_len=5843 hash=ea3f326b5f2d
+[2025-08-27T19:25:47.048638+00:00] site=Regierungspräsidium Darmstadt - Regionalplan Südhessen
+  url=https://rp-darmstadt.hessen.de/infrastruktur-und-wirtschaft/regionalplanung/regionalplan-suedhessen
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main.col-12.col-lg-5
+  text_len=3586 hash=2e31d5de1452
+[2025-08-27T19:25:47.110872+00:00] site=Landkreis Diepholz - Regionaler Raumordnungsplan
+  url=https://www.diepholz.de/portal/seiten/regionalplanung-regionalentwicklung-1000571-21750.html
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=div#content
+  text_len=22408 hash=71fc7f2a533d
+[2025-08-27T19:25:47.155815+00:00] site=Regierungspräsidium Kassel - Erneuerbare Energien und Solarenergienutzung
+  url=https://rp-kassel.hessen.de/landesentwicklung/erneuerbare-energien/solarenergienutzung
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main.col-12.col-lg-5
+  text_len=5599 hash=e561bd297bec
+[2025-08-27T19:25:47.285958+00:00] site=Landkreis Verden - Regionaler Raumordnungsplan
+  url=https://www.landkreis-verden.de/abfall-bauen-umwelt/regionalplanung/rrop-2016/
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=div#content
+  text_len=2582 hash=ce15f2e7a6f8
+[2025-08-27T19:25:47.328533+00:00] site=Regierungspräsidium Darmstadt - Regionalplan Südhessen Neuaufstellung
+  url=https://rp-darmstadt.hessen.de/infrastruktur-und-wirtschaft/regionalplanung/regionalplan-suedhessen/neuaufstellung
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main.col-12.col-lg-5
+  text_len=13417 hash=929b17fb4bc2
+[2025-08-27T19:25:47.356119+00:00] site=Regionalplan Nordhessen - Geoportal Nordhessen
+  url=https://www.geoportalnordhessen.de/de/regionalplan-nordhessen.html
+  strategy=selectors(.col-12.order-1)
+  selectors=[.col-12.order-1]
+  matches=1
+  used_nodes=main.col-12.order-1
+  text_len=736 hash=74d39fb27ef9
+[2025-08-27T19:25:47.369538+00:00] site=Planungsgemeinschaft Mittelrhein-Westerwald - Teilfortschreibung Erneuerbare Energien
+  url=https://www.mittelrhein-westerwald.de/index.php/teilfortschreibung-erneuerbare-energien
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=div#content
+  text_len=4524 hash=92809dcadb59
+[2025-08-27T19:25:47.377165+00:00] site=Planungsgemeinschaft Mittelrhein-Westerwald
+  url=https://www.mittelrhein-westerwald.de/index.php/veroeffentlichungen/raumordnungsplan
+  strategy=selectors(#contentWrapper)
+  selectors=[#contentWrapper]
+  matches=1
+  used_nodes=div#contentWrapper
+  text_len=1760 hash=ff427371e1f2
+[2025-08-27T19:25:47.383591+00:00] site=Planungsgemeinschaft Mittelrhein-Westerwald - Raumordnungsbericht
+  url=https://www.mittelrhein-westerwald.de/index.php/veroeffentlichungen/raumordnungsbericht
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=div#content
+  text_len=189 hash=6365ba4b5cde
+[2025-08-27T19:25:47.405271+00:00] site=Metropolregion Rhein-Neckar - Aufstellung Teilregionalplan Freiflächenphotovoltaik
+  url=https://planungsregion.m-r-n.com/regionalplan/teilregionalplan-photovoltaik/
+  strategy=selectors(div.grid__item--twothirds.content)
+  selectors=[div.grid__item--twothirds.content]
+  matches=1
+  used_nodes=div.grid__item--twothirds.content
+  text_len=25345 hash=7c8939a0be07
+[2025-08-27T19:25:47.423384+00:00] site=Metropolregion Rhein-Neckar - Einheitlicher Regionalplan
+  url=https://planungsregion.m-r-n.com/regionalplan/einheitlicher-regionalplan/
+  strategy=selectors(div.grid__item--twothirds.content)
+  selectors=[div.grid__item--twothirds.content]
+  matches=1
+  used_nodes=div.grid__item--twothirds.content
+  text_len=3524 hash=94ad2bdb978e
+[2025-08-27T19:25:47.438414+00:00] site=Metropolregion Rhein-Neckar - Teilregionalplan Windenergie
+  url=https://planungsregion.m-r-n.com/regionalplan/teilregionalplan-windenergie/
+  strategy=selectors(div.grid__item--twothirds.content)
+  selectors=[div.grid__item--twothirds.content]
+  matches=1
+  used_nodes=div.grid__item--twothirds.content
+  text_len=2777 hash=0a06e7b97735
+[2025-08-27T19:25:47.459837+00:00] site=Metropolregion Rhein-Neckar - Fortschreibung Teilregionalplan Windenergie
+  url=https://planungsregion.m-r-n.com/regionalplan/fortschreibung-des-teilregionalplans-windenergie/
+  strategy=selectors(div.grid__item--twothirds.content)
+  selectors=[div.grid__item--twothirds.content]
+  matches=1
+  used_nodes=div.grid__item--twothirds.content
+  text_len=28420 hash=6ce873366c4f
+[2025-08-27T19:25:47.731562+00:00] site=Ministerium des Innern und für Sport - Regionalplanung
+  url=https://ris.rlp.de/service/regionale-raumordnungsplaene
+  strategy=selectors(#c31628)
+  selectors=[#c31628]
+  matches=1
+  used_nodes=div#c31628.container.my-0.py-0.frame.frame-default.frame-type-container_accordion.frame-layout-0
+  text_len=637 hash=fde50d6b8ec2
+[2025-08-27T19:25:47.863206+00:00] site=Region FrankfurtRheinMain - Regionaler Flächennutzungsplan & Teilplan EE 2019
+  url=https://www.region-frankfurt.de/Unsere-Themen-Leistungen/Regionaler-Fl%C3%A4chennutzungsplan/Beteiligung-und-aktueller-Stand-/Der-g%C3%BCltige-RegFNP-2010/
+  strategy=selectors(#jump-content)
+  selectors=[#jump-content]
+  matches=1
+  used_nodes=div#jump-content.main-content-area.column-2x3.column-md-1
+  text_len=18767 hash=804b4839b7a5
+[2025-08-27T19:25:47.879837+00:00] site=Regionalplan Karlsruhe
+  url=https://www.region-karlsruhe.de/regionalplan/teilfortschreibungen/teilfortschreibung-solarenergie
+  strategy=selectors(.whitebg)
+  selectors=[.whitebg]
+  matches=1
+  used_nodes=div.container.whitebg
+  text_len=4762 hash=1a459a5abf89
+[2025-08-27T19:25:47.909303+00:00] site=Regionalplan Karlsruhe
+  url=https://www.region-karlsruhe.de/regionalplan/teilfortschreibungen
+  strategy=selectors(#container-white)
+  selectors=[#container-white]
+  matches=1
+  used_nodes=div#container-white.wrapper
+  text_len=1101 hash=cbc53b6f5838
+[2025-08-27T19:25:47.926808+00:00] site=Regionalplan Rhein-Neckar
+  url=https://planungsregion.m-r-n.com/regionalplan/
+  strategy=selectors(.content-block)
+  selectors=[.content-block]
+  matches=1
+  used_nodes=section.content-block
+  text_len=1884 hash=13a67cfb3738
+[2025-08-27T19:25:47.943840+00:00] site=Regionalplan Donau-Iller
+  url=https://www.rvdi.de/regionalplanung
+  strategy=selectors(.content)
+  selectors=[.content]
+  matches=1
+  used_nodes=div.content
+  text_len=2120 hash=6f556a70e1d6
+[2025-08-27T19:25:47.956078+00:00] site=Regionalplan Donau-Iller
+  url=https://www.rvdi.de/regionalplanung/beteiligungsverfahren
+  strategy=selectors(.content)
+  selectors=[.content]
+  matches=1
+  used_nodes=div.content
+  text_len=4321 hash=dd72a89822ad
+[2025-08-27T19:25:47.961800+00:00] site=Regionalplan Neckar-Alb
+  url=https://www.rvna.de/Startseite/Regionalplanung/Regionalplan+Ueberblick.html
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main
+  text_len=1137 hash=b5f0349a854d
+[2025-08-27T19:25:48.045903+00:00] site=Regionalplan Rhein-Neckar
+  url=https://planungsregion.m-r-n.com/regionalplan/teilregionalplan-photovoltaik/
+  strategy=selectors(.main-content)
+  selectors=[.main-content]
+  matches=1
+  used_nodes=section.wrapper.grid__row.page--base.main-content
+  text_len=25457 hash=82d4bfa79d0c
+[2025-08-27T19:25:48.056665+00:00] site=Regionalplan Bodensee-Oberschwaben
+  url=https://www.rvbo.de/Planung/Fortschreibung-Regionalplan
+  strategy=selectors(body)
+  selectors=[body]
+  matches=1
+  used_nodes=body.contentpage
+  text_len=5560 hash=fc622584213f
+[2025-08-27T19:25:48.071241+00:00] site=Planungsgemeinschaft Region Trier - Bekanntmachungen
+  url=https://www.plg-region-trier.de/index.php/aktuelles/bekanntmachungen
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=div#content
+  text_len=1520 hash=89fdb804b3fe
+[2025-08-27T19:25:48.086219+00:00] site=Regionalplan Bodensee-Oberschwaben
+  url=https://www.rvbo.de/
+  strategy=selectors(.main-container)
+  selectors=[.main-container]
+  matches=1
+  used_nodes=div.container-fluid.main-container
+  text_len=2211 hash=e9468cd29f96
+[2025-08-27T19:25:48.095506+00:00] site=Regionalplan Bodensee-Oberschwaben
+  url=https://www.rvbo.de/
+  strategy=fallback:body
+  selectors=[main]
+  matches=0
+  used_nodes=body.frontpage
+  text_len=2954 hash=eb002a9d6a8c
+[2025-08-27T19:25:48.107664+00:00] site=Planungsgemeinschaft Region Trier - Materialien / Verfahren / Projekte
+  url=https://www.plg-region-trier.de/index.php/materialien/info-hefte
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=div#content
+  text_len=1258 hash=a80707ac2d4b
+[2025-08-27T19:25:48.118764+00:00] site=Planungsgemeinschaft Region Trier - Regionalplan
+  url=https://www.plg-region-trier.de/index.php/materialien/regionalplan
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=div#content
+  text_len=1264 hash=bb5e2e244e8f
+[2025-08-27T19:25:48.138547+00:00] site=Planungsgemeinschaft Region Trier - Neuaufstellung Regionalplan
+  url=https://www.plg-region-trier.de/index.php/materialien/neuaufstellung-regionalplan
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=div#content
+  text_len=4785 hash=3f3107a1636b
+[2025-08-27T19:25:48.147459+00:00] site=Regionalplan Schwarzwald-Baar-Heuberg
+  url=https://www.regionalverband-sbh.de/seite/587156/regionalplan-2003.html
+  strategy=selectors(main)
+  selectors=[main]
+  matches=1
+  used_nodes=main
+  text_len=795 hash=42c7c9ddbd9c
+[2025-08-27T19:25:48.154195+00:00] site=Planungsgemeinschaft Westpfalz - Aktuelles & Bekanntmachungen
+  url=https://www.pg-westpfalz.de/pgw/aktuelles-bekanntmachungen/
+  strategy=selectors(#page)
+  selectors=[#page]
+  matches=1
+  used_nodes=div#page.site
+  text_len=1770 hash=721af443e50f
+[2025-08-27T19:25:48.163389+00:00] site=Planungsgemeinschaft Westpfalz - Raumordnungsplan
+  url=https://www.pg-westpfalz.de/regionalplanung/raumordnungsplan/
+  strategy=selectors(#page)
+  selectors=[#page]
+  matches=1
+  used_nodes=div#page.site
+  text_len=5937 hash=072d8743c005
+[2025-08-27T19:25:48.169449+00:00] site=Regionalplan Neckar-Alb
+  url=https://www.rvna.de/Startseite/Regionalplanung/teilfortschreibung+solarenergie.html
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main
+  text_len=2804 hash=a1ff6ce51f26
+[2025-08-27T19:25:48.211833+00:00] site=Planungsgemeinschaft Westpfalz - Regionalstatistik & Raumbeobachtung
+  url=https://www.pg-westpfalz.de/regionalplanung/regionalstatistik/
+  strategy=selectors(#page)
+  selectors=[#page]
+  matches=1
+  used_nodes=div#page.site
+  text_len=1323 hash=ee4822b23c4e
+[2025-08-27T19:25:48.221147+00:00] site=Regionalplan Schwarzwald-Baar-Heuberg
+  url=https://www.regionalverband-sbh.de/seite/587136/gesamtplanfortschreibung.html
+  strategy=selectors(main)
+  selectors=[main]
+  matches=1
+  used_nodes=main
+  text_len=6573 hash=f4931df79adb
+[2025-08-27T19:25:48.240934+00:00] site=Planungsgemeinschaft Rheinhessen-Nahe - Regionaler Raumordnungsplan 2014
+  url=https://www.pg-rheinhessen-nahe.de/projekte/reg-raumordnungsplan-2014/
+  strategy=selectors(body)
+  selectors=[body]
+  matches=1
+  used_nodes=body.wp-singular.page-template.page-template-elementor_header_footer.page.page-id-1047.page-child.parent-pageid-695.wp-custom-logo.wp-embed-responsive.wp-theme-hello-elementor.hello-elementor-default.elementor-default.elementor-template-full-width.elementor-kit-4.elementor-page.elementor-page-1047
+  text_len=6505 hash=7bb324e17f1a
+[2025-08-27T19:25:48.262453+00:00] site=Planungsgemeinschaft Rheinhessen-Nahe - Raumordnungsbericht
+  url=https://www.pg-rheinhessen-nahe.de/projekte/reg-raumordnungsbericht/
+  strategy=selectors(body)
+  selectors=[body]
+  matches=1
+  used_nodes=body.wp-singular.page-template.page-template-elementor_header_footer.page.page-id-1055.page-child.parent-pageid-695.wp-custom-logo.wp-embed-responsive.wp-theme-hello-elementor.hello-elementor-default.elementor-default.elementor-template-full-width.elementor-kit-4.elementor-page.elementor-page-1055
+  text_len=5228 hash=5bb657dfeded
+[2025-08-27T19:25:48.283235+00:00] site=Planungsgemeinschaft Rheinhessen-Nahe - Fortschreibung
+  url=https://www.pg-rheinhessen-nahe.de/projekte/fortschreibungen-rop/
+  strategy=selectors(body)
+  selectors=[body]
+  matches=1
+  used_nodes=body.wp-singular.page-template.page-template-elementor_header_footer.page.page-id-4224.page-child.parent-pageid-695.wp-custom-logo.wp-embed-responsive.wp-theme-hello-elementor.hello-elementor-default.elementor-default.elementor-template-full-width.elementor-kit-4.elementor-page.elementor-page-4224
+  text_len=8019 hash=0d103df25f69
+[2025-08-27T19:25:48.300466+00:00] site=Regionalplan Suedlicher Oberrhein
+  url=https://www.vrso.de/de/regionalplanung/fortschreibung-regionalplan/index_VerfahrenSolar.php
+  strategy=selectors(#blockMain)
+  selectors=[#blockMain]
+  matches=1
+  used_nodes=div#blockMain
+  text_len=3815 hash=a9c01dbebc72
+[2025-08-27T19:25:48.312402+00:00] site=Regionalplan Karlsruhe
+  url=https://rvmo.raumordnung-online.de/verfahren/solarenergiervmo/public/detail
+  strategy=selectors(.o-page__main)
+  selectors=[.o-page__main]
+  matches=1
+  used_nodes=main#jumpContent.o-page__main.layout--flush.flow-root
+  text_len=3543 hash=cdd98e6fc852
+[2025-08-27T19:25:48.319231+00:00] site=Regionalplan Suedlicher Oberrhein
+  url=https://www.vrso.de/de/planung/regionalplan/
+  strategy=selectors(#blockMain)
+  selectors=[#blockMain]
+  matches=1
+  used_nodes=div#blockMain
+  text_len=1518 hash=35bfcd2f7099
+[2025-08-27T19:25:48.353905+00:00] site=Regionalplan Heilbronn-Franken
+  url=https://www.rvhnf.de/rp2020-aenderungen
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=main#main
+  text_len=22345 hash=7e630f76b98e
+[2025-08-27T19:25:48.366613+00:00] site=Planungsgemeinschaft Westpfalz - Themen Regionalplanung & Regionalentwicklung
+  url=https://www.pg-westpfalz.de/regionalplanung/themen/
+  strategy=selectors(#page)
+  selectors=[#page]
+  matches=1
+  used_nodes=div#page.site
+  text_len=14728 hash=d3fbba6ebacf
+[2025-08-27T19:25:48.429376+00:00] site=Regionalplan Nordschwarzwald
+  url=https://nordschwarzwald-region.de/regionalplanung/teilfortschreibungen/teilregionalplan-solarenergie/
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main.vamtam-main.layout-full
+  text_len=4587 hash=32b5fe7faf40
+[2025-08-27T19:25:48.476319+00:00] site=Regionalplan Nordschwarzwald
+  url=https://nordschwarzwald-region.de/regionalplanung/regionalplan/
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main.vamtam-main.layout-full
+  text_len=4083 hash=6f91fa2c4bda
+[2025-08-27T19:25:48.503122+00:00] site=Regionalplan Heilbronn-Franken
+  url=https://www.rvhnf.de/tfs-solarenergie
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=main#main
+  text_len=11809 hash=56f75d755711
+[2025-08-27T19:25:48.660759+00:00] site=Regionalplan Oberfranken-West
+  url=https://www.oberfranken-west.de/Regionalplan/%C3%84nderungen/
+  strategy=selectors(.main-content)
+  selectors=[.main-content]
+  matches=1
+  used_nodes=div.main-content.column-1
+  text_len=8748 hash=3523747cc273
+[2025-08-27T19:25:48.719831+00:00] site=Regionalplan Region Nuernberg
+  url=https://www.nuernberg.de/internet/pim/bisherigefortschreibungen.html
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=main#main.main
+  text_len=6410 hash=63c1cce0f7ed
+[2025-08-27T19:25:48.763928+00:00] site=Regionalplan Region Main-Rhoen
+  url=https://www.regierung.unterfranken.bayern.de/aufgaben/177666/177670/eigene_leistung/el_00283/index.html
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main
+  text_len=13338 hash=e01632c6a8ad
+[2025-08-27T19:25:48.799313+00:00] site=Regionalplan Region Bayerischer Untermain
+  url=https://www.regierung.unterfranken.bayern.de/aufgaben/177666/177670/eigene_leistung/el_00223/index.html
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main
+  text_len=12751 hash=597da54614b3
+[2025-08-27T19:25:48.844986+00:00] site=Regionalplan Region Wuerzburg
+  url=https://www.regierung.unterfranken.bayern.de/aufgaben/177666/177670/eigene_leistung/el_00276/index.html
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main
+  text_len=20895 hash=bdf4144503b8
+[2025-08-27T19:25:48.884997+00:00] site=Regionalplan Ostwuerttemberg
+  url=https://www.ostwuerttemberg.org/regionalplanung/teilfortschreibungen/
+  strategy=selectors(body)
+  selectors=[body]
+  matches=1
+  used_nodes=body
+  text_len=2036 hash=f79e9e6ce7a3
+[2025-08-27T19:25:48.919412+00:00] site=Regionalplan Stuttgart
+  url=https://www.region-stuttgart.org/de/bereiche-aufgaben/regionalplanung/solarenergie/
+  strategy=selectors(.main)
+  selectors=[.main]
+  matches=1
+  used_nodes=main#content.main
+  text_len=3523 hash=9eba7bde05d6
+[2025-08-27T19:25:48.942916+00:00] site=Regionalplan Stuttgart
+  url=https://www.region-stuttgart.org/de/bereiche-aufgaben/regionalplanung/regionalplan/abgeschlossenen-aenderungsverfahren-des-regionalplans/
+  strategy=selectors(.main)
+  selectors=[.main]
+  matches=1
+  used_nodes=main#content.main
+  text_len=902 hash=6cc08814fc79
+[2025-08-27T19:25:48.955774+00:00] site=Regionalplan Region Nuernberg
+  url=https://www.nuernberg.de/internet/pim/aktuellefortschreibungen.html
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=main#main.main
+  text_len=2806 hash=7e459a8444c4
+[2025-08-27T19:25:49.003197+00:00] site=Regionalplan Region Oberpfalz-Nord
+  url=https://www.regierung.oberpfalz.bayern.de/service/landes_und_regionalplanung/regionalplanung/index.html
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main
+  text_len=18012 hash=7a425dab2018
+[2025-08-27T19:25:49.016670+00:00] site=Regionalplan Ostwuerttemberg
+  url=https://www.ostwuerttemberg.org/regionalplanung/teilfortschreibungen/erneuerbare-energien-2025/
+  strategy=selectors(body)
+  selectors=[body]
+  matches=1
+  used_nodes=body
+  text_len=10822 hash=d23f1f507381
+[2025-08-27T19:25:49.062248+00:00] site=Regionalplan Region Regensburg
+  url=https://www.regierung.oberpfalz.bayern.de/service/landes_und_regionalplanung/regionalplanung/index.html
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main
+  text_len=18012 hash=7a425dab2018
+[2025-08-27T19:25:49.113222+00:00] site=Regionalplan Donau-Iller
+  url=https://www.rvdi.de/regionalplanung/regionalplan
+  strategy=selectors(.content)
+  selectors=[.content]
+  matches=1
+  used_nodes=div.content
+  text_len=4941 hash=27c32e35ab1a
+[2025-08-27T19:25:49.122826+00:00] site=Regionalplan Donau-Iller
+  url=https://www.rvdi.de/regionalplanung/beteiligungsverfahren
+  strategy=selectors(.content)
+  selectors=[.content]
+  matches=1
+  used_nodes=div.content
+  text_len=4321 hash=dd72a89822ad
+[2025-08-27T19:25:49.138241+00:00] site=Regionalplan Landshut
+  url=https://region.landshut.org/seite/547999/fortschreibungen.html
+  strategy=selectors(main)
+  selectors=[main]
+  matches=1
+  used_nodes=main
+  text_len=4284 hash=f8db854560d0
+[2025-08-27T19:25:49.155909+00:00] site=Regionalplan Donau-Wald
+  url=https://www.region-donau-wald.de/regionalplan/laufende-fortschreibungen
+  strategy=selectors(body)
+  selectors=[body]
+  matches=1
+  used_nodes=body
+  text_len=4308 hash=ba7ef114ac88
+[2025-08-27T19:25:49.163324+00:00] site=Regionalplan Landshut
+  url=https://region.landshut.org/seite/554522/aktuelle-fortschreibungen.html
+  strategy=selectors(main)
+  selectors=[main]
+  matches=1
+  used_nodes=main
+  text_len=1613 hash=8e2aa01ca69b
+[2025-08-27T19:25:49.175445+00:00] site=Regionalplan Oberfranken-Ost
+  url=https://www.planungsverband-oberfranken-ost.de/regionalplan/aktuelle-fortschreibungen/
+  strategy=selectors(body)
+  selectors=[body]
+  matches=1
+  used_nodes=body.wp-singular.page-template-default.page.page-id-3025.page-child.parent-pageid-91.wp-custom-logo.wp-embed-responsive.wp-theme-hello-elementor.hello-elementor-default.elementor-default.elementor-kit-5.elementor-page.elementor-page-3025.elementor-page-1102
+  text_len=2657 hash=6adc9ab4d97c
+[2025-08-27T19:25:49.181326+00:00] site=Regionalplan Donau-Iller
+  url=https://www.rvdi.de/regionalplanung
+  strategy=selectors(.content)
+  selectors=[.content]
+  matches=1
+  used_nodes=div.content
+  text_len=2120 hash=6f556a70e1d6
+[2025-08-27T19:25:49.201752+00:00] site=Regionalplan Oberfranken-Ost
+  url=https://www.planungsverband-oberfranken-ost.de/regionalplan/aenderungen/
+  strategy=selectors(body)
+  selectors=[body]
+  matches=1
+  used_nodes=body.wp-singular.page-template-default.page.page-id-214.page-child.parent-pageid-91.wp-custom-logo.wp-embed-responsive.wp-theme-hello-elementor.hello-elementor-default.elementor-default.elementor-kit-5.elementor-page.elementor-page-214.elementor-page-1102
+  text_len=6314 hash=faaf3987880e
+[2025-08-27T19:25:49.214562+00:00] site=Regionalplan Oberfranken-Ost
+  url=https://www.planungsverband-oberfranken-ost.de/regionalplan/
+  strategy=selectors(body)
+  selectors=[body]
+  matches=1
+  used_nodes=body.wp-singular.page-template-default.page.page-id-91.page-parent.wp-custom-logo.wp-embed-responsive.wp-theme-hello-elementor.hello-elementor-default.elementor-default.elementor-kit-5.elementor-page.elementor-page-91.elementor-page-1102
+  text_len=3541 hash=84d2736379c9
+[2025-08-27T19:25:49.234227+00:00] site=Regionalplan Donau-Wald
+  url=https://www.region-donau-wald.de/regionalplan
+  strategy=selectors(body)
+  selectors=[body]
+  matches=1
+  used_nodes=body
+  text_len=6027 hash=7a26915018c6
+[2025-08-27T19:25:49.439975+00:00] site=Regionalplan Westmittelfranken
+  url=https://www.region-westmittelfranken.de/Regionalplan/Regionalplan-Aenderungen.html
+  strategy=selectors(.center)
+  selectors=[.center]
+  matches=1
+  used_nodes=div.center
+  text_len=996 hash=d889cccbb47b
+[2025-08-27T19:25:49.463854+00:00] site=Regionalplan Donau-Wald
+  url=https://www.region-donau-wald.de/regionalplan/abgeschlossene-aenderungen
+  strategy=selectors(body)
+  selectors=[body]
+  matches=1
+  used_nodes=body
+  text_len=5230 hash=0e68509090f9
+[2025-08-27T19:25:49.488592+00:00] site=Regionalplan Muenchen
+  url=https://www.region-muenchen.com/verfahren
+  strategy=selectors(body)
+  selectors=[body]
+  matches=1
+  used_nodes=body#p865
+  text_len=8707 hash=982ba617e1cd
+[2025-08-27T19:25:49.688969+00:00] site=Regionale Planungsgemeinschaft Nordthüringen - Änderung und Verfahrensstand RROP
+  url=https://regionalplanung.thueringen.de/nordthueringen/regionalplan-nordthueringen/aenderung-des-regionalplanes/verfahrensstand
+  strategy=selectors(div.th-content.th-rows)
+  selectors=[div.th-content.th-rows]
+  matches=1
+  used_nodes=div.th-content.th-rows
+  text_len=1638 hash=767e2e01cf99
+[2025-08-27T19:25:49.717858+00:00] site=Regionale Planungsgemeinschaft Nordthüringen - Änderung RROP Entwurf 
+  url=https://regionalplanung.thueringen.de/nordthueringen/regionalplan-nordthueringen/aenderung-des-regionalplanes/entwurf
+  strategy=selectors(div.th-content.th-rows)
+  selectors=[div.th-content.th-rows]
+  matches=1
+  used_nodes=div.th-content.th-rows
+  text_len=589 hash=8f6152af549c
+[2025-08-27T19:25:49.745631+00:00] site=Regionale Planungsgemeinschaft Nordthüringen - Regionalplan Nordthüringen 2012
+  url=https://regionalplanung.thueringen.de/nordthueringen/regionalplan-nordthueringen/regionalplan-nordthueringen-2012
+  strategy=selectors(div.th-content.th-rows)
+  selectors=[div.th-content.th-rows]
+  matches=1
+  used_nodes=div.th-content.th-rows
+  text_len=2357 hash=dce535ee333a
+[2025-08-27T19:25:49.845081+00:00] site=Regionale Planungsgemeinschaft Mittelthüringen - Regionalplan Mittelthüringen 2011
+  url=https://regionalplanung.thueringen.de/mittelthueringen/regionalplan-mittelthueringen
+  strategy=selectors(div.th-content.th-rows)
+  selectors=[div.th-content.th-rows]
+  matches=1
+  used_nodes=div.th-content.th-rows
+  text_len=4230 hash=aa787071fa87
+[2025-08-27T19:25:49.874724+00:00] site=Regionale Planungsgemeinschaft Südwestthüringen - Regionalplan Südwestthüringen 2012
+  url=https://regionalplanung.thueringen.de/suedwestthueringen/regionalplan-suedwestthueringen/regionalplan-suedwestthueringen-2012
+  strategy=selectors(div.th-content.th-rows)
+  selectors=[div.th-content.th-rows]
+  matches=1
+  used_nodes=div.th-content.th-rows
+  text_len=5484 hash=ae81f528d523
+[2025-08-27T19:25:49.902901+00:00] site=Regionale Planungsgemeinschaft Mittelthüringen - Änderung und Verfahrensstand RROP/TP
+  url=https://regionalplanung.thueringen.de/mittelthueringen/regionalplan-mittelthueringen/aenderung-des-regionalplanes/verfahrensstand
+  strategy=selectors(div.th-content.th-rows)
+  selectors=[div.th-content.th-rows]
+  matches=1
+  used_nodes=div.th-content.th-rows
+  text_len=3481 hash=e6d7ba1047cb
+[2025-08-27T19:25:49.930852+00:00] site=Regionale Planungsgemeinschaft Südwestthüringen - Änderung RROP Entwurf
+  url=https://regionalplanung.thueringen.de/suedwestthueringen/regionalplan-suedwestthueringen/aenderung-des-regionalplanes/entwurf
+  strategy=selectors(div.th-content.th-rows)
+  selectors=[div.th-content.th-rows]
+  matches=1
+  used_nodes=div.th-content.th-rows
+  text_len=2142 hash=7b316eb4068e
+[2025-08-27T19:25:49.958822+00:00] site=Regionale Planungsgemeinschaft Mittelthüringen - Änderung RROP Entwurf
+  url=https://regionalplanung.thueringen.de/mittelthueringen/regionalplan-mittelthueringen/aenderung-des-regionalplanes/entwurf/entwurfsstand-092019
+  strategy=selectors(div.th-content.th-rows)
+  selectors=[div.th-content.th-rows]
+  matches=1
+  used_nodes=div.th-content.th-rows
+  text_len=453 hash=4336d79f93e7
+[2025-08-27T19:25:49.987649+00:00] site=Regionale Planungsgemeinschaft Südwestthüringen - Änderung und Verfahrensstand RROP
+  url=https://regionalplanung.thueringen.de/suedwestthueringen/regionalplan-suedwestthueringen/aenderung-des-regionalplanes/verfahrensstand
+  strategy=selectors(div.th-content.th-rows)
+  selectors=[div.th-content.th-rows]
+  matches=1
+  used_nodes=div.th-content.th-rows
+  text_len=887 hash=5f7f2afc429b
+[2025-08-27T19:25:50.018649+00:00] site=Regionale Planungsgemeinschaft Ostthüringen - Regionalplan Ostthüringen 2012
+  url=https://regionalplanung.thueringen.de/ostthueringen/regionalplan-ostthueringen/regionalplan-ostthueringen-2012
+  strategy=selectors(div.th-content.th-rows)
+  selectors=[div.th-content.th-rows]
+  matches=1
+  used_nodes=div.th-content.th-rows
+  text_len=2422 hash=9eefeb84fe43
+[2025-08-27T19:25:50.045336+00:00] site=Regionale Planungsgemeinschaft Mittelthüringen - Entwurf 2. sachlicher Teilplan Windenergie
+  url=https://regionalplanung.thueringen.de/mittelthueringen/regionalplan-mittelthueringen/aufstellung-2stpwind/entwurfsstand-2stpwind-122023
+  strategy=selectors(div.th-content.th-rows)
+  selectors=[div.th-content.th-rows]
+  matches=1
+  used_nodes=div.th-content.th-rows
+  text_len=747 hash=39e37a4b7508
+[2025-08-27T19:25:50.075091+00:00] site=Regionale Planungsgemeinschaft Ostthüringen - Sachlicher Teilplan Windenergie 2020
+  url=https://regionalplanung.thueringen.de/ostthueringen/regionalplan-ostthueringen/sachlicher-teilplan-windenergie-2020
+  strategy=selectors(div.th-content.th-rows)
+  selectors=[div.th-content.th-rows]
+  matches=1
+  used_nodes=div.th-content.th-rows
+  text_len=2858 hash=59f6c6c2bfb8
+[2025-08-27T19:25:50.109913+00:00] site=Regionalplan Region Oberland
+  url=https://www.region-oberland.bayern.de/fortschreibungen/
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=div#content.site-content
+  text_len=2731 hash=5b6c723aad77
+[2025-08-27T19:25:50.139624+00:00] site=Regionale Planungsgemeinschaft Ostthüringen - Änderung RROP Entwurf
+  url=https://regionalplanung.thueringen.de/ostthueringen/regionalplan-ostthueringen/aenderung-des-regionalplanes/entwurf
+  strategy=selectors(div.th-content.th-rows)
+  selectors=[div.th-content.th-rows]
+  matches=1
+  used_nodes=div.th-content.th-rows
+  text_len=5545 hash=7323a876e6cc
+[2025-08-27T19:25:50.156574+00:00] site=Regionalplan Hochrhein-Bodensee
+  url=https://hochrhein-bodensee.de/regionalplanung/erneuerbare-energien/
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main.all_colors
+  text_len=4518 hash=8f5a76d05d10
+[2025-08-27T19:25:50.186941+00:00] site=Regionale Planungsgemeinschaft Ostthüringen - Änderung und Verfahrensstand RROP
+  url=https://regionalplanung.thueringen.de/ostthueringen/regionalplan-ostthueringen/aenderung-des-regionalplanes/verfahrensstand
+  strategy=selectors(div.th-content.th-rows)
+  selectors=[div.th-content.th-rows]
+  matches=1
+  used_nodes=div.th-content.th-rows
+  text_len=4110 hash=e7237071f612
+[2025-08-27T19:25:50.251528+00:00] site=Regionalplan Region Suedostoberbayern
+  url=https://www.region-suedostoberbayern.bayern.de/fortschreibungen/
+  strategy=selectors(#content)
+  selectors=[#content]
+  matches=1
+  used_nodes=div#content.site-content
+  text_len=3478 hash=96a3684074a5
+[2025-08-27T19:25:50.487868+00:00] site=Regionalplan Ingolstadt
+  url=https://www.region-ingolstadt.bayern.de/fortschreibungen/
+  strategy=selectors(body)
+  selectors=[body]
+  matches=1
+  used_nodes=body.archive.post-type-archive.post-type-archive-fortschreibungen.wp-theme-astra.wp-child-theme-astra-child.ast-desktop.ast-separate-container.ast-two-container.ast-no-sidebar.astra-4.11.8.ast-inherit-site-logo-transparent.ast-hfb-header.elementor-page-1068.elementor-default.elementor-template-full-width.elementor-kit-6.astra-addon-4.11.6
+  text_len=6270 hash=ea6c9f148627
+[2025-08-27T19:25:50.503536+00:00] site=Regionalplan Allgaeu
+  url=https://www.region.allgaeu.org/regionalplan/regionalplan-fortschreibungen/
+  strategy=selectors(#after_section_1)
+  selectors=[#after_section_1]
+  matches=1
+  used_nodes=div#after_section_1.main_color.av_default_container_wrap.container_wrap.sidebar_left
+  text_len=2921 hash=a0a062968aa2
+[2025-08-27T19:25:51.097524+00:00] site=Regionalplan Hochrhein-Bodensee
+  url=https://hochrhein-bodensee.de/regionalplanung/regionalplan-gesamtfortschreibung/
+  strategy=selectors(#main)
+  selectors=[#main]
+  matches=1
+  used_nodes=div#main.all_colors
+  text_len=4015 hash=5e6c0821b178
