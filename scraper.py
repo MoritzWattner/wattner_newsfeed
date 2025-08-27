@@ -62,14 +62,22 @@ def short_hash(text: str) -> str:
 def rss_escape(s: str) -> str:
     return html.escape(s, quote=True)
 
-def make_rss(channel_title: str, channel_link: str, channel_desc: str, items: List[Dict[str, str]]) -> str:
-    # items: list of dict with title, link, guid, pubDate (RFC2822), description (CDATA)
+def make_rss(
+    channel_title: str,
+    channel_link: str,
+    channel_desc: str,
+    items: List[Dict[str, str]],
+    *,
+    last_build_date: Optional[str] = None
+) -> str:
     rss = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<rss version="2.0">',
            "<channel>",
            f"<title>{rss_escape(channel_title)}</title>",
            f"<link>{rss_escape(channel_link)}</link>",
            f"<description>{rss_escape(channel_desc)}</description>"]
+    if last_build_date:
+        rss.append(f"<lastBuildDate>{rss_escape(last_build_date)}</lastBuildDate>")
     for it in items:
         desc = it.get("description", "")
         rss.append("<item>")
@@ -77,8 +85,7 @@ def make_rss(channel_title: str, channel_link: str, channel_desc: str, items: Li
         rss.append(f"<link>{rss_escape(it.get('link',''))}</link>")
         rss.append(f"<guid isPermaLink=\"false\">{rss_escape(it.get('guid',''))}</guid>")
         rss.append(f"<pubDate>{rss_escape(it.get('pubDate',''))}</pubDate>")
-        # put description in CDATA to preserve diffs/markup
-        rss.append(f"<![CDATA[{desc}]]>")
+        rss.append(f"<description><![CDATA[{desc}]]></description>")
         rss.append("</item>")
     rss.append("</channel></rss>")
     return "\n".join(rss)
@@ -142,8 +149,44 @@ async def fetch(client: httpx.AsyncClient, url: str, timeout: int) -> Optional[s
     except Exception:
         return None
 
+# --- Diff-Helfer ---
+def make_hash(text: str) -> str:
+    h = hashlib.sha256()
+    h.update(text.encode("utf-8", errors="ignore"))
+    return h.hexdigest()
+
+def text_diff(old: str, new: str, max_lines: int = 200) -> str:
+    import difflib
+    old_lines = old.split()
+    new_lines = new.split()
+    diff = difflib.unified_diff(old_lines, new_lines, fromfile="prev", tofile="curr", lineterm="")
+    lines = list(diff)[:max_lines]
+    return "<pre>" + html.escape("\n".join(lines)) + "</pre>"
+
+def added_lines_html(old: str, new: str, max_lines: int = 80) -> str:
+    import difflib
+    old_lines = old.split()
+    new_lines = new.split()
+    added = []
+    for ln in difflib.unified_diff(old_lines, new_lines, lineterm=""):
+        if ln.startswith("+") and not ln.startswith("+++"):
+            added.append(ln[1:])
+        if len(added) >= max_lines:
+            break
+    if not added:
+        return "<p><em>Keine reinen Hinzufügungen erkennbar.</em></p>"
+    body = html.escape("\n".join(added))
+    return f"<pre>{body}</pre>"
+
 # --- Extraction + Logging ---
-def extract(html_text: str, selectors: List[str], mode: str, *, site_name: str = "", site_url: str = "") -> str:
+def extract(
+    html_text: str,
+    selectors: List[str],
+    mode: str,
+    *,
+    site_name: str = "",
+    site_url: str = ""
+) -> tuple[str, Dict[str, Any]]:
     soup = BeautifulSoup(html_text, "lxml")
     sel_list = [s.strip() for s in (selectors or []) if s and s.strip()]
 
@@ -197,29 +240,49 @@ def extract(html_text: str, selectors: List[str], mode: str, *, site_name: str =
     )
     append_log(log_block)
 
-    return content
+    meta = {
+        "checked_at": ts,
+        "strategy": used_strategy,
+        "selectors": sel_list,
+        "used_nodes": node_labels,
+    }
+    return content, meta
 
-def make_hash(text: str) -> str:
-    h = hashlib.sha256()
-    h.update(text.encode("utf-8", errors="ignore"))
-    return h.hexdigest()
-
-def text_diff(old: str, new: str, max_lines: int = 200) -> str:
-    import difflib
-    old_lines = old.split()
-    new_lines = new.split()
-    diff = difflib.unified_diff(old_lines, new_lines, fromfile="prev", tofile="curr", lineterm="")
-    lines = list(diff)[:max_lines]
-    # wrap in <pre>
-    return "<pre>" + html.escape("\n".join(lines)) + "</pre>"
+# --- Sichtbare Item-Beschreibung bauen ---
+def build_item_description(ev: Dict[str, Any]) -> str:
+    header = (
+        f"<p><strong>Stand (Inhalt):</strong> {ev['fetched_at']}Z<br>"
+        f"<strong>Zuletzt geprüft:</strong> {ev.get('checked_at','')}Z<br>"
+        f"<strong>Selektoren:</strong> {', '.join(ev.get('selectors', [])) or '—'}<br>"
+        f"<strong>Genutzte Elemente:</strong> {html.escape(ev.get('used_nodes',''))}</p>"
+    )
+    changes = (
+        "<h3>Änderungen (neue Zeilen)</h3>"
+        f"{ev.get('diff_added_html','')}"
+        "<h3>Diff (komplett)</h3>"
+        f"{ev.get('diff_html','')}"
+    )
+    content_block = (
+        "<h3>Aktueller Inhalt (Auszug)</h3>"
+        f"<pre>{html.escape(ev.get('content_excerpt',''))}</pre>"
+    )
+    return header + "<hr/>" + changes + "<hr/>" + content_block
 
 # --- Processing (ohne DB, mit state.json) ---
+@dataclasses.dataclass
+class SiteCfg:
+    name: str
+    bundesland: str
+    url: str
+    selectors: List[str]
+    mode: str = "text"  # or "html"
+
 async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: SiteCfg, timeout: int) -> Optional[Dict[str, Any]]:
     html_text = await fetch(client, cfg.url, timeout)
     if not html_text:
         return None
 
-    content = extract(html_text, cfg.selectors, cfg.mode, site_name=cfg.name, site_url=cfg.url)
+    content, meta = extract(html_text, cfg.selectors, cfg.mode, site_name=cfg.name, site_url=cfg.url)
     h = make_hash(content)
     slug = slugify(cfg.name)
 
@@ -232,6 +295,7 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
 
     # compute diff if previous exists
     diff_html = text_diff(last_excerpt or "", content) if last_hash else "<p>Erste Erfassung.</p>"
+    diff_added_html = added_lines_html(last_excerpt or "", content) if last_hash else "<p>Erste Erfassung.</p>"
     excerpt = content[:1000]
     now_iso = now_utc().isoformat()
 
@@ -251,8 +315,14 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
         "name": cfg.name,
         "bundesland": cfg.bundesland,
         "url": cfg.url,
-        "fetched_at": now_iso,
+        "fetched_at": now_iso,            # Stand (Inhalt)
+        "checked_at": meta["checked_at"], # Zuletzt geprüft
+        "strategy": meta["strategy"],
+        "selectors": meta["selectors"],
+        "used_nodes": meta["used_nodes"],
         "diff_html": diff_html,
+        "diff_added_html": diff_added_html,
+        "content_excerpt": excerpt,
     })
     # Historie begrenzen (z. B. auf 2000 Events)
     if len(state["items"]) > 2000:
@@ -279,6 +349,7 @@ def generate_feeds_from_state(state: Dict[str, Any], feeds_path: str, retention_
         return
 
     cutoff_dt = now_utc() - dt.timedelta(days=retention_days)
+    build_ts_rfc2822 = rfc2822(now_utc().isoformat())
 
     # --- Per-Site-Feeds nur für aktive Slugs
     items_by_slug: Dict[str, List[Dict[str, Any]]] = {}
@@ -301,13 +372,14 @@ def generate_feeds_from_state(state: Dict[str, Any], feeds_path: str, retention_
                 "link": url,
                 "guid": f"{slug}:{fetched_at}",
                 "pubDate": rfc2822(fetched_at),
-                "description": ev["diff_html"]
+                "description": build_item_description(ev),
             })
         xml = make_rss(
             channel_title=f"Aktualisierungen – {name}",
             channel_link=url,
             channel_desc=f"Änderungsfeed für {name}",
-            items=rss_items
+            items=rss_items,
+            last_build_date=build_ts_rfc2822,
         )
         write_text(os.path.join(feeds_path, f"site_{slug}.xml"), xml)
 
@@ -333,13 +405,14 @@ def generate_feeds_from_state(state: Dict[str, Any], feeds_path: str, retention_
                 "link": ev["url"],
                 "guid": f"{ev['slug']}:{fetched_at}",
                 "pubDate": rfc2822(fetched_at),
-                "description": ev["diff_html"]
+                "description": build_item_description(ev),
             })
         xml = make_rss(
             channel_title=f"Regional-/Entwicklungspläne – {bl}",
             channel_link="https://example.invalid/",
             channel_desc=f"Aggregierter Feed für {bl}",
-            items=rss_items
+            items=rss_items,
+            last_build_date=build_ts_rfc2822,
         )
         bl_slug = slugify(bl)
         write_text(os.path.join(feeds_path, f"DE-{bl_slug}.xml"), xml)
