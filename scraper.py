@@ -58,6 +58,40 @@ def short_hash(text: str) -> str:
     h.update(text.encode("utf-8", errors="ignore"))
     return h.hexdigest()[:12]
 
+def normalize_for_hash(text: str) -> str:
+    # für Vergleich/Hash: Whitespace komprimieren
+    return re.sub(r"\s+", " ", text).strip()
+
+def split_paragraphs(text: str) -> list[str]:
+    # robuste Absatzliste aus Text mit \n
+    t = text.replace("\r\n", "\n").replace("\r", "\n")
+    # Mehrfach-Leerzeilen zu zwei \n zusammenfassen
+    t = re.sub(r"\n{3,}", "\n\n", t)
+    # an Leerzeilen trennen
+    parts = [p.strip() for p in t.split("\n\n")]
+    # ungeeignete leere Teile raus
+    return [p for p in parts if p]
+
+def paragraphs_to_html(paragraphs: list[str]) -> str:
+    # einfache, scrollbar-freie Darstellung als Fließtext-Blöcke
+    return "".join(f"<p>{html.escape(p)}</p>" for p in paragraphs)
+
+def added_paragraphs_html(old_text: str, new_text: str) -> str:
+    import difflib
+    old_pars = split_paragraphs(old_text)
+    new_pars = split_paragraphs(new_text)
+    sm = difflib.SequenceMatcher(None, old_pars, new_pars)
+    added: list[str] = []
+    for tag, i1, i2, j1, j2 in sm.get_opcodes():
+        if tag == "insert":
+            added.extend(new_pars[j1:j2])
+        elif tag == "replace":
+            # ersetzte Absätze komplett als "neu" ausweisen
+            added.extend(new_pars[j1:j2])
+    if not added:
+        return "<p><em>Keine neuen Absätze erkennbar.</em></p>"
+    return paragraphs_to_html(added)
+
 # --- RSS minimal (no external deps) ---
 def rss_escape(s: str) -> str:
     return html.escape(s, quote=True)
@@ -195,12 +229,10 @@ def extract(
         for node in soup.select(sel):
             matches.append(node)
 
-    # Auswahl-Strategie bestimmen
     if matches:
         used_strategy = f"selectors({', '.join(sel_list)})"
         used_nodes = matches
     else:
-        # Fallback-Kaskade: main -> body -> soup
         node = soup.select_one("main")
         if node:
             used_strategy = "fallback:main"
@@ -212,17 +244,23 @@ def extract(
             used_strategy = "fallback:soup"
             used_nodes = [soup]
 
-    # Inhalte extrahieren
-    chunks = []
+    # Anzeige-Text: Absätze bewahren (mit \n\n), Hash-Text separat normalisiert
+    display_chunks = []
+    hash_chunks = []
     for node in used_nodes:
         if mode == "html":
-            chunks.append(str(node))
+            # HTML -> Text mit Absätzen
+            t = BeautifulSoup(str(node), "lxml").get_text(separator="\n", strip=True)
         else:
-            chunks.append(node.get_text(separator="\n", strip=True))
-    content = "\n\n".join(chunks).strip()
-    content = re.sub(r"\s+", " ", content)  # Whitespace normalisieren
+            t = node.get_text(separator="\n", strip=True)
+        display_chunks.append(t)
+        hash_chunks.append(t)
 
-    # Logging (Block)
+    # Anzeige-Text mit Absätzen (nicht zu Ein-Zeilen zusammenquetschen)
+    display_text = "\n\n".join(display_chunks).strip()
+    # Hash-Text: komprimierter Whitespace
+    hash_text = normalize_for_hash("\n\n".join(hash_chunks))
+
     ts = now_utc().isoformat()
     node_labels = ", ".join(node_label(n) for n in used_nodes[:3])
     if len(used_nodes) > 3:
@@ -236,24 +274,26 @@ def extract(
         f"  selectors={selectors_pretty}\n"
         f"  matches={len(matches)}\n"
         f"  used_nodes={node_labels}\n"
-        f"  text_len={len(content)} hash={short_hash(content)}\n"
+        f"  text_len={len(display_text)} hash={short_hash(hash_text)}\n"
     )
     append_log(log_block)
 
     meta = {
         "checked_at": ts,
         "strategy": used_strategy,
-        "selectors": sel_list,  # aus config
-        # NEU: tatsächlich genutzte Selektoren/Fallback
+        "selectors": sel_list,
         "selectors_used": sel_list if matches else [used_strategy.replace("fallback:", "(fallback: ") + ")"],
         "used_nodes": node_labels,
+        "display_text": display_text,  # für Darstellung/Absätze
+        "hash_text": hash_text,        # für Hash/Abgleich
     }
-    return content, meta
+    # return: (anzeige-text, meta) – der anzeige-text ist mit absätzen
+    return display_text, meta
+
 
 # --- Sichtbare Item-Beschreibung bauen ---
 def build_item_description(ev: Dict[str, Any]) -> str:
     def _fmt(ts: str) -> str:
-        # hübsches RFC-2822; fällt auf Original zurück, falls Parsing scheitert
         try:
             return rfc2822(ts)
         except Exception:
@@ -264,7 +304,6 @@ def build_item_description(ev: Dict[str, Any]) -> str:
     selectors_used = ev.get('selectors_used') or ev.get('selectors') or []
     selectors_txt = ", ".join(selectors_used) if selectors_used else "—"
     used_nodes = ev.get('used_nodes', '')
-    excerpt = ev.get('content_excerpt', '') or ""
 
     header = (
         f"<p><strong>Stand (Inhalt):</strong> {rss_escape(_fmt(fetched_at))}<br>"
@@ -273,25 +312,18 @@ def build_item_description(ev: Dict[str, Any]) -> str:
         f"<strong>Genutzte Elemente:</strong> {rss_escape(used_nodes)}</p>"
     )
 
-    changes = (
-        "<h3>Änderungen (neue Zeilen)</h3>"
-        f"{ev.get('diff_added_html','')}"
-        "<h3>Diff (komplett)</h3>"
-        f"{ev.get('diff_html','')}"
+    changes_block = (
+        "<h3>Änderungen (neue Inhalte)</h3>"
+        f"{ev.get('added_html','<p><em>Keine neuen Absätze erkennbar.</em></p>')}"
     )
 
-    if excerpt.strip():
-        content_block = (
-            "<h3>Aktueller Inhalt (Auszug)</h3>"
-            f"<pre>{html.escape(excerpt)}</pre>"
-        )
-    else:
-        content_block = (
-            "<h3>Aktueller Inhalt (Auszug)</h3>"
-            "<p><em>Kein Text extrahiert. Prüfe Selektoren oder nutze den Fallback (main/body).</em></p>"
-        )
+    content_block = (
+        "<h3>Aktueller Inhalt</h3>"
+        f"{ev.get('content_paragraphs_html','')}"
+    )
 
-    return header + "<hr/>" + changes + "<hr/>" + content_block
+    return header + "<hr/>" + changes_block + "<hr/>" + content_block
+
 
 # --- Processing (ohne DB, mit state.json) ---
 @dataclasses.dataclass
@@ -307,50 +339,51 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
     if not html_text:
         return None
 
-    content, meta = extract(html_text, cfg.selectors, cfg.mode, site_name=cfg.name, site_url=cfg.url)
-    h = make_hash(content)
+    display_text, meta = extract(html_text, cfg.selectors, cfg.mode, site_name=cfg.name, site_url=cfg.url)
+
+    # Hash nur auf normalisiertem Text
+    h = make_hash(meta["hash_text"])
     slug = slugify(cfg.name)
 
     site_state = state["sites"].get(slug, {})
     last_hash = site_state.get("hash")
-    last_excerpt = site_state.get("excerpt", "")
+    last_full = site_state.get("full_text", "")  # bisheriger Volltext (mit Absätzen)
 
     if h == last_hash:
         return None  # keine Änderung
 
-    # compute diff if previous exists
-    diff_html = text_diff(last_excerpt or "", content) if last_hash else "<p>Erste Erfassung.</p>"
-    diff_added_html = added_lines_html(last_excerpt or "", content) if last_hash else "<p>Erste Erfassung.</p>"
-    excerpt = content[:1000]
+    # Neue Absätze extrahieren (statt Wort-Diff)
+    added_html = added_paragraphs_html(last_full or "", display_text)
+    excerpt = meta["display_text"][:2000]  # längerer Auszug ok
     now_iso = now_utc().isoformat()
 
-    # State aktualisieren
+    # State aktualisieren (inkl. Volltext zur nächsten Diff-Basis)
     state["sites"][slug] = {
         "name": cfg.name,
         "bundesland": cfg.bundesland,
         "url": cfg.url,
         "hash": h,
         "excerpt": excerpt,
+        "full_text": meta["display_text"],  # Volltext mit Absätzen
         "last_change": now_iso,
     }
 
-    # Historie-Event anhängen (für Feeds/Aggregation)
+    # Event
     state["items"].append({
         "slug": slug,
         "name": cfg.name,
         "bundesland": cfg.bundesland,
         "url": cfg.url,
-        "fetched_at": now_iso,  # Stand (Inhalt)
-        "checked_at": meta["checked_at"],  # Zuletzt geprüft (ECHTES Datum)
+        "fetched_at": now_iso,             # Stand (Inhalt)
+        "checked_at": meta["checked_at"],  # Zuletzt geprüft
         "strategy": meta["strategy"],
-        "selectors": meta["selectors"],  # aus config
-        "selectors_used": meta["selectors_used"],  # NEU: real genutzt (oder Fallback)
+        "selectors": meta["selectors"],
+        "selectors_used": meta["selectors_used"],
         "used_nodes": meta["used_nodes"],
-        "diff_html": diff_html,
-        "diff_added_html": diff_added_html,
+        "added_html": added_html,                 # NEU: nur neue Absätze
+        "content_paragraphs_html": paragraphs_to_html(split_paragraphs(meta["display_text"])),  # kompletter Inhalt
         "content_excerpt": excerpt,
     })
-    # Historie begrenzen (z. B. auf 2000 Events)
     if len(state["items"]) > 2000:
         state["items"] = state["items"][-2000:]
 
@@ -359,8 +392,9 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
         "fetched_at": now_iso,
         "hash": h,
         "excerpt": excerpt,
-        "diff_html": diff_html,
+        "diff_html": "",  # nicht mehr genutzt
     }
+
 
 def rfc2822(ts_iso: str) -> str:
     dt_obj = dt.datetime.fromisoformat(ts_iso)
