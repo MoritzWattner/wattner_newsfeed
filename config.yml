@@ -1,12 +1,10 @@
 # Konfiguration für DE-Plan Feed Watcher
 # Jede Quelle kann eigene CSS-Selektoren enthalten. Wenn mehrere Selektoren angegeben sind, werden sie zusammengeführt (OR).
 
-postgres_dsn: "postgresql://postgres:1234@localhost:5432/newsfeed_rss"         # postgresql://BENUTZER:PASSWORT@HOST:PORT/DATENBANKNAME
+storage_path: "./data"
 feeds_path: "./feeds"
-site_timeout_sec: 30
-user_agent: "DE-Plan-Feed-Watcher/1.0 (contact: moritz.hochbein@wattner.de)"
-default_encoding: "utf-8"
 feed_retention_days: 120
+user_agent: "DE-Plan-Feed-Watcher/1.0 (kontakt@example.de)"
 
 # Hinweis: Bundesland ist frei wählbar (String). Nutze konsistent die offiziellen Namen.
 sites:
