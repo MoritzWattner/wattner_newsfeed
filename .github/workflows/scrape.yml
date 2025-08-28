@@ -39,6 +39,7 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: |
           set -euxo pipefail
+          rm -rf data feeds logs
           mkdir -p data feeds logs
           python scraper.py --once
 
