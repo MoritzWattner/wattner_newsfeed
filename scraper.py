@@ -96,14 +96,7 @@ def added_paragraphs_html(old_text: str, new_text: str) -> str:
 def rss_escape(s: str) -> str:
     return html.escape(s, quote=True)
 
-def make_rss(
-    channel_title: str,
-    channel_link: str,
-    channel_desc: str,
-    items: List[Dict[str, str]],
-    *,
-    last_build_date: Optional[str] = None
-) -> str:
+def make_rss(channel_title: str, channel_link: str, channel_desc: str, items: List[Dict[str, str]], *, last_build_date: Optional[str] = None) -> str:
     rss = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<rss version="2.0">',
            "<channel>",
@@ -114,6 +107,8 @@ def make_rss(
         rss.append(f"<lastBuildDate>{rss_escape(last_build_date)}</lastBuildDate>")
     for it in items:
         desc = it.get("description", "")
+        # WICHTIG: ']]>' in CDATA auftrennen
+        desc = desc.replace("]]>", "]]]]><![CDATA[>")
         rss.append("<item>")
         rss.append(f"<title>{rss_escape(it.get('title',''))}</title>")
         rss.append(f"<link>{rss_escape(it.get('link',''))}</link>")
@@ -123,6 +118,7 @@ def make_rss(
         rss.append("</item>")
     rss.append("</channel></rss>")
     return "\n".join(rss)
+
 
 # --- Config ---
 try:
@@ -222,6 +218,9 @@ def extract(
     site_url: str = ""
 ) -> tuple[str, Dict[str, Any]]:
     soup = BeautifulSoup(html_text, "lxml")
+    # Störende Tags entfernen
+    for bad in soup(["script", "style", "noscript", "iframe", "template"]):
+        bad.decompose()
     sel_list = [s.strip() for s in (selectors or []) if s and s.strip()]
 
     matches = []
