@@ -4,13 +4,13 @@
 <title>Aktualisierungen – Regionalplan Ingolstadt - Fortschreibungen</title>
 <link>https://www.region-ingolstadt.bayern.de/fortschreibungen/</link>
 <description>Änderungsfeed für Regionalplan Ingolstadt - Fortschreibungen</description>
-<lastBuildDate>Thu, 28 Aug 2025 09:32:14 +0000</lastBuildDate>
+<lastBuildDate>Thu, 28 Aug 2025 09:35:28 +0000</lastBuildDate>
 <item>
-<title>Aktualisierung: Regionalplan Ingolstadt - Fortschreibungen (2025-08-28T09:31:49Z)</title>
+<title>Aktualisierung: Regionalplan Ingolstadt - Fortschreibungen (2025-08-28T09:35:27Z)</title>
 <link>https://www.region-ingolstadt.bayern.de/fortschreibungen/</link>
-<guid isPermaLink="false">regionalplan-ingolstadt-fortschreibungen:2025-08-28T09:31:49.449457+00:00</guid>
-<pubDate>Thu, 28 Aug 2025 09:31:49 +0000</pubDate>
-<description><![CDATA[<p><strong>Stand (Inhalt):</strong> Thu, 28 Aug 2025 09:31:49 +0000<br><strong>Zuletzt geprüft:</strong> Thu, 28 Aug 2025 09:31:49 +0000<br><strong>Selektoren:</strong> body<br><strong>Genutzte Elemente:</strong> body.archive.post-type-archive.post-type-archive-fortschreibungen.wp-theme-astra.wp-child-theme-astra-child.ast-desktop.ast-separate-container.ast-two-container.ast-no-sidebar.astra-4.11.8.ast-inherit-site-logo-transparent.ast-hfb-header.elementor-page-1068.elementor-default.elementor-template-full-width.elementor-kit-6.astra-addon-4.11.6</p><hr/><hr/><h3>Bisheriger Inhalt</h3><body class="archive post-type-archive post-type-archive-fortschreibungen wp-theme-astra wp-child-theme-astra-child ast-desktop ast-separate-container ast-two-container ast-no-sidebar astra-4.11.8 ast-inherit-site-logo-transparent ast-hfb-header elementor-page-1068 elementor-default elementor-template-full-width elementor-kit-6 astra-addon-4.11.6" data-cmplz="2" itemscope="itemscope" itemtype="https://schema.org/Blog">
+<guid isPermaLink="false">regionalplan-ingolstadt-fortschreibungen:2025-08-28T09:35:27.567893+00:00</guid>
+<pubDate>Thu, 28 Aug 2025 09:35:27 +0000</pubDate>
+<description><![CDATA[<p><strong>Stand (Inhalt):</strong> Thu, 28 Aug 2025 09:35:27 +0000<br><strong>Zuletzt geprüft:</strong> Thu, 28 Aug 2025 09:35:27 +0000<br><strong>Selektoren:</strong> body<br><strong>Genutzte Elemente:</strong> body.archive.post-type-archive.post-type-archive-fortschreibungen.wp-theme-astra.wp-child-theme-astra-child.ast-desktop.ast-separate-container.ast-two-container.ast-no-sidebar.astra-4.11.8.ast-inherit-site-logo-transparent.ast-hfb-header.elementor-page-1068.elementor-default.elementor-template-full-width.elementor-kit-6.astra-addon-4.11.6</p><hr/><hr/><h3>Bisheriger Inhalt</h3><body class="archive post-type-archive post-type-archive-fortschreibungen wp-theme-astra wp-child-theme-astra-child ast-desktop ast-separate-container ast-two-container ast-no-sidebar astra-4.11.8 ast-inherit-site-logo-transparent ast-hfb-header elementor-page-1068 elementor-default elementor-template-full-width elementor-kit-6 astra-addon-4.11.6" data-cmplz="2" itemscope="itemscope" itemtype="https://schema.org/Blog">
 <a class="skip-link screen-reader-text" href="#content" title="Zum Inhalt springen">
 		Zum Inhalt springen</a>
 <div class="hfeed site" id="page">
@@ -1698,7 +1698,7 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
 <script id="smartmenus-js" src="https://www.region-ingolstadt.bayern.de/wp-content/plugins/elementor-pro/assets/lib/smartmenus/jquery.smartmenus.min.js?ver=1.2.1"></script>
 <script id="jet-plugins-js" src="https://www.region-ingolstadt.bayern.de/wp-content/plugins/jet-engine/assets/lib/jet-plugins/jet-plugins.js?ver=1.1.0"></script>
 <script id="jet-engine-frontend-js-extra">
-var JetEngineSettings = {"ajaxurl":"https:\/\/www.region-ingolstadt.bayern.de\/wp-admin\/admin-ajax.php","ajaxlisting":"https:\/\/www.region-ingolstadt.bayern.de\/fortschreibungen\/?nocache=1756373508","restNonce":"622ca5cdd2","hoverActionTimeout":"400","post_id":"0","query_builder":{"custom_ids":{"33":"break_months","32":"verbandsvorsitz"}},"addedPostCSS":["851"]};
+var JetEngineSettings = {"ajaxurl":"https:\/\/www.region-ingolstadt.bayern.de\/wp-admin\/admin-ajax.php","ajaxlisting":"https:\/\/www.region-ingolstadt.bayern.de\/fortschreibungen\/?nocache=1756373727","restNonce":"622ca5cdd2","hoverActionTimeout":"400","post_id":"0","query_builder":{"custom_ids":{"33":"break_months","32":"verbandsvorsitz"}},"addedPostCSS":["851"]};
 </script>
 <script id="jet-engine-frontend-js" src="https://www.region-ingolstadt.bayern.de/wp-content/plugins/jet-engine/assets/js/frontend.js?ver=3.7.3"></script>
 <script id="elementor-pro-webpack-runtime-js" src="https://www.region-ingolstadt.bayern.de/wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.min.js?ver=3.31.0"></script>
