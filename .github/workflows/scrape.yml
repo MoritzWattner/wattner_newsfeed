@@ -2,13 +2,17 @@ name: scrape-feeds
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "*/30 * * * *"   # UTC-basiert
   workflow_dispatch: {}
 
 permissions:
   contents: write
   pages: write
   id-token: write
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: false
 
 jobs:
   scrape:
@@ -28,6 +32,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: "pip"               # <<< schneller dank Cache
+          cache-dependency-path: requirements.txt
 
       - name: Install deps
         run: |
@@ -42,6 +48,7 @@ jobs:
           rm -rf data feeds logs
           mkdir -p data feeds logs
           python scraper.py --once
+          test -n "$(ls -A feeds || true)" || { echo "No feeds generated"; exit 1; }
 
       - name: Show workspace (after)
         run: |
@@ -54,23 +61,29 @@ jobs:
           [ -f data/state.json ] && head -n 20 data/state.json || true
 
       - name: Upload logs (artifact)
+        if: always()              # <<< auch bei Fehlern hochladen
         uses: actions/upload-artifact@v4
         with:
           name: logs
           path: logs
           if-no-files-found: warn
 
-      - name: Commit state.json (handles untracked)
+      - name: Commit state.json (only)
         run: |
           set -euxo pipefail
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          # untracked Files erkennen:
           if [ -f data/state.json ]; then
-            git add -A
+            git config user.name "github-actions"
+            git config user.email "actions@github.com"
+            git add data/state.json
             git commit -m "Update state.json [skip ci]" || echo "no changes to commit"
             git push || true
           fi
+
+      # Optional: Validierung – wenn du nicht blockieren willst, setze '|| true'
+      - name: Validate XML feeds
+        run: |
+          sudo apt-get update && sudo apt-get install -y libxml2-utils
+          xmllint --noout feeds/*.xml
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
