@@ -11,7 +11,7 @@ import json
 from typing import List, Optional, Dict, Any
 
 import httpx
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Comment
 
 # ---- Konfiguration für Pfade ----
 DEFAULT_STORAGE = "./data"
@@ -119,31 +119,59 @@ def make_rss(channel_title: str, channel_link: str, channel_desc: str, items: Li
     rss.append("</channel></rss>")
     return "\n".join(rss)
 
+def xml_sanitize(text: str) -> str:
+    """
+    Entfernt alle Zeichen, die in XML 1.0 nicht erlaubt sind.
+    Erlaubt sind: Tab, LF, CR, U+0020..U+D7FF, U+E000..U+FFFD (und bei UCS-4 Python auch > U+10000).
+    """
+    if not text:
+        return text
+    out_chars = []
+    for ch in text:
+        cp = ord(ch)
+        if (
+            cp == 0x9 or cp == 0xA or cp == 0xD or
+            (0x20 <= cp <= 0xD7FF) or
+            (0xE000 <= cp <= 0xFFFD) or
+            (0x10000 <= cp <= 0x10FFFF)
+        ):
+            out_chars.append(ch)
+        # sonst: drop
+    return "".join(out_chars)
+
 def cdata_wrap(html_payload: str) -> str:
     """
-    Verpackt beliebigen HTML-Text sicher in CDATA.
-    - Entfernt sicherheits-/noise-relevante Tags (fallback – normal machst du das schon in extract)
-    - Entschärft CDATA-Ende `]]>` durch Auftrennen
-    - Entschärft *sichtbare* CDATA-Starts innerhalb der Payload (optional)
+    Verpackt beliebiges HTML sicher in CDATA:
+    - entfernt script/style/noscript/iframe/template und HTML-Kommentare
+    - entfernt ungültige XML-Zeichen
+    - entschärft ']]>' innerhalb des Inhalts
     """
     if not html_payload:
         return "<![CDATA[]]>"
-    # 1) rudimentär störende Tags raus (zusätzlich zur Extraktion)
-    #    Falls du das schon in `extract` machst, schadet das hier nicht.
+
     try:
-        from bs4 import BeautifulSoup
         soup = BeautifulSoup(html_payload, "lxml")
+
+        # Störende Tags raus
         for bad in soup(["script", "style", "noscript", "iframe", "template"]):
             bad.decompose()
+
+        # HTML-Kommentare entfernen (die enthalten manchmal heikle Sequenzen)
+        for c in soup.find_all(string=lambda t: isinstance(t, Comment)):
+            c.extract()
+
         html_payload = str(soup)
     except Exception:
+        # falls BS4 fehlschlägt, mit raw-String weiterarbeiten
         pass
 
-    # 2) CDATA-Ende sicher auftrennen
+    # Ungültige XML-Zeichen entfernen
+    html_payload = xml_sanitize(html_payload)
+
+    # ']]>' im Inhalt splitten, damit CDATA nicht frühzeitig endet
     html_payload = html_payload.replace("]]>", "]]]]><![CDATA[>")
 
-    # 3) Optional: sichtbare CDATA-Starts neutralisieren (rein kosmetisch)
-    #    (In CDATA wäre '<![CDATA[' nur Text – manche Parser sind aber pingelig)
+    # (Optional) sichtbaren CDATA-Start neutralisieren
     html_payload = html_payload.replace("<![CDATA[", "<![C DATA[")
 
     return f"<![CDATA[{html_payload}]]>"
@@ -237,18 +265,14 @@ def added_lines_html(old: str, new: str, max_lines: int = 80) -> str:
     return f"<pre>{body}</pre>"
 
 # --- Extraction + Logging ---
-def extract(
-    html_text: str,
-    selectors: List[str],
-    mode: str,
-    *,
-    site_name: str = "",
-    site_url: str = ""
-) -> tuple[str, Dict[str, Any]]:
+def extract(html_text: str, selectors: List[str], mode: str, *, site_name: str = "", site_url: str = "") -> tuple[str, Dict[str, Any]]:
     soup = BeautifulSoup(html_text, "lxml")
     # Störende Tags entfernen
     for bad in soup(["script", "style", "noscript", "iframe", "template"]):
         bad.decompose()
+    # Kommentare raus
+    for c in soup.find_all(string=lambda t: isinstance(t, Comment)):
+        c.extract()
     sel_list = [s.strip() for s in (selectors or []) if s and s.strip()]
 
     matches = []
