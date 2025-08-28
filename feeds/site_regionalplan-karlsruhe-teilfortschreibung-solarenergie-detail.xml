@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+<title>Aktualisierungen – Regionalplan Karlsruhe - Teilfortschreibung Solarenergie Detail </title>
+<link>https://rvmo.raumordnung-online.de/verfahren/solarenergiervmo/public/detail</link>
+<description>Änderungsfeed für Regionalplan Karlsruhe - Teilfortschreibung Solarenergie Detail </description>
+<lastBuildDate>Thu, 28 Aug 2025 10:49:52 +0000</lastBuildDate>
+<item>
+<title>Aktualisierung: Regionalplan Karlsruhe - Teilfortschreibung Solarenergie Detail  (2025-08-28T10:49:25Z)</title>
+<link>https://rvmo.raumordnung-online.de/verfahren/solarenergiervmo/public/detail</link>
+<guid isPermaLink="false">regionalplan-karlsruhe-teilfortschreibung-solarenergie-detail:2025-08-28T10:49:25.542096+00:00</guid>
+<pubDate>Thu, 28 Aug 2025 10:49:25 +0000</pubDate>
+<description><![CDATA[<html><body><p><strong>Stand (Inhalt):</strong> Thu, 28 Aug 2025 10:49:25 +0000<br/><strong>Zuletzt geprüft:</strong> Thu, 28 Aug 2025 10:49:25 +0000<br/><strong>Selektoren:</strong> div.o-page__padded<br/><strong>Genutzte Elemente:</strong> div.o-page__padded.c-header__wrapper, div.o-page__padded</p><hr/><hr/><h3>Bisheriger Inhalt</h3><div class="o-page__padded c-header__wrapper"><a class="c-header__brand c-header__brand--image" href="/"><span><img alt="Logo des Verfahrensträgers" src="/file/3fc25d156d915f4dbdd1d12cdbba7723"/></span></a><button class="c-header__nav-toggle float-right" data-mobile-nav-menu="" type="button"><svg class="c-header__nav-toggle-icon u-mr-0_25" fill="#ffffff" height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg><span class="c-header__nav-toggle-text">
+                        Menü
+                    </span></button><nav class="c-header__nav" data-nav=""><ul class="c-header__nav-inner u-m-0 inline-block" id="jumpNavigation" role="menu"><li class="c-header__nav-item" role="menuitem"><a data-cy="publicIndex" href="/">
+                                    Startseite
+                                </a></li><li class="c-header__nav-item" role="menuitem"><a data-cy="staticInformation" href="/informationen">
+                                Über Raumordnung Online
+                            </a></li><li class="c-header__nav-item" role="menuitem"><a data-cy="PageFAQ" href="/faq">
+                                Häufige Fragen
+                            </a></li><li class="c-header__nav-item c-header__user" role="menuitem"><a class="c-header__user-badge" href="/dplan/login" id="loginLink"><i aria-hidden="true" class="fa fa-user u-mr-0_125"></i>
+                                        Anmelden
+                                    </a></li><li class="c-header__nav-item ml-2 px-2 inline-block text-xl rounded align-top h-[44px]" role="menuitem"><register-flyout citizen-register-form-route="DemosPlan_citizen_registration_form" orga-register-form-route="DemosPlan_orga_register_form"></register-flyout></li></ul></nav></div>
+<div class="o-page__padded">
+<section :class="{ 'is-active-tab' : activeTab === '#procedureDetailsMap'}" :hidden="Boolean(activeTab !== '#procedureDetailsMap')" @keydown="checkKeyEvent" aria-labelledby="procedureDetailsMapTab" class="c-map c-tabs__panel u-nojs-hide--block flow-root bg-color--white" id="procedureDetailsMap" role="tabpanel">
+<div class="c-map__toolbar u-pr-0_5-lap-up u-mb-0_5-palm">
+<div class="c-actionbox c-actionbox--bare u-p-0_5 is-visible-actionbox-toggle u-mb" data-icon-in-button="" data-statement-state-started="">
+<p class="c-actionbox__hint">
+
+                        
+                                
+                                        
+                                                    Sie können an dieser Stelle Einsicht in die Karte des Verfahrens nehmen.
+                        
+                    
+                
+            
+        </p>
+</div>
+<ul class="c-map__group">
+<li>
+<button aria-label="Kriterien am Ort abfragen Aktivieren, um die Kriterien durch einen Klick in den entsprechenden Bereich der Karte einzusehen." class="c-map__tool-simple btn--blank o-link--default font-size-medium" id="criteriaButton" type="button">
+<i aria-hidden="true" class="fa fa-lg fa-lightbulb-o u-mr-0_5"></i>
+                        Kriterien am Ort abfragen
+                    </button>
+<i aria-label="Kontexthilfe" class="fa-question-circle fa u-nojs-hide o-tooltip--question-circle float-right u-mt-0_25" tabindex="0" v-tooltip="'Aktivieren, um die Kriterien durch einen Klick in den entsprechenden Bereich der Karte einzusehen.'">
+</i>
+</li>
+</ul>
+<div class="layer-controls">
+<dp-unfold-toolbar-control drag-target=".c-map__toolbar"></dp-unfold-toolbar-control>
+<div class="c-map__group--bottom bg-color--white">
+<dp-public-layer-list-wrapper :layer-groups-alternate-visibility="Boolean()"></dp-public-layer-list-wrapper>
+<dp-layer-legend :layers-with-legend-files="JSON.parse('\u005B\u007B\u0022name\u0022\u003A\u0022Vorranggebiete\u0020f\\u00fcr\u0020Freifl\\u00e4chenphotovoltaikanlagen\u0020\u0028OL2\u0029\u0022,\u0022legend\u0022\u003A\u007B\u0022hash\u0022\u003A\u0022f50a1e05\u002D4afb\u002D48d6\u002Dac8b\u002Df5e1e98d6cd2\u0022,\u0022mimeType\u0022\u003A\u0022jpg\u0022,\u0022fileSize\u0022\u003A\u002237.82\u0020KB\u0022\u007D\u007D\u005D')" :plan-pdf="JSON.parse('\u007B\u0022pdf\u0022\u003A\u0022\u0022,\u0022hash\u0022\u003A\u0022\u0022,\u0022mimeType\u0022\u003A\u0022\u0022,\u0022size\u0022\u003A\u0022\u0022\u007D')" procedure-id="f0a46bae-36bc-491d-93cb-698afc323742" v-show="Boolean(1)">
+</dp-layer-legend>
+<dp-map-tools></dp-map-tools>
+<dp-custom-layer :init-available-projections="JSON.parse('\u005B\u007B\u0022label\u0022\u003A\u0022EPSG\u003A3857\u0022,\u0022value\u0022\u003A\u0022\u002Bproj\u003Dmerc\u0020\u002Ba\u003D6378137\u0020\u002Bb\u003D6378137\u0020\u002Blat_ts\u003D0.0\u0020\u002Blon_0\u003D0.0\u0020\u002Bx_0\u003D0.0\u0020\u002By_0\u003D0\u0020\u002Bk\u003D1.0\u0020\u002Bunits\u003Dm\u0020\u002Bnadgrids\u003D\u0040null\u0020\u002Bwktext\u0020\u0020\u002Bno_defs\u0022\u007D,\u007B\u0022label\u0022\u003A\u0022EPSG\u003A25832\u0022,\u0022value\u0022\u003A\u0022\u002Bproj\u003Dutm\u0020\u002Bzone\u003D32\u0020\u002Bellps\u003DGRS80\u0020\u002Bunits\u003Dm\u0020\u002Bno_defs\u0022\u007D,\u007B\u0022label\u0022\u003A\u0022EPSG\u003A25833\u0022,\u0022value\u0022\u003A\u0022\u002Bproj\u003Dutm\u0020\u002Bzone\u003D33\u0020\u002Bellps\u003DGRS80\u0020\u002Bunits\u003Dm\u0020\u002Bno_defs\u0022\u007D\u005D')">
+</dp-custom-layer>
+</div>
+</div>
+</div>
+<div aria-describedby="mapHintContent" aria-label="Interaktive Karte. Um die Karte zu benutzen, ist eine Maus oder ein äquivalentes Eingabegerät erforderlich." class="c-map__canvas is-queryarea" id="dp-map" role="region">
+<dp-map :available-projections="JSON.parse('\u005B\u007B\u0022label\u0022\u003A\u0022EPSG\u003A3857\u0022,\u0022value\u0022\u003A\u0022\u002Bproj\u003Dmerc\u0020\u002Ba\u003D6378137\u0020\u002Bb\u003D6378137\u0020\u002Blat_ts\u003D0.0\u0020\u002Blon_0\u003D0.0\u0020\u002Bx_0\u003D0.0\u0020\u002By_0\u003D0\u0020\u002Bk\u003D1.0\u0020\u002Bunits\u003Dm\u0020\u002Bnadgrids\u003D\u0040null\u0020\u002Bwktext\u0020\u0020\u002Bno_defs\u0022\u007D,\u007B\u0022label\u0022\u003A\u0022EPSG\u003A25832\u0022,\u0022value\u0022\u003A\u0022\u002Bproj\u003Dutm\u0020\u002Bzone\u003D32\u0020\u002Bellps\u003DGRS80\u0020\u002Bunits\u003Dm\u0020\u002Bno_defs\u0022\u007D,\u007B\u0022label\u0022\u003A\u0022EPSG\u003A25833\u0022,\u0022value\u0022\u003A\u0022\u002Bproj\u003Dutm\u0020\u002Bzone\u003D33\u0020\u002Bellps\u003DGRS80\u0020\u002Bunits\u003Dm\u0020\u002Bno_defs\u0022\u007D\u005D')" :draft-statement="JSON.parse('\u0022\u0022')" :procedure-default-initial-extent="JSON.parse('\u005B\u005D')" :procedure-default-max-extent="JSON.parse('\u005B\u005D')" :procedure-initial-extent="JSON.parse('\u005B872309.29135749,6238267.3023663,1016929.5805981,6312607.4510466\u005D')" :procedure-max-extent="JSON.parse('\u005B829266.28830223,6193383.2125981,1118506.8667834,6342063.5099587\u005D')" :procedure-settings="JSON.parse('\u007B\u0022ident\u0022\u003A\u0022af513e88\u002D121d\u002D49e4\u002Da2d7\u002D5328d19db4d7\u0022,\u0022id\u0022\u003A\u0022af513e88\u002D121d\u002D49e4\u002Da2d7\u002D5328d19db4d7\u0022,\u0022pId\u0022\u003A\u0022f0a46bae\u002D36bc\u002D491d\u002D93cb\u002D698afc323742\u0022,\u0022mapExtent\u0022\u003A\u0022872309.29135749,6238267.3023663,1016929.5805981,6312607.4510466\u0022,\u0022startScale\u0022\u003A\u0022\u0022,\u0022availableScale\u0022\u003A\u0022\u0022,\u0022boundingBox\u0022\u003A\u0022829266.28830223,6193383.2125981,1118506.8667834,6342063.5099587\u0022,\u0022informationUrl\u0022\u003A\u0022https\u003A\\\/\\\/geoserver.demos\u002Dplan.de\\\/geoserver\\\/RVMO\\\/ows\u003FLAYERS\u003DVRG_FPV_2025\u0026QUERY_LAYERS\u003DVRG_FPV_2025\u0022,\u0022defaultLayer\u0022\u003A\u0022\u0022,\u0022territory\u0022\u003A\u0022\u007B\u007D\u0022,\u0022coordinate\u0022\u003A\u0022\u0022,\u0022planEnable\u0022\u003Atrue,\u0022planText\u0022\u003A\u002213.02.2025\u0022,\u0022planPDF\u0022\u003A\u0022\u0022,\u0022planPara1PDF\u0022\u003A\u0022\u0022,\u0022planPara2PDF\u0022\u003A\u0022\u0022,\u0022planDrawText\u0022\u003A\u0022\u0022,\u0022planDrawPDF\u0022\u003A\u0022\u0022,\u0022emailTitle\u0022\u003A\u0022Einladung\u0020zur\u0020Beteiligung\u003A\u0020Teilfortschreibung\u0020Solarenergie\u0020sowie\u0020Grunds\\u00e4tze\u0020und\u0020Anlagen\u0020der\u0020Energieversorgung\u0020\u0028erneute\u0020Offenlage\u0029\u0022,\u0022emailText\u0022\u003A\u0022\u0022,\u0022emailCc\u0022\u003A\u0022\u0022,\u0022links\u0022\u003A\u0022\u0022,\u0022procedure\u0022\u003A\u007B\u007D,\u0022pictogram\u0022\u003A\u0022csm_221220_Teaser_Unterrichtung_Solar_Quelle_pixabay_1d2105f7f0.jpg\u003Aad6b2a4c\u002D2847\u002D4610\u002Da59c\u002D1eb2c61d8c49\u003A27885\u003Aimage\\\/jpeg\u0022,\u0022designatedPhase\u0022\u003Anull,\u0022designatedPublicPhase\u0022\u003Anull,\u0022designatedSwitchDate\u0022\u003Anull,\u0022designatedPublicSwitchDate\u0022\u003Anull,\u0022designatedPhaseChangeUser\u0022\u003Anull,\u0022designatedPublicPhaseChangeUser\u0022\u003Anull,\u0022designatedEndDate\u0022\u003Anull,\u0022designatedPublicEndDate\u0022\u003Anull,\u0022sendMailsToCounties\u0022\u003Afalse,\u0022planningArea\u0022\u003A\u0022\u0022,\u0022scales\u0022\u003A\u005B\u00225000\u0022,\u002215000\u0022,\u002235000\u0022,\u002270000\u0022,\u0022150000\u0022,\u0022500000\u0022\u005D,\u0022legalNotice\u0022\u003A\u0022\u0022,\u0022copyright\u0022\u003A\u0022\u007BcurrentYear\u007D\u0022,\u0022mapHint\u0022\u003A\u0022Auf\u0020dieser\u0020Karte\u0020sehen\u0020Sie\u0020die\u0020Vorranggebietsentw\\u00fcrfe\u0020f\\u00fcr\u0020die\u0020Teilfortschreibung.\u0020Als\u0020Hintergrund\u0020k\\u00f6nnen\u0020Sie\u0020eine\u0020topografische\u0020Karte\u0020oder\u0020ein\u0020Luftbild\u0020ausw\\u00e4hlen.\u0022,\u0022allowedSegmentAccessProcedures\u0022\u003A\u007B\u007D,\u0022featureInfoUrl\u0022\u003A\u0022https\u003A\\\/\\\/geoserver.demos\u002Dplan.de\\\/geoserver\\\/RVMO\\\/ows\u003FLAYERS\u003DVRG_FPV_2025\u0026QUERY_LAYERS\u003DVRG_FPV_2025\u0022,\u0022layerGroupsAlternateVisibility\u0022\u003Afalse\u007D')" :project-map-settings="JSON.parse('\u007B\u0022maxBoundingbox\u0022\u003A\u0022\u005B675901.98,5979940.57,1735104.21,7339227.72\u005D\u0022,\u0022adminBaselayer\u0022\u003A\u0022https\u003A\\\/\\\/sgx.geodatenzentrum.de\\\/wms_basemapde\u0022,\u0022adminBaselayerLayers\u0022\u003A\u0022de_basemapde_web_raster_farbe\u0022,\u0022globalAvailableScales\u0022\u003A\u0022\u005B250,500,1000,2000,4000,5000,15000,35000,70000,150000,250000,500000,1000000\u005D\u0022,\u0022printBaselayer\u0022\u003A\u0022https\u003A\\\/\\\/sgx.geodatenzentrum.de\\\/wms_basemapde\u0022,\u0022printBaselayerName\u0022\u003A\u0022de_basemapde_web_raster_farbe\u0022,\u0022printBaselayerLayers\u0022\u003A\u0022de_basemapde_web_raster_farbe\u0022,\u0022publicBaselayer\u0022\u003A\u0022\u0022,\u0022publicBaselayerLayers\u0022\u003A\u0022\u0022,\u0022publicAvailableScales\u0022\u003A\u0022\u005B250,500,1000,2000,4000,5000,15000,35000,70000,150000,250000,500000,1000000,5000000\u005D\u0022,\u0022publicSearchAutozoom\u0022\u003A\u00223.5277848333474453\u0022,\u0022publicExtent\u0022\u003A\u0022\u005B58347.40,5235048.55,922249.22,6131682.12\u005D\u0022,\u0022xplanDefaultLayers\u0022\u003A\u0022\u0022,\u0022mapAttribution\u0022\u003A\u0022\u0022\u007D')" @fullscreen-toggle="handleFullscreenFocus" get-feature-info-url-planning-area="" map-danmark-layer="" procedure-id="f0a46bae-36bc-491d-93cb-698afc323742">
+<div class="hidden">
+<div class="c-map__popup" id="popup">
+<a class="c-map__popup__button-close" href="#" id="popupCloser"></a>
+<div class="c-map__popup__content" id="popupContent"></div>
+</div>
+<div id="markLocationPopup">
+<h3 class="c-map__popup__title">Ihr Ort wurde markiert</h3>
+                ___content___
+            </div>
+<div id="criteriaPopup">
+<h3 class="c-map__popup__title o-spinner">Entscheidungskriterien</h3>
+                    ___content___
+                </div>
+<div id="errorPopup">
+<h3 class="c-map__popup__title">Fehler</h3>
+                ___content___
+            </div>
+<div id="miscPopup">
+<h3 class="c-map__popup__title u-mb-0">___title___</h3>
+</div>
+<div id="contentPopup">
+<h3 class="c-map__popup__title u-mb-0">___title___</h3>
+<p class="map__popup__content u-mt-0_5">___content___</p>
+</div>
+</div>
+<div class="c-map__hint is-hidden-hint" data-toggle-id="mapHint">
+<div class="c-map__hint__inner js__toggleAnything js__statementForm" data-statement-action="closeHint" data-toggle="#mapHint" data-toggle-container=".c-map__canvas" data-toggle-property=".is-hidden-hint">
+<p class="c-map__hint__header">
+                        Hinweise zur Karte
+                        <a class="c-map__hint__close" href="#">
+                            Schließen <i aria-hidden="true" class="fa fa-times"></i>
+</a>
+</p>
+<div id="mapHintContent">
+<div class="c-map__hint__content text-left">Auf dieser Karte sehen Sie die Vorranggebietsentwürfe für die Teilfortschreibung. Als Hintergrund können Sie eine topografische Karte oder ein Luftbild auswählen.</div>
+</div>
+</div>
+<span class="c-map__hint__bg js__toggleAnything js__statementForm o-link--default" data-statement-action="closeHint" data-toggle="#mapHint" data-toggle-container=".c-map__canvas" data-toggle-property=".is-hidden-hint" title="Hinweis schließen"></span>
+</div>
+<a aria-label="Hinweise zur Kartenbenutzung" class="c-map__hint__show is-hidden-hint-toggle js__toggleAnything js__statementForm o-link--default" data-statement-action="closeHint" data-toggle="#mapHint" data-toggle-container=".c-map__canvas" data-toggle-property=".is-hidden-hint" href="#">
+<i aria-hidden="true" class="fa fa-question-circle" title="Hinweise zur Nutzung der Karte"></i>
+</a>
+<div class="hidden">
+<span class="c-map__draw-fill"></span>
+<span class="c-map__draw-stroke"></span>
+<span class="c-map__draw-image"></span>
+</div>
+<div class="c-map--progress" id="mapProgress"></div>
+<div class="c-map__zoom absolute ol-zoom ol-unselectable ol-control">
+<button aria-label="In Karte hineinzoomen" class="ol-zoom-in" id="mapCustomZoomIn" title="In Karte hineinzoomen" type="button">+</button>
+<button aria-label="Zoom der Karte zurücksetzen" class="zoom-reset" id="mapCustomZoomReset" title="Zoom der Karte zurücksetzen" type="button">o</button>
+<button aria-label="Aus Karte herauszoomen" class="ol-zoom-out" id="mapCustomZoomOut" title="Aus Karte herauszoomen" type="button">−</button>
+</div>
+</dp-map>
+</div>
+</section>
+<section :class="{ 'is-active-tab' : activeTab === '#procedureDetailsDocumentlist'}" :hidden="Boolean(activeTab !== '#procedureDetailsDocumentlist')" aria-labelledby="procedureDetailsDocumentlistTab" class="c-tabs__panel layout--flush" id="procedureDetailsDocumentlist" role="tabpanel">
+<div class="layout__item width-map-toolbar u-pr-0_5-lap-up">
+<div class="c-actionbox c-actionbox--bare u-p-0_5 is-visible-actionbox-toggle" data-icon-in-button="" data-statement-state-started="">
+<p class="c-actionbox__hint">
+
+                        
+                                
+                                        
+                                                    Sie können an dieser Stelle Einsicht in die Dokumente des Verfahrens nehmen.
+                        
+                    
+                
+            
+        </p>
+</div>
+</div><!--
+--><div class="layout__item width-map-canvas u-pl-0_5-lap-up u-pr-0_5-lap-up">
+<article class="elements">
+<h2 class="elements__header elements__grid flow-root">
+<span class="elements__grid-grow inline-block">
+<i aria-hidden="true" class="elements__header-icon absolute fa fa-file-text"></i>
+<span class="elements__title inline-block">
+                            Anhörungsunterlagen
+                        </span>
+</span>
+</h2>
+<div class="elements__description u-1-of-1-desk-up break-words">
+<div class="c-styled-html">
+<p>Unterlagen der erneuten Beteiligung.</p>
+</div>
+</div>
+<ul class="elements__content hide-empty"><li class="elements__file flow-root"><div class="elements__grid"><div class="elements__file-name elements__grid-grow"><a class="o-link--default break-words u-mr-0_25" href="/file/solarenergiervmo/a734e36c-ac33-4f4b-88f8-5dbcaea81c6d" rel="noopener" target="_blank"><span class="hide-visually">Herunterladen</span><i aria-hidden="true" class="fa fa-file-o u-mr-0_125"></i>
+                                                    Öffentliche Bekanntmachung
+                                                                                                            <span class="whitespace-nowrap">
+                                                            (pdf 0.39 MB)
+                                                        </span></a></div><a aria-hidden="true" class="elements__button btn btn--secondary btn--outline u-1-of-1-lap-down" href="/file/solarenergiervmo/a734e36c-ac33-4f4b-88f8-5dbcaea81c6d" rel="noopener" tabindex="-1" target="_blank">
+                                                Herunterladen
+                                            </a></div><div class="elements__permission"></div></li><li class="elements__file flow-root"><div class="elements__grid"><div class="elements__file-name elements__grid-grow"><a class="o-link--default break-words u-mr-0_25" href="/file/solarenergiervmo/d2623b51-6503-477c-96bb-f9b13dc1107b" rel="noopener" target="_blank"><span class="hide-visually">Herunterladen</span><i aria-hidden="true" class="fa fa-file-o u-mr-0_125"></i>
+                                                    Satzung
+                                                                                                            <span class="whitespace-nowrap">
+                                                            (pdf 0.11 MB)
+                                                        </span></a></div><a aria-hidden="true" class="elements__button btn btn--secondary btn--outline u-1-of-1-lap-down" href="/file/solarenergiervmo/d2623b51-6503-477c-96bb-f9b13dc1107b" rel="noopener" tabindex="-1" target="_blank">
+                                                Herunterladen
+                                            </a></div><div class="elements__permission"></div></li><li class="elements__file flow-root"><div class="elements__grid"><div class="elements__file-name elements__grid-grow"><a class="o-link--default break-words u-mr-0_25" href="/file/solarenergiervmo/c67a9be0-e104-4116-80b1-c5695b94b74e" rel="noopener" target="_blank"><span class="hide-visually">Herunterladen</span><i aria-hidden="true" class="fa fa-file-o u-mr-0_125"></i>
+                                                    Textteil und Begründung
+                                                                                                            <span class="whitespace-nowrap">
+                                                            (pdf 0.96 MB)
+                                                        </span></a></div><a aria-hidden="true" class="elements__button btn btn--secondary btn--outline u-1-of-1-lap-down" href="/file/solarenergiervmo/c67a9be0-e104-4116-80b1-c5695b94b74e" rel="noopener" tabindex="-1" target="_blank">
+                                                Herunterladen
+                                            </a></div><div class="elements__permission"></div></li><li class="elements__file flow-root"><div class="elements__grid"><div class="elements__file-name elements__grid-grow"><a class="o-link--default break-words u-mr-0_25" href="/file/solarenergiervmo/aa5cd7d0-9a7f-44e8-82dd-f126e1fdb37d" rel="noopener" target="_blank"><span class="hide-visually">Herunterladen</span><i aria-hidden="true" class="fa fa-file-o u-mr-0_125"></i>
+                                                    Übersichtsplan und Teilkarten
+                                                                                                            <span class="whitespace-nowrap">
+                                                            (pdf 26.83 MB)
+                                                        </span></a></div><a aria-hidden="true" class="elements__button btn btn--secondary btn--outline u-1-of-1-lap-down" href="/file/solarenergiervmo/aa5cd7d0-9a7f-44e8-82dd-f126e1fdb37d" rel="noopener" tabindex="-1" target="_blank">
+                                                Herunterladen
+                                            </a></div><div class="elements__permission"></div></li><li class="elements__file flow-root"><div class="elements__grid"><div class="elements__file-name elements__grid-grow"><a class="o-link--default break-words u-mr-0_25" href="/file/solarenergiervmo/cffaa55d-ed41-4ce9-84e7-7a3cf0604b1c" rel="noopener" target="_blank"><span class="hide-visually">Herunterladen</span><i aria-hidden="true" class="fa fa-file-o u-mr-0_125"></i>
+                                                    Umweltbericht Textteil
+                                                                                                            <span class="whitespace-nowrap">
+                                                            (pdf 2.65 MB)
+                                                        </span></a></div><a aria-hidden="true" class="elements__button btn btn--secondary btn--outline u-1-of-1-lap-down" href="/file/solarenergiervmo/cffaa55d-ed41-4ce9-84e7-7a3cf0604b1c" rel="noopener" tabindex="-1" target="_blank">
+                                                Herunterladen
+                                            </a></div><div class="elements__permission"></div></li><li class="elements__file flow-root"><div class="elements__grid"><div class="elements__file-name elements__grid-grow"><a class="o-link--default break-words u-mr-0_25" href="/file/solarenergiervmo/acaa07d0-6c16-40e5-8bfd-ce7848ec1512" rel="noopener" target="_blank"><span class="hide-visually">Herunterladen</span><i aria-hidden="true" class="fa fa-file-o u-mr-0_125"></i>
+                                                    Anlage zum Umweltbericht: Gebietssteckbriefe
+                                                                                                            <span class="whitespace-nowrap">
+                                                            (pdf 147.91 MB)
+                                                        </span></a></div><a aria-hidden="true" class="elements__button btn btn--secondary btn--outline u-1-of-1-lap-down" href="/file/solarenergiervmo/acaa07d0-6c16-40e5-8bfd-ce7848ec1512" rel="noopener" tabindex="-1" target="_blank">
+                                                Herunterladen
+                                            </a></div><div class="elements__permission"></div></li><li class="elements__file flow-root"><div class="elements__grid"><div class="elements__file-name elements__grid-grow"><a class="o-link--default break-words u-mr-0_25" href="/file/solarenergiervmo/f61a9328-50d1-441e-8252-65ed11eca1b4" rel="noopener" target="_blank"><span class="hide-visually">Herunterladen</span><i aria-hidden="true" class="fa fa-file-o u-mr-0_125"></i>
+                                                    Synopse zu den eingegangenen Stellungnahmen aus der ersten Offenlage
+                                                                                                            <span class="whitespace-nowrap">
+                                                            (pdf 2.39 MB)
+                                                        </span></a></div><a aria-hidden="true" class="elements__button btn btn--secondary btn--outline u-1-of-1-lap-down" href="/file/solarenergiervmo/f61a9328-50d1-441e-8252-65ed11eca1b4" rel="noopener" tabindex="-1" target="_blank">
+                                                Herunterladen
+                                            </a></div><div class="elements__permission"></div></li></ul>
+</article>
+<article class="elements border--top">
+<h2 class="elements__header elements__grid flow-root">
+<span class="elements__grid-grow inline-block">
+<i aria-hidden="true" class="elements__header-icon absolute fa fa-file-text"></i>
+<span class="elements__title inline-block">
+                            Ergänzende Unterlagen
+                        </span>
+</span>
+</h2>
+<div class="elements__description u-1-of-1-desk-up break-words">
+<div class="c-styled-html">
+</div>
+</div>
+<ul class="elements__content hide-empty"><li class="elements__file flow-root"><div class="elements__grid"><div class="elements__file-name elements__grid-grow"><a class="o-link--default break-words u-mr-0_25" href="/file/solarenergiervmo/ea8236cf-a466-41b8-8f8e-b19c86265d42" rel="noopener" target="_blank"><span class="hide-visually">Herunterladen</span><i aria-hidden="true" class="fa fa-file-o u-mr-0_125"></i>
+                                                    Textteil und Begründung mit gekennzeichneten Änderungen
+                                                                                                            <span class="whitespace-nowrap">
+                                                            (pdf 1.02 MB)
+                                                        </span></a></div><a aria-hidden="true" class="elements__button btn btn--secondary btn--outline u-1-of-1-lap-down" href="/file/solarenergiervmo/ea8236cf-a466-41b8-8f8e-b19c86265d42" rel="noopener" tabindex="-1" target="_blank">
+                                                Herunterladen
+                                            </a></div><div class="elements__permission"></div></li><li class="elements__file flow-root"><div class="elements__grid"><div class="elements__file-name elements__grid-grow"><a class="o-link--default break-words u-mr-0_25" href="/file/solarenergiervmo/f8de355c-8f92-4a8b-9829-2e48bf2d823e" rel="noopener" target="_blank"><span class="hide-visually">Herunterladen</span><i aria-hidden="true" class="fa fa-file-o u-mr-0_125"></i>
+                                                    Geänderte Gebiete
+                                                                                                            <span class="whitespace-nowrap">
+                                                            (pdf 0.16 MB)
+                                                        </span></a></div><a aria-hidden="true" class="elements__button btn btn--secondary btn--outline u-1-of-1-lap-down" href="/file/solarenergiervmo/f8de355c-8f92-4a8b-9829-2e48bf2d823e" rel="noopener" tabindex="-1" target="_blank">
+                                                Herunterladen
+                                            </a></div><div class="elements__permission"></div></li><li class="elements__file flow-root"><div class="elements__grid"><div class="elements__file-name elements__grid-grow"><a class="o-link--default break-words u-mr-0_25" href="/file/solarenergiervmo/e8ef6f46-ff1c-49b9-93f9-ff553c8e8578" rel="noopener" target="_blank"><span class="hide-visually">Herunterladen</span><i aria-hidden="true" class="fa fa-file-o u-mr-0_125"></i>
+                                                    Verfahrensübersicht
+                                                                                                            <span class="whitespace-nowrap">
+                                                            (pdf 0.1 MB)
+                                                        </span></a></div><a aria-hidden="true" class="elements__button btn btn--secondary btn--outline u-1-of-1-lap-down" href="/file/solarenergiervmo/e8ef6f46-ff1c-49b9-93f9-ff553c8e8578" rel="noopener" tabindex="-1" target="_blank">
+                                                Herunterladen
+                                            </a></div><div class="elements__permission"></div></li></ul>
+</article>
+<article class="elements border--top">
+<h2 class="elements__header elements__grid flow-root">
+<span class="elements__grid-grow inline-block">
+<i aria-hidden="true" class="elements__header-icon absolute fa fa-file-text"></i>
+<span class="elements__title inline-block">
+                            Erläuterung der Planung Solar/ Explication de la planification solaire
+                        </span>
+</span>
+</h2>
+<div class="elements__description u-1-of-1-desk-up break-words">
+<div class="c-styled-html">
+</div>
+</div>
+<ul class="elements__content hide-empty"><li class="elements__file flow-root"><div class="elements__grid"><div class="elements__file-name elements__grid-grow"><a class="o-link--default break-words u-mr-0_25" href="/file/solarenergiervmo/a7990ecd-f415-4f8c-ac6a-fda0254bafa4" rel="noopener" target="_blank"><span class="hide-visually">Herunterladen</span><i aria-hidden="true" class="fa fa-file-o u-mr-0_125"></i>
+                                                    Erläuterung der Planung Solar (deutsch)
+                                                                                                            <span class="whitespace-nowrap">
+                                                            (pdf 0.82 MB)
+                                                        </span></a></div><a aria-hidden="true" class="elements__button btn btn--secondary btn--outline u-1-of-1-lap-down" href="/file/solarenergiervmo/a7990ecd-f415-4f8c-ac6a-fda0254bafa4" rel="noopener" tabindex="-1" target="_blank">
+                                                Herunterladen
+                                            </a></div><div class="elements__permission"></div></li><li class="elements__file flow-root"><div class="elements__grid"><div class="elements__file-name elements__grid-grow"><a class="o-link--default break-words u-mr-0_25" href="/file/solarenergiervmo/f906ac39-ad0c-499b-9cee-26694e72b344" rel="noopener" target="_blank"><span class="hide-visually">Herunterladen</span><i aria-hidden="true" class="fa fa-file-o u-mr-0_125"></i>
+                                                    Explication de la planification solaire
+                                                                                                            <span class="whitespace-nowrap">
+                                                            (pdf 0.97 MB)
+                                                        </span></a></div><a aria-hidden="true" class="elements__button btn btn--secondary btn--outline u-1-of-1-lap-down" href="/file/solarenergiervmo/f906ac39-ad0c-499b-9cee-26694e72b344" rel="noopener" tabindex="-1" target="_blank">
+                                                Herunterladen
+                                            </a></div><div class="elements__permission"></div></li></ul>
+</article>
+<article class="elements border--top">
+<h2 class="elements__header elements__grid flow-root">
+<span class="elements__grid-grow inline-block">
+<i aria-hidden="true" class="elements__header-icon absolute fa fa-file-text"></i>
+<span class="elements__title inline-block">
+                            Geodaten (Shapedateien)
+                        </span>
+</span>
+</h2>
+<div class="elements__description u-1-of-1-desk-up break-words">
+<div class="c-styled-html">
+<p>Geodaten in ETRS89 / UTM Zone 32N (EPSG:25832)</p>
+</div>
+</div>
+<ul class="elements__content hide-empty"><li class="elements__file flow-root"><div class="elements__grid"><div class="elements__file-name elements__grid-grow"><a class="o-link--default break-words u-mr-0_25" href="/file/solarenergiervmo/b58c57bd-6389-4e6c-a97f-c416c2343316" rel="noopener" target="_blank"><span class="hide-visually">Herunterladen</span><i aria-hidden="true" class="fa fa-file-o u-mr-0_125"></i>
+                                                    Shape-Datei der Vorranggebiete für Freiflächenphotovoltaik
+                                                                                                            <span class="whitespace-nowrap">
+                                                            (zip 0.05 MB)
+                                                        </span></a></div><a aria-hidden="true" class="elements__button btn btn--secondary btn--outline u-1-of-1-lap-down" href="/file/solarenergiervmo/b58c57bd-6389-4e6c-a97f-c416c2343316" rel="noopener" tabindex="-1" target="_blank">
+                                                Herunterladen
+                                            </a></div></li></ul>
+</article>
+<article class="elements border--top">
+<h2 class="elements__header elements__grid flow-root">
+<span class="elements__grid-grow inline-block">
+<i aria-hidden="true" class="elements__header-icon absolute fa fa-file-text"></i>
+<span class="elements__title inline-block">
+                            Datenschutzerklärung
+                        </span>
+</span>
+</h2>
+<div class="elements__description u-1-of-1-desk-up break-words">
+<div class="c-styled-html">
+</div>
+</div>
+<ul class="elements__content hide-empty"><li class="elements__file flow-root"><div class="elements__grid"><div class="elements__file-name elements__grid-grow"><a class="o-link--default break-words u-mr-0_25" href="/file/solarenergiervmo/c1e8deca-e2cf-4d1b-8529-211ee55288a9" rel="noopener" target="_blank"><span class="hide-visually">Herunterladen</span><i aria-hidden="true" class="fa fa-file-o u-mr-0_125"></i>
+                                                    Datenschutzerklärung RVMO
+                                                                                                            <span class="whitespace-nowrap">
+                                                            (pdf 0.19 MB)
+                                                        </span></a></div><a aria-hidden="true" class="elements__button btn btn--secondary btn--outline u-1-of-1-lap-down" href="/file/solarenergiervmo/c1e8deca-e2cf-4d1b-8529-211ee55288a9" rel="noopener" tabindex="-1" target="_blank">
+                                                Herunterladen
+                                            </a></div></li></ul>
+</article>
+</div>
+</section>
+</div></body></html>]]></description>
+</item>
+</channel></rss>
