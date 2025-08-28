@@ -244,22 +244,21 @@ def extract(
             used_strategy = "fallback:soup"
             used_nodes = [soup]
 
-    # Anzeige-Text: Absätze bewahren (mit \n\n), Hash-Text separat normalisiert
+    # Inhalte extrahieren
     display_chunks = []
     hash_chunks = []
     for node in used_nodes:
         if mode == "html":
-            # HTML -> Text mit Absätzen
-            t = BeautifulSoup(str(node), "lxml").get_text(separator="\n", strip=True)
+            t = str(node)  # HTML 1:1 übernehmen
         else:
-            t = node.get_text(separator="\n", strip=True)
+            # Plaintext optional, aber für deine Anforderung besser auch HTML
+            t = str(node)
         display_chunks.append(t)
-        hash_chunks.append(t)
+        # Für Hash reicht auch HTML -> Plaintext
+        hash_chunks.append(node.get_text(separator=" ", strip=True))
 
-    # Anzeige-Text mit Absätzen (nicht zu Ein-Zeilen zusammenquetschen)
     display_text = "\n\n".join(display_chunks).strip()
-    # Hash-Text: komprimierter Whitespace
-    hash_text = normalize_for_hash("\n\n".join(hash_chunks))
+    hash_text = normalize_for_hash(" ".join(hash_chunks))
 
     ts = now_utc().isoformat()
     node_labels = ", ".join(node_label(n) for n in used_nodes[:3])
@@ -312,17 +311,16 @@ def build_item_description(ev: Dict[str, Any]) -> str:
         f"<strong>Genutzte Elemente:</strong> {rss_escape(used_nodes)}</p>"
     )
 
-    changes_block = (
-        "<h3>Änderungen (neue Inhalte)</h3>"
-        f"{ev.get('added_html','<p><em>Keine neuen Absätze erkennbar.</em></p>')}"
-    )
+    changes_block = ""
+    if ev.get("aenderungen_html"):
+        changes_block = "<h3>Änderungen (neue Inhalte)</h3>" + ev["aenderungen_html"]
 
-    content_block = (
-        "<h3>Aktueller Inhalt</h3>"
-        f"{ev.get('content_paragraphs_html','')}"
-    )
+    previous_block = ""
+    if ev.get("bisheriger_html"):
+        previous_block = "<h3>Bisheriger Inhalt</h3>" + ev["bisheriger_html"]
 
-    return header + "<hr/>" + changes_block + "<hr/>" + content_block
+    return header + "<hr/>" + changes_block + "<hr/>" + previous_block
+
 
 
 # --- Processing (ohne DB, mit state.json) ---
@@ -363,27 +361,43 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
         "bundesland": cfg.bundesland,
         "url": cfg.url,
         "hash": h,
-        "excerpt": excerpt,
-        "full_text": meta["display_text"],  # Volltext mit Absätzen
+        "current_html": meta["display_text"],  # voller aktueller HTML-Inhalt
+        "previous_html": site_state.get("current_html", ""),  # alter Stand speichern
         "last_change": now_iso,
     }
 
-    # Event
-    state["items"].append({
-        "slug": slug,
-        "name": cfg.name,
-        "bundesland": cfg.bundesland,
-        "url": cfg.url,
-        "fetched_at": now_iso,             # Stand (Inhalt)
-        "checked_at": meta["checked_at"],  # Zuletzt geprüft
-        "strategy": meta["strategy"],
-        "selectors": meta["selectors"],
-        "selectors_used": meta["selectors_used"],
-        "used_nodes": meta["used_nodes"],
-        "added_html": added_html,                 # NEU: nur neue Absätze
-        "content_paragraphs_html": paragraphs_to_html(split_paragraphs(meta["display_text"])),  # kompletter Inhalt
-        "content_excerpt": excerpt,
-    })
+    if not last_hash:
+        # Erste Erfassung
+        state["items"].append({
+            "slug": slug,
+            "name": cfg.name,
+            "bundesland": cfg.bundesland,
+            "url": cfg.url,
+            "fetched_at": now_iso,
+            "checked_at": meta["checked_at"],
+            "selectors": meta["selectors"],
+            "selectors_used": meta["selectors_used"],
+            "used_nodes": meta["used_nodes"],
+            "aenderungen_html": "",  # keine Änderungen
+            "bisheriger_html": display_text,  # kompletter Stand
+        })
+    else:
+        # Änderung
+        added_html = added_paragraphs_html(last_full or "", display_text)
+        state["items"].append({
+            "slug": slug,
+            "name": cfg.name,
+            "bundesland": cfg.bundesland,
+            "url": cfg.url,
+            "fetched_at": now_iso,
+            "checked_at": meta["checked_at"],
+            "selectors": meta["selectors"],
+            "selectors_used": meta["selectors_used"],
+            "used_nodes": meta["used_nodes"],
+            "aenderungen_html": added_html,  # nur die neuen Absätze
+            "bisheriger_html": site_state.get("current_html", ""),  # letzter Stand
+        })
+
     if len(state["items"]) > 2000:
         state["items"] = state["items"][-2000:]
 
