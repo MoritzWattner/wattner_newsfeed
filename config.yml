@@ -514,7 +514,7 @@ sites:
   - name: "Regionalplan Karlsruhe - Teilfortschreibung Solarenergie Detail "
     bundesland: "Baden-Wuerttemberg"
     url: "https://rvmo.raumordnung-online.de/verfahren/solarenergiervmo/public/detail"
-    selectors: [".o-page__padded"]
+    selectors: ["div.o-page__padded"]
     mode: "text"  # "text" (standard) oder "html"
     
   - name: "Regionalplan Karlsruhe - Teilfortschreibungen Solarenergie"
