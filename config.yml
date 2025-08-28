@@ -451,7 +451,7 @@ sites:
     
 # --------------------------------------------------- Baden-Württemberg -------------------------------------------------
 
-  - name: "Regionalplan Bodensee-Oberschwaben"
+  - name: "Regionalplan Bodensee-Oberschwaben - Fortschreibung Regionalplan"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.rvbo.de/Planung/Fortschreibung-Regionalplan"
     selectors: ["body"]
@@ -463,145 +463,145 @@ sites:
     selectors: [".main-container"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Bodensee-Oberschwaben"
+  - name: "Regionalplan Bodensee-Oberschwaben - Kurznachrichten"
     bundesland: "Baden-Wuerttemberg"
-    url: "https://www.rvbo.de/"
-    selectors: ["main"]
+    url: "https://www.rvbo.de/Kurznachrichten"
+    selectors: [".blog"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Donau-Iller"
+  - name: "Regionalplan Donau-Iller - Beteiligungsverfahren"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.rvdi.de/regionalplanung/beteiligungsverfahren"
     selectors: [".content"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Donau-Iller"
+  - name: "Regionalplan Donau-Iller - Regionalplanung"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.rvdi.de/regionalplanung"
     selectors: [".content"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Heilbronn-Franken"
+  - name: "Regionalplan Heilbronn-Franken - Teilfortschreibung Solarenergie"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.rvhnf.de/tfs-solarenergie"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Heilbronn-Franken"
+  - name: "Regionalplan Heilbronn-Franken - ROP2020 Änderung"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.rvhnf.de/rp2020-aenderungen"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Hochrhein-Bodensee"
+  - name: "Regionalplan Hochrhein-Bodensee - Gesamtfortschreibung"
     bundesland: "Baden-Wuerttemberg"
     url: "https://hochrhein-bodensee.de/regionalplanung/regionalplan-gesamtfortschreibung/"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Hochrhein-Bodensee"
+  - name: "Regionalplan Hochrhein-Bodensee - Erneuerbare Energien"
     bundesland: "Baden-Wuerttemberg"
     url: "https://hochrhein-bodensee.de/regionalplanung/erneuerbare-energien/"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Karlsruhe"
+  - name: "Regionalplan Karlsruhe - Teilfortschreibungen"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.region-karlsruhe.de/regionalplan/teilfortschreibungen"
     selectors: ["#container-white"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Karlsruhe"
+  - name: "Regionalplan Karlsruhe - Teilfortschreibung Solarenergie Detail "
     bundesland: "Baden-Wuerttemberg"
     url: "https://rvmo.raumordnung-online.de/verfahren/solarenergiervmo/public/detail"
-    selectors: [".o-page__main"]
+    selectors: [".o-page__padded"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Karlsruhe"
+  - name: "Regionalplan Karlsruhe - Teilfortschreibungen Solarenergie"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.region-karlsruhe.de/regionalplan/teilfortschreibungen/teilfortschreibung-solarenergie"
     selectors: [".whitebg"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Neckar-Alb"
+  - name: "Regionalplan Neckar-Alb - Überblick"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.rvna.de/Startseite/Regionalplanung/Regionalplan+Ueberblick.html"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Neckar-Alb"
+  - name: "Regionalplan Neckar-Alb - Teilfortschreibung Solarenergie"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.rvna.de/Startseite/Regionalplanung/teilfortschreibung+solarenergie.html"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Nordschwarzwald"
+  - name: "Regionalplan Nordschwarzwald - Gesamtübersicht"
     bundesland: "Baden-Wuerttemberg"
     url: "https://nordschwarzwald-region.de/regionalplanung/regionalplan/"
-    selectors: ["#main"]
+    selectors: ["#page"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Nordschwarzwald"
+  - name: "Regionalplan Nordschwarzwald - Teilfortschreibung Solarenergie"
     bundesland: "Baden-Wuerttemberg"
     url: "https://nordschwarzwald-region.de/regionalplanung/teilfortschreibungen/teilregionalplan-solarenergie/"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Ostwuerttemberg"
+  - name: "Regionalplan Ostwuerttemberg - Erneuerbare Energien 2025"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.ostwuerttemberg.org/regionalplanung/teilfortschreibungen/erneuerbare-energien-2025/"
     selectors: ["body"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Ostwuerttemberg"
+  - name: "Regionalplan Ostwuerttemberg - Teilfortschreibungen"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.ostwuerttemberg.org/regionalplanung/teilfortschreibungen/"
     selectors: ["body"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Schwarzwald-Baar-Heuberg"
+  - name: "Regionalplan Schwarzwald-Baar-Heuberg - Gesamtübersicht"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.regionalverband-sbh.de/seite/587156/regionalplan-2003.html"
     selectors: ["main"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Schwarzwald-Baar-Heuberg"
+  - name: "Regionalplan Schwarzwald-Baar-Heuberg - Gesamtplanfortschreibungen"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.regionalverband-sbh.de/seite/587136/gesamtplanfortschreibung.html"
     selectors: ["main"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Suedlicher Oberrhein"
+  - name: "Regionalplan Suedlicher Oberrhein - Gesamtübersicht"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.vrso.de/de/planung/regionalplan/"
     selectors: ["#blockMain"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Suedlicher Oberrhein"
+  - name: "Regionalplan Suedlicher Oberrhein - Teilfortschreibung Solar"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.vrso.de/de/regionalplanung/fortschreibung-regionalplan/index_VerfahrenSolar.php"
     selectors: ["#blockMain"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Rhein-Neckar"
+  - name: "Regionalplan Rhein-Neckar - Gesamtübersicht"
     bundesland: "Baden-Wuerttemberg"
     url: "https://planungsregion.m-r-n.com/regionalplan/"
     selectors: [".content-block"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Rhein-Neckar"
+  - name: "Regionalplan Rhein-Neckar - Teilregionalplan Photovoltaik"
     bundesland: "Baden-Wuerttemberg"
     url: "https://planungsregion.m-r-n.com/regionalplan/teilregionalplan-photovoltaik/"
     selectors: [".main-content"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Stuttgart"
+  - name: "Regionalplan Stuttgart - Teilregionalplan Solarenergie"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.region-stuttgart.org/de/bereiche-aufgaben/regionalplanung/solarenergie/"
     selectors: [".main"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Stuttgart"
+  - name: "Regionalplan Stuttgart - Abgeschlossene Änderungsverfahren"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.region-stuttgart.org/de/bereiche-aufgaben/regionalplanung/regionalplan/abgeschlossenen-aenderungsverfahren-des-regionalplans/"
     selectors: [".main"]
@@ -609,157 +609,157 @@ sites:
     
 # --------------------------------------------------------- Bayern ------------------------------------------------------
 
-  - name: "Regionalplan Region Bayerischer Untermain"
+  - name: "Regionalplan Region Bayerischer Untermain - Gesamtübersicht"
     bundesland: "Bayern"
     url: "https://www.regierung.unterfranken.bayern.de/aufgaben/177666/177670/eigene_leistung/el_00223/index.html"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Region Wuerzburg"
+  - name: "Regionalplan Region Wuerzburg - Gesamtüberischt"
     bundesland: "Bayern"
     url: "https://www.regierung.unterfranken.bayern.de/aufgaben/177666/177670/eigene_leistung/el_00276/index.html"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Region Main-Rhoen"
+  - name: "Regionalplan Region Main-Rhoen - Gesamtübersicht"
     bundesland: "Bayern"
     url: "https://www.regierung.unterfranken.bayern.de/aufgaben/177666/177670/eigene_leistung/el_00283/index.html"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Oberfranken-West"
+  - name: "Regionalplan Oberfranken-West - Gesamtübersicht"
     bundesland: "Bayern"
     url: "https://www.oberfranken-west.de/Regionalplan/%C3%84nderungen/"
     selectors: [".main-content"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Oberfranken-Ost"
+  - name: "Regionalplan Oberfranken-Ost - Gesamtübersicht"
     bundesland: "Bayern"
     url: "https://www.planungsverband-oberfranken-ost.de/regionalplan/"
     selectors: ["body"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Oberfranken-Ost"
+  - name: "Regionalplan Oberfranken-Ost - Änderungen"
     bundesland: "Bayern"
     url: "https://www.planungsverband-oberfranken-ost.de/regionalplan/aenderungen/"
     selectors: ["body"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Oberfranken-Ost"
+  - name: "Regionalplan Oberfranken-Ost - Aktuelle Fortschreibungen"
     bundesland: "Bayern"
     url: "https://www.planungsverband-oberfranken-ost.de/regionalplan/aktuelle-fortschreibungen/"
     selectors: ["body"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Westmittelfranken"
+  - name: "Regionalplan Westmittelfranken - Änderungen"
     bundesland: "Bayern"
     url: "https://www.region-westmittelfranken.de/Regionalplan/Regionalplan-Aenderungen.html"
     selectors: [".center"]
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Region Nuernberg"
+  - name: "Regionalplan Region Nuernberg - Aktuelle Fortschreibungen"
     bundesland: "Bayern"
     url: "https://www.nuernberg.de/internet/pim/aktuellefortschreibungen.html"
     selectors: ["#main"] # auch möglich: ".main"
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Region Nuernberg"
+  - name: "Regionalplan Region Nuernberg - Bisherige Fortschreibungen"
     bundesland: "Bayern"
     url: "https://www.nuernberg.de/internet/pim/bisherigefortschreibungen.html"
     selectors: ["#main"] # auch möglich: ".main"
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Region Oberpfalz-Nord"
+  - name: "Regionalplan Region Oberpfalz-Nord - Gesamtübersicht"
     bundesland: "Bayern"
     url: "https://www.regierung.oberpfalz.bayern.de/service/landes_und_regionalplanung/regionalplanung/index.html"
     selectors: ["#main"] # evtl. auch ".modContent" -> ohne Navigation auf der linken Seite
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Region Regensburg" # ist dieselbe URL wie Region Oberpfalz-Nord
+  - name: "Regionalplan Region Regensburg - Gesamtübersicht " # ist dieselbe URL wie Region Oberpfalz-Nord
     bundesland: "Bayern"
     url: "https://www.regierung.oberpfalz.bayern.de/service/landes_und_regionalplanung/regionalplanung/index.html"
     selectors: ["#main"] # evtl. auch ".modContent" -> ohne Navigation auf der linken Seite
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Region Augsburg" 
+  - name: "Regionalplan Region Augsburg - Fortschreibungen" 
     bundesland: "Bayern"
     url: "https://www.rpv-augsburg.de/regionalplan/fortschreibungen/"
     selectors: ["#ContentWrapper"] 
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Donau-Iller" 
+  - name: "Regionalplan Donau-Iller - Gesamtübersicht" 
     bundesland: "Bayern"
     url: "https://www.rvdi.de/regionalplanung/regionalplan"
     selectors: [".content"] 
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Donau-Iller" 
+  - name: "Regionalplan Donau-Iller - Beteiligungsverfahren" 
     bundesland: "Bayern"
     url: "https://www.rvdi.de/regionalplanung/beteiligungsverfahren"
     selectors: [".content"] 
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Donau-Iller" 
+  - name: "Regionalplan Donau-Iller - Basisinformationen" 
     bundesland: "Bayern"
     url: "https://www.rvdi.de/regionalplanung"
     selectors: [".content"] 
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Allgaeu" 
+  - name: "Regionalplan Allgaeu - Fortschreibung" 
     bundesland: "Bayern"
     url: "https://www.region.allgaeu.org/regionalplan/regionalplan-fortschreibungen/"
     selectors: ["#after_section_1"] 
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Landshut" 
+  - name: "Regionalplan Landshut - Fortschreibungen" 
     bundesland: "Bayern"
     url: "https://region.landshut.org/seite/547999/fortschreibungen.html"
     selectors: ["main"] 
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Landshut" 
+  - name: "Regionalplan Landshut - Aktuelle Fortschreibungen" 
     bundesland: "Bayern"
     url: "https://region.landshut.org/seite/554522/aktuelle-fortschreibungen.html"
     selectors: ["main"] 
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Donau-Wald" 
+  - name: "Regionalplan Donau-Wald - Laufende Fortschreibungen" 
     bundesland: "Bayern"
     url: "https://www.region-donau-wald.de/regionalplan/laufende-fortschreibungen"
     selectors: ["body"] 
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Donau-Wald" 
+  - name: "Regionalplan Donau-Wald - Abgeschlossene Änderungen" 
     bundesland: "Bayern"
     url: "https://www.region-donau-wald.de/regionalplan/abgeschlossene-aenderungen"
     selectors: ["body"] 
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Donau-Wald" 
+  - name: "Regionalplan Donau-Wald - Gesamtübersicht" 
     bundesland: "Bayern"
     url: "https://www.region-donau-wald.de/regionalplan"
     selectors: ["body"] 
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Ingolstadt" 
+  - name: "Regionalplan Ingolstadt - Fortschreibungen" 
     bundesland: "Bayern"
     url: "https://www.region-ingolstadt.bayern.de/fortschreibungen/"
     selectors: ["body"] 
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Muenchen" 
+  - name: "Regionalplan Muenchen - Verfahren" 
     bundesland: "Bayern"
     url: "https://www.region-muenchen.com/verfahren"
     selectors: ["body"] 
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Region Suedostoberbayern" 
+  - name: "Regionalplan Region Suedostoberbayern - Fortschreibungen" 
     bundesland: "Bayern"
     url: "https://www.region-suedostoberbayern.bayern.de/fortschreibungen/"
     selectors: ["#content"] # wenn mehrere Ergebnisse, dann "body"
     mode: "text"  # "text" (standard) oder "html"
     
-  - name: "Regionalplan Region Oberland" 
+  - name: "Regionalplan Region Oberland - Fortschreibungen" 
     bundesland: "Bayern"
     url: "https://www.region-oberland.bayern.de/fortschreibungen/"
     selectors: ["#content"] # wenn mehrere Ergebnisse, dann "body"
