@@ -107,18 +107,46 @@ def make_rss(channel_title: str, channel_link: str, channel_desc: str, items: Li
         rss.append(f"<lastBuildDate>{rss_escape(last_build_date)}</lastBuildDate>")
     for it in items:
         desc = it.get("description", "")
-        # WICHTIG: ']]>' in CDATA auftrennen
-        desc = desc.replace("]]>", "]]]]><![CDATA[>")
+        # WICHTIG: CDATA sicher wrappen
+        desc_cdata = cdata_wrap(desc)
         rss.append("<item>")
-        rss.append(f"<title>{rss_escape(it.get('title',''))}</title>")
-        rss.append(f"<link>{rss_escape(it.get('link',''))}</link>")
-        rss.append(f"<guid isPermaLink=\"false\">{rss_escape(it.get('guid',''))}</guid>")
-        rss.append(f"<pubDate>{rss_escape(it.get('pubDate',''))}</pubDate>")
-        rss.append(f"<description><![CDATA[{desc}]]></description>")
+        rss.append(f"<title>{rss_escape(it.get('title', ''))}</title>")
+        rss.append(f"<link>{rss_escape(it.get('link', ''))}</link>")
+        rss.append(f"<guid isPermaLink=\"false\">{rss_escape(it.get('guid', ''))}</guid>")
+        rss.append(f"<pubDate>{rss_escape(it.get('pubDate', ''))}</pubDate>")
+        rss.append(f"<description>{desc_cdata}</description>")
         rss.append("</item>")
     rss.append("</channel></rss>")
     return "\n".join(rss)
 
+def cdata_wrap(html_payload: str) -> str:
+    """
+    Verpackt beliebigen HTML-Text sicher in CDATA.
+    - Entfernt sicherheits-/noise-relevante Tags (fallback – normal machst du das schon in extract)
+    - Entschärft CDATA-Ende `]]>` durch Auftrennen
+    - Entschärft *sichtbare* CDATA-Starts innerhalb der Payload (optional)
+    """
+    if not html_payload:
+        return "<![CDATA[]]>"
+    # 1) rudimentär störende Tags raus (zusätzlich zur Extraktion)
+    #    Falls du das schon in `extract` machst, schadet das hier nicht.
+    try:
+        from bs4 import BeautifulSoup
+        soup = BeautifulSoup(html_payload, "lxml")
+        for bad in soup(["script", "style", "noscript", "iframe", "template"]):
+            bad.decompose()
+        html_payload = str(soup)
+    except Exception:
+        pass
+
+    # 2) CDATA-Ende sicher auftrennen
+    html_payload = html_payload.replace("]]>", "]]]]><![CDATA[>")
+
+    # 3) Optional: sichtbare CDATA-Starts neutralisieren (rein kosmetisch)
+    #    (In CDATA wäre '<![CDATA[' nur Text – manche Parser sind aber pingelig)
+    html_payload = html_payload.replace("<![CDATA[", "<![C DATA[")
+
+    return f"<![CDATA[{html_payload}]]>"
 
 # --- Config ---
 try:
