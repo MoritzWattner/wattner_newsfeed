@@ -221,7 +221,7 @@ sites:
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
   
-  # ------------------------------------------------------ RROP Nordrhein-Westfalen ------------------------------------------------------
+  # ------------------------------------------------------ RROP Nordrhein-Westfalen -----------------------------------------------------
   
   - name: "Landkreis  - Regionaler Raumordnungsplan"
     bundesland: "Nordrhein-Westfalen"
@@ -234,8 +234,34 @@ sites:
     url: ""
     selectors: [""]
     mode: "text"  # "text" (standard) oder "html"
+    
+  # ------------------------------------------------------ RROP Saarland ---------------------------------------------------------------
   
-  # ------------------------------------------------------ RROP Hessen ------------------------------------------------------
+  - name: "Saarland - Landesentwicklungsplan"
+    bundesland: "Saarland"
+    url: "https://www.saarland.de/mibs/DE/portale/landesplanung/informationen/verteilerseite_landesentwicklungsplan/landesentwicklungsplan_node"
+    selectors: ["#rs_start"]
+    mode: "text"  # "text" (standard) oder "html"
+  
+  - name: "Saarland - Landesentwicklungsplan Neuaufstellung"
+    bundesland: "Saarland"
+    url: "https://www.saarland.de/mibs/DE/portale/landesplanung/informationen/verteilerseite_neuaufstellung_lep/neuaufstellung-lep_node"
+    selectors: ["#rs_start"]
+    mode: "text"  # "text" (standard) oder "html"
+
+  - name: "Saarland - Landesentwicklungsplan Medieninformationen"
+    bundesland: "Saarland"
+    url: "https://www.saarland.de/mibs/DE/aktuelles/newsletter/medieninformationen/_documents/2023/pm139_2023-08-22-LEP"
+    selectors: ["#rs_start"]
+    mode: "text"  # "text" (standard) oder "html"
+    
+  - name: "Saarland - Landesentwicklungsplan Klim, ROK und Windkraft"
+    bundesland: "Saarland"
+    url: "https://www.saarland.de/mibs/DE/portale/landesplanung/informationen/verteilerseite_klima_rok_windkraft/klima-rok-windkraft_node"
+    selectors: ["#rs_start"]
+    mode: "text"  # "text" (standard) oder "html"
+  
+  # ------------------------------------------------------ RROP Hessen -----------------------------------------------------------------
 
   - name: "Planregion NordOst-Hessen - Regionaler Raumordnungsplan"
     bundesland: "Hessen"
