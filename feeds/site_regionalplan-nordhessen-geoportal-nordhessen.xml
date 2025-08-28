@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+<title>Aktualisierungen – Regionalplan Nordhessen - Geoportal Nordhessen</title>
+<link>https://www.geoportalnordhessen.de/de/regionalplan-nordhessen.html</link>
+<description>Änderungsfeed für Regionalplan Nordhessen - Geoportal Nordhessen</description>
+<lastBuildDate>Thu, 28 Aug 2025 09:32:14 +0000</lastBuildDate>
+<item>
+<title>Aktualisierung: Regionalplan Nordhessen - Geoportal Nordhessen (2025-08-28T09:31:46Z)</title>
+<link>https://www.geoportalnordhessen.de/de/regionalplan-nordhessen.html</link>
+<guid isPermaLink="false">regionalplan-nordhessen-geoportal-nordhessen:2025-08-28T09:31:46.228240+00:00</guid>
+<pubDate>Thu, 28 Aug 2025 09:31:46 +0000</pubDate>
+<description><![CDATA[<p><strong>Stand (Inhalt):</strong> Thu, 28 Aug 2025 09:31:46 +0000<br><strong>Zuletzt geprüft:</strong> Thu, 28 Aug 2025 09:31:46 +0000<br><strong>Selektoren:</strong> .col-12.order-1<br><strong>Genutzte Elemente:</strong> main.col-12.order-1</p><hr/><hr/><h3>Bisheriger Inhalt</h3><main class="col-12 order-1">
+<div class="col-main" data-gc-search="true">
+<div class="gccookiemessageSpecial d-print-none z-index-tooltip fixed-bottom" data-gc-search="false" data-nosnippet="" id="gccookiemessage" style="display:none;     margin-bottom: 1rem;">
+<style>
+        .gccookiemessageSpecial .intern-page-link {
+            text-decoration : underline !important;
+            font-weight     : bold;
+        }
+    </style>
+<div id="cookieBanner" style="max-width: 830px; z-index: 1070; margin: 0 auto;">
+<div class="card shadow">
+<div class="card-body">
+<p>Auf unserer Webseite werden Cookies und Fingerprints gemäß unserer Datenschutzerklärung verwendet. Wenn Sie weiter auf diesen Seiten surfen, erklären Sie sich damit einverstanden. Sie können die Verwendung von Fingerprints über das Opt-Out Verfahren in der Datenschutzerklärung deaktivieren.</p>
+<div class="row align-items-center">
+<div class="col-12 col-md-3 mb-2 mb-md-0">
+<a class="btn btn-sm btn-outline-dark silbentrennung w-100" href="/de/datenschutz-nh.html" title="Sprung zur Datenschutz-Seite">Datenschutzhinweis</a>
+</div>
+<div class="col-12 col-md-3 mb-2 mb-md-0">
+<a class="btn btn-sm btn-outline-dark silbentrennung w-100" href="/de/impressum-nh.html" title="Sprung zum Impressum-Seite">Impressum</a>
+</div>
+<div class="col-12 col-md-3 ml-md-auto">
+<button class="btn btn-sm btn-outline-success silbentrennung w-100" id="cookieSubmitButton" onclick="setCookieMessageCookie();jQuery('#gccookiemessage').slideUp()" type="button">Einverstanden</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<style>
+        #essentialCheckContainer .xelement-form .checkbox input[data-gc-cbtype=switch]:disabled + .box, .xelement-form .checkbox input[data-gc-cbtype=switch]:disabled ~ .label {
+            opacity : 1;
+        }
+
+        #gccookiemessage .option-card .form-control-label {
+            margin-bottom : 0;
+        }
+
+        #gccookiemessage .option-card[data-click] {
+            cursor : pointer;
+        }
+
+        #essentialCheckContainer input {
+            cursor : not-allowed;
+        }
+    </style>
+<script>
+
+        // Prüft den Checkbox-Status und setzt den Klick-Handler für die Optionen-Auswahl
+        // i.d.R. im GeoCMS nur Matomo
+
+        function setCookieOptionCheck() {
+            document.querySelectorAll('.option-element-dialog').forEach(function (element) {
+                var option = element.getAttribute('data-option-name')
+                if (option) {
+                    var option_on = element.getAttribute('data-option-on') || 1
+                    var current = window.GeoCMSLocalStorage.getItem(option)
+                    if (current && current === option_on) {
+                        element.checked = true
+                    } else {
+                        element.checked = false
+                    }
+                }
+            })
+        }
+
+        function clickHandler(element) {
+            let option = element.getAttribute('data-option-name')
+            let option_on = element.getAttribute('data-option-on') || 1
+            let current = window.GeoCMSLocalStorage.getItem(option)
+            if (current && current == option_on) {
+                window.GeoCMSLocalStorage.removeItem(option)
+            } else if (!current || current !== option_on) {
+                window.GeoCMSLocalStorage.setItem(option, option_on)
+            }
+            element.checked = !element.checked
+        }
+
+        function setContainerEventListeners() {
+            document.querySelectorAll('#cookieBanner .option-card').forEach(function (element) {
+                if (element.hasAttribute("data-click")) {
+                    var checkbox = element.querySelector('.option-element-dialog')
+                    element.addEventListener('click', function (event) {
+                        event.preventDefault()
+                        clickHandler(checkbox)
+                    })
+                }
+            })
+        }
+
+        // Callback-Funktion, wird nach dem Laden des Dialogs aufgerufen
+        function initCookieModal(response, status) {
+            window.setTimeout(setCookieOptionCheck, 500)
+        }
+
+        // Lädt den Dialog
+        function showCookieModal() {
+            var url = 'https://www.geoportalnordhessen.de/de/mod/33,200,1151/ajax/1/cookiemodal/?tHash=1756367196.2818'
+            if (url) {
+                var modal = new BtpDialogClass('mycookiemodal', {
+                    'ajaxUrl': url,
+                    'title': 'Cookie-Einstellungen',
+                    'onLoaded': initCookieModal,
+                    'onHide': function () {
+                        location.reload()
+                    }
+                })
+                modal.open()
+            }
+        }
+
+        GeoCMS.Content.Core.alternateDocumentReady(function () {
+            setCookieOptionCheck()
+            setContainerEventListeners()
+        })
+    </script>
+</div>
+<div class="btp_breadcrumb modularea-main view-listview" data-gc-search="false">
+<nav aria-label="Brotkrümel-Navigation"><ol class="breadcrumb rounded-0"><li class="breadcrumb-item active"><strong>Sie befinden sich hier</strong></li><li class="breadcrumb-item breadcrumb-item-first"><a data-level="1" href="https://www.geoportalnordhessen.de/de/startseite.html" title="Startseite">Startseite</a></li><li class="breadcrumb-item"><a data-level="2" href="//www.geoportalnordhessen.de/de/themenkarten.html" title="Themenkarten">Themenkarten</a></li><li class="breadcrumb-item"><a data-level="3" href="//www.geoportalnordhessen.de/de/bauen-und-planen.html" title="Planen &amp; Bauen">Planen &amp; Bauen</a></li><li class="breadcrumb-item active"><span aria-current="page" data-level="4">Regionalplan Nordhessen</span></li></ol></nav></div>
+<!-- btp_article: empty -->
+<!-- pagecontent: empty -->
+<div class="btp_freecontent modularea-main view-singleview mode-iframe" data-gc-search="true"><div class="border-0 rounded-0 btp_freecontent_cfg_8_365_1151" id="8_365_1151" role="complementary"><iframe frameborder="0" height="700px" id="iframe_8_365_1151" scrolling="auto" src="https://www.geoportalnordhessen.de/de/viewer-regionalplan-nordhessen.html" width="100%">
+        Keine IFRAME-Anzeige von [https://www.geoportalnordhessen.de/de/viewer-regionalplan-nordhessen.html] m&amp;ouml;glich!
+    </iframe></div></div>
+<div class="btp_freecontent modularea-main view-singleview mode-rte" data-gc-search="true"><div class="border-0 rounded-0 btp_freecontent_cfg_9_365_1151" id="9_365_1151" role="complementary"><div class="" id="9_365_1151_box"><div class=""><p>Weiterführende Informationen zum Regionalplan Nordhessen finden Sie auf den <a class="extern-page-link" href="https://rp-kassel.hessen.de/planung/regionalplanung/regionalplan-nordhessen" rel="noopener" target="_blank">Seiten des Regierungspräsidiums Kassel</a>. Informationen zu Geodatendiensten der Regional- und Landesplanung finden Sie <a class="extern-media-link" href="https://landesplanung.hessen.de/sites/landesplanung.hessen.de/files/WMS_Dienste_2018.pdf" rel="noopener" target="_blank">hier</a>.</p></div></div></div></div>
+</div>
+</main>]]></description>
+</item>
+</channel></rss>

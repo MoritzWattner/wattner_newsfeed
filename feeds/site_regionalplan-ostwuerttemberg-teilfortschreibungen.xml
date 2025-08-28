@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+<title>Aktualisierungen – Regionalplan Ostwuerttemberg - Teilfortschreibungen</title>
+<link>https://www.ostwuerttemberg.org/regionalplanung/teilfortschreibungen/</link>
+<description>Änderungsfeed für Regionalplan Ostwuerttemberg - Teilfortschreibungen</description>
+<lastBuildDate>Thu, 28 Aug 2025 09:32:14 +0000</lastBuildDate>
+<item>
+<title>Aktualisierung: Regionalplan Ostwuerttemberg - Teilfortschreibungen (2025-08-28T09:31:48Z)</title>
+<link>https://www.ostwuerttemberg.org/regionalplanung/teilfortschreibungen/</link>
+<guid isPermaLink="false">regionalplan-ostwuerttemberg-teilfortschreibungen:2025-08-28T09:31:48.203134+00:00</guid>
+<pubDate>Thu, 28 Aug 2025 09:31:48 +0000</pubDate>
+<description><![CDATA[<p><strong>Stand (Inhalt):</strong> Thu, 28 Aug 2025 09:31:48 +0000<br><strong>Zuletzt geprüft:</strong> Thu, 28 Aug 2025 09:31:48 +0000<br><strong>Selektoren:</strong> body<br><strong>Genutzte Elemente:</strong> body</p><hr/><hr/><h3>Bisheriger Inhalt</h3><body>
+<nav class="sub navbar navbar-expand-lg navbar-light">
+<div class="container-fluid max_1280">
+<a class="navbar-brand" href="/"><img alt="Regionalverband Logo" class="img-fluid logo" src="https://www.ostwuerttemberg.org/wp-content/themes/regionalverband/img/logo.svg"/></a>
+<button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+		    MENÜ
+		  </button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav ml-auto">
+<div class="navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="navbar-nav ml-auto" id="menu-hauptmenue" itemscope="" itemtype="http://www.schema.org/SiteNavigationElement"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown menu-item-29 nav-item" id="menu-item-29"><a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" id="menu-item-dropdown-29"><span itemprop="name">Ostwürttemberg</span></a>
+<ul aria-labelledby="menu-item-dropdown-29" class="dropdown-menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-429 nav-item" id="menu-item-429"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/ostwuerttemberg/kurzportrait/" itemprop="url"><span itemprop="name">Kurzportrait</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-430 nav-item" id="menu-item-430"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/ostwuerttemberg/ostwuerttemberg/" itemprop="url"><span itemprop="name">Zahlen, Fakten &amp; Daten</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-431 nav-item" id="menu-item-431"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/ostwuerttemberg/kreise-kommunen/" itemprop="url"><span itemprop="name">Kreise &amp; Kommunen</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-620 nav-item" id="menu-item-620"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/ostwuerttemberg/links/" itemprop="url"><span itemprop="name">Links</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown menu-item-28 nav-item" id="menu-item-28"><a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" id="menu-item-dropdown-28"><span itemprop="name">Verband</span></a>
+<ul aria-labelledby="menu-item-dropdown-28" class="dropdown-menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-350 nav-item" id="menu-item-350"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/verband/aufgaben-und-organisation/" itemprop="url"><span itemprop="name">Aufgaben und Organisation</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-351 nav-item" id="menu-item-351"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/verband/geschaeftsstelle/" itemprop="url"><span itemprop="name">Geschäftsstelle</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-352 nav-item" id="menu-item-352"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/verband/team/" itemprop="url"><span itemprop="name">Team</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-717 nav-item" id="menu-item-717"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/verband/stellenangebote/" itemprop="url"><span itemprop="name">Stellenangebote</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-353 nav-item" id="menu-item-353"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/verband/gremieninformation/" itemprop="url"><span itemprop="name">Gremieninformation</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-354 nav-item" id="menu-item-354"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/verband/veroeffentlichungen/" itemprop="url"><span itemprop="name">Veröffentlichungen</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-528 nav-item" id="menu-item-528"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/verband/meldungen/" itemprop="url"><span itemprop="name">Aktuelle Meldungen</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor current-menu-ancestor current-menu-parent current-page-parent current_page_parent current_page_ancestor menu-item-has-children dropdown active menu-item-27 nav-item" id="menu-item-27"><a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" id="menu-item-dropdown-27"><span itemprop="name">Regionalplanung</span></a>
+<ul aria-labelledby="menu-item-dropdown-27" class="dropdown-menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1802 nav-item" id="menu-item-1802"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/regionalplanung/regionalplanfortschreibung/" itemprop="url"><span itemprop="name">Regionalplanfortschreibung</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-364 nav-item" id="menu-item-364"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/regionalplanung/regionalplan-2010/" itemprop="url"><span itemprop="name">Regionalplan 2010</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-1565 current_page_item menu-item-has-children dropdown active menu-item-1605 nav-item" id="menu-item-1605"><a aria-current="page" class="dropdown-item" href="https://www.ostwuerttemberg.org/regionalplanung/teilfortschreibungen/" itemprop="url"><span itemprop="name">Teilfortschreibungen</span></a>
+<ul aria-labelledby="menu-item-dropdown-27" class="dropdown-menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown menu-item-1604 nav-item" id="menu-item-1604"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/regionalplanung/teilfortschreibungen/erneuerbare-energien-2025/" itemprop="url"><span itemprop="name">Erneuerbare Energien 2025</span></a>
+<ul aria-labelledby="menu-item-dropdown-27" class="dropdown-menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2220 nav-item" id="menu-item-2220"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/regionalplanung/teilfortschreibungen/erneuerbare-energien-2025/teilfortschreibung-windenergie-2025-3/" itemprop="url"><span itemprop="name">Teilfortschreibung Windenergie 2025</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1603 nav-item" id="menu-item-1603"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/regionalplanung/teilfortschreibungen/rohstoffsicherung-2019/" itemprop="url"><span itemprop="name">Rohstoffsicherung 2019</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1602 nav-item" id="menu-item-1602"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/regionalplanung/teilfortschreibungen/erneuerbare-energien-2014/" itemprop="url"><span itemprop="name">Erneuerbare Energien 2014</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown menu-item-408 nav-item" id="menu-item-408"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/regionalplanung/landschaftsrahmenplan/" itemprop="url"><span itemprop="name">Landschaftsrahmenplan</span></a>
+<ul aria-labelledby="menu-item-dropdown-27" class="dropdown-menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-453 nav-item" id="menu-item-453"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/regionalplanung/landschaftsrahmenplan/textteile-und-karten/" itemprop="url"><span itemprop="name">Textteile und Karten</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-454 nav-item" id="menu-item-454"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/regionalplanung/landschaftsrahmenplan/regionaler-biotopverbund/" itemprop="url"><span itemprop="name">Regionaler Biotopverbund</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-455 nav-item" id="menu-item-455"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/regionalplanung/landschaftsrahmenplan/regionales-kompensationskonzept/" itemprop="url"><span itemprop="name">Regionales Kompensationskonzept</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-409 nav-item" id="menu-item-409"><a class="dropdown-item" href="https://www.ostwuerttemberg.org/regionalplanung/regionalplanaenderungen/" itemprop="url"><span itemprop="name">Regionalplanänderungen</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26 nav-item" id="menu-item-26"><a class="nav-link" href="https://www.ostwuerttemberg.org/projekte/" itemprop="url"><span itemprop="name">Projekte</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2079 nav-item" id="menu-item-2079"><a class="nav-link" href="https://www.ostwuerttemberg.org/bekanntgaben/" itemprop="url"><span itemprop="name">Öffentliche Bekanntmachungen</span></a></li>
+</ul></div> </ul>
+<form action="/" class="form-inline my-2 my-lg-0" id="search">
+<label class="sr-only" for="suche">Suche</label>
+<input aria-describedby="emailHelp" class="form-control mr-sm-2" id="suche" name="s" placeholder="Suche" type="text" value=""/>
+<button type="submit"><img alt="Suchen" src="https://www.ostwuerttemberg.org/wp-content/themes/regionalverband/img/search.svg"/></button>
+</form>
+</div>
+</div>
+</nav>
+<div class="headerbild_mit_text" id="block1">
+<img alt="Windkraft und Solar Headerbild" class="d-none d-md-block img-fluid w-100" src="https://www.ostwuerttemberg.org/wp-content/uploads/2023/06/windkraft-und-solar_headerbild.png" title="windkraft und solar_headerbild"/>
+<img alt="Windkraft und Solar Headerbild" class="d-block d-md-none img-fluid w-100" src="https://www.ostwuerttemberg.org/wp-content/uploads/2023/06/windkraft-und-solar_headerbild.png" title="windkraft und solar_headerbild"/>
+<div class="container-fluid max_1280">
+<div class="inner">
+<h1>Regionalplanung</h1>
+<h2 class="regular">Teilfortschreibungen</h2>
+</div>
+</div>
+</div>
+<div class="uberschrift_text" id="block2">
+<div class="container-fluid max_1280 pt-5 pb-5">
+<div class="row">
+<div class="col-xl-12 text">
+<h2 class="mb-4">Teilfortschreibungen</h2>
+<p>Manche Themen können nicht auf die Gesamtfortschreibung des Regionalplans warten und werden daher in Form von Teilfortschreibungen behandelt. In Ostwürttemberg wurden bisher für die Kapitel Rohstoffsicherung (in 2019)  und Erneuerbare Energien (in 2014) Teilfortschreibungen durchgeführt.</p>
+<p>Gemäß dem Klimaschutzgesetz des Landes sollen in den Regionalplänen künftig Gebiete in einer Größenordnung von mindestens zwei Prozent der Regionsfläche für die Nutzung von Windenergie und Photovoltaik festgelegt werden, um das Klimaschutzziel der Klimaneutralität bis 2040 zu erreichen.</p>
+<p>Die Verbandsversammlung des Regionalverbandes Ostwürttemberg hat deshalb am 02.12.2022 Beschlüsse zur Aufstellung des Teilregionalplans Windkraft und des Teilregionalplans Solarenergie gemäß § 12 Abs. 1 Landesplanungsgesetz (LplG) gefasst (vgl. Anlage: <a href="https://rvo.gremieninfomanagement.net/sdnetrim/UGhVM0hpd2NXNFdFcExjZbo8KqrEKoq7N9kPt6cCP1YgFud-cbZ2Sn8eQ2-VKV5_/Sitzungsvorlage_DS-36-2022.pdf">DS36/2022</a>).</p>
+<p>Zu den Unterseiten der jeweiligen Teilfortschreibungen gelangen Sie hier</p>
+<p><a href="https://www.ostwuerttemberg.org/regionalplanung/teilfortschreibungen/erneuerbare-energien-2025/"><strong>Erneuerbare Energien 2025</strong></a></p>
+<p><a href="https://www.ostwuerttemberg.org/regionalplanung/teilfortschreibungen/rohstoffsicherung-2019/"><strong>Rohstoffsicherung 2019</strong></a></p>
+<p><a href="https://www.ostwuerttemberg.org/regionalplanung/teilfortschreibungen/erneuerbare-energien-2014/"><strong>Erneuerbare Energien 2014</strong></a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="footer">
+<img alt="Regionalverband Logo" class="img-fluid w-100" src="https://www.ostwuerttemberg.org/wp-content/themes/regionalverband/img/footer.svg"/>
+<div class="container-fluid max_1280 pt-5 pb-5">
+<img alt="Regionalverband Logo" class="img-fluid logo" src="https://www.ostwuerttemberg.org/wp-content/themes/regionalverband/img/logo.svg"/>
+<div class="row">
+<div class="col-xl-3 col-md-6 mb-3">
+<div class="text-secondary mb-3"><strong> </strong></div>
+<p>Körperschaft öffentlichen Rechts</p>
+<p>HAUS DER REGION<br/>
+Bahnhofplatz 5<br/>
+73525 Schwäbisch Gmünd<br/>
+Telefon: +49/7171/92764-0<br/>
+E-Mail: <a href="mailto:info@ostwuerttemberg.org"><u>info(at)ostwuerttemberg(dot)org</u></a></p>
+</div>
+<div class="col-xl-3 col-md-6 mb-3">
+<div class="xtext-secondary mb-3"><strong>Service</strong></div>
+<a class="d-block" href="https://www.ostwuerttemberg.org/ostwuerttemberg/">Ostwürttemberg</a><a class="d-block" href="https://www.ostwuerttemberg.org/verband/">Verband</a><a class="d-block" href="https://www.ostwuerttemberg.org/regionalplanung/">Regionalplanung</a><a class="d-block" href="https://www.ostwuerttemberg.org/projekte/">Projekte</a><a class="d-block" href="https://www.ostwuerttemberg.org/kontakt-anfahrt/">Kontakt &amp; Anfahrt</a> </div>
+<div class="col-xl-3 col-md-6 mb-3">
+<div class="xtext-secondary mb-3"><strong>Weiteres</strong></div>
+<a class="d-block" href="https://www.ostwuerttemberg.org/datenschutzerklaerung/">Datenschutzerklärung</a><a class="d-block" href="https://www.ostwuerttemberg.org/impressum/">Impressum</a> <div class="xtext-secondary mt-4 mb-3"><strong>Barrierefreiheit</strong></div>
+<a class="d-block" href="https://www.ostwuerttemberg.org/erklaerung-zur-barrierefreiheit/">Erklärung zur Barrierefreiheit</a><a class="d-block" href="https://www.ostwuerttemberg.org/leichte-sprache/">Leichte Sprache</a> </div>
+<div class="col-xl-3 col-md-6 mb-3">
+<div class="xtext-secondary mb-3"><strong>Newsletter abonnieren</strong></div>
+<form action="https://seu2.cleverreach.com/f/413449-406802/wcs/" method="post" target="_blank">
+<label class="sr-only" for="text9258662">E-Mail*</label>
+<input class="form-control mb-3" id="text9258662" name="email" placeholder="Ihre E-Mail Adresse" required="" type="email" value=""/>
+<div class="form-check">
+<input class="form-check-input" id="flexCheckDefault" name="ds" required="" type="checkbox" value="1"/>
+<small class="form-check-label" for="flexCheckDefault" style="position:relative;top:-5px;">
+						    Ja, ich stimme der <a href="https://www.ostwuerttemberg.org/datenschutzerklaerung/" target="_blank">Datenschutzerklärung</a> zu.
+						  </small>
+</div>
+<button class="btn btn-primary" type="submit">Jetzt anmelden</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+<!-- Optional JavaScript -->
+<script src="https://www.ostwuerttemberg.org/wp-content/themes/regionalverband/js/popper.min.js"></script>
+<script src="https://www.ostwuerttemberg.org/wp-content/themes/regionalverband/js/bootstrap.min.js"></script>
+<script src="https://www.ostwuerttemberg.org/wp-content/themes/regionalverband/js/jquery.matchHeight-min.js"></script>
+<script src="https://www.ostwuerttemberg.org/wp-content/themes/regionalverband/js/jquery.rwdImageMaps.min.js"></script>
+<link href="https://www.ostwuerttemberg.org/wp-content/themes/regionalverband/css/jquery.fancybox.min.css" rel="stylesheet"/>
+<script src="https://www.ostwuerttemberg.org/wp-content/themes/regionalverband/js/jquery.fancybox.min.js"></script>
+<script src="https://www.ostwuerttemberg.org/wp-content/themes/regionalverband/js/slick.min.js"></script>
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/regionalverband\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<!--googleoff: all--><div data-nosnippet=""><script id="BorlabsCookieBoxWrap" type="text/template"><div
+    id="BorlabsCookieBox"
+    class="BorlabsCookie"
+    role="dialog"
+    aria-labelledby="CookieBoxTextHeadline"
+    aria-describedby="CookieBoxTextDescription"
+    aria-modal="true"
+>
+    <div class="top-center" style="display: none;">
+        <div class="_brlbs-box-wrap">
+            <div class="_brlbs-box _brlbs-box-advanced">
+                <div class="cookie-box">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="_brlbs-flex-center">
+                                    
+                                    <span role="heading" aria-level="3" class="_brlbs-h3" id="CookieBoxTextHeadline">Datenschutzeinstellungen</span>
+                                </div>
+
+                                <p id="CookieBoxTextDescription"><span class="_brlbs-paragraph _brlbs-text-description">Wir nutzen Cookies auf unserer Website. Einige von ihnen sind essenziell, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern.</span> <span class="_brlbs-paragraph _brlbs-text-confirm-age">Wenn Sie unter 16 Jahre alt sind und Ihre Zustimmung zu freiwilligen Diensten geben möchten, müssen Sie Ihre Erziehungsberechtigten um Erlaubnis bitten.</span> <span class="_brlbs-paragraph _brlbs-text-technology">Wir verwenden Cookies und andere Technologien auf unserer Website. Einige von ihnen sind essenziell, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern.</span> <span class="_brlbs-paragraph _brlbs-text-personal-data">Personenbezogene Daten können verarbeitet werden (z. B. IP-Adressen), z. B. für personalisierte Anzeigen und Inhalte oder Anzeigen- und Inhaltsmessung.</span> <span class="_brlbs-paragraph _brlbs-text-more-information">Weitere Informationen über die Verwendung Ihrer Daten finden Sie in unserer  <a class="_brlbs-cursor" href="https://www.ostwuerttemberg.org/datenschutzerklaerung/">Datenschutzerklärung</a>.</span> <span class="_brlbs-paragraph _brlbs-text-revoke">Sie können Ihre Auswahl jederzeit unter <a class="_brlbs-cursor" href="#" data-cookie-individual>Einstellungen</a> widerrufen oder anpassen.</span></p>
+
+                                                                    <fieldset>
+                                        <legend class="sr-only">Datenschutzeinstellungen</legend>
+                                        <ul>
+                                                                                                <li>
+                                                        <label class="_brlbs-checkbox">
+                                                            Essenziell                                                            <input
+                                                                id="checkbox-essential"
+                                                                tabindex="0"
+                                                                type="checkbox"
+                                                                name="cookieGroup[]"
+                                                                value="essential"
+                                                                 checked                                                                 disabled                                                                data-borlabs-cookie-checkbox
+                                                            >
+                                                            <span class="_brlbs-checkbox-indicator"></span>
+                                                        </label>
+                                                    </li>
+                                                                                                    <li>
+                                                        <label class="_brlbs-checkbox">
+                                                            Externe Medien                                                            <input
+                                                                id="checkbox-external-media"
+                                                                tabindex="0"
+                                                                type="checkbox"
+                                                                name="cookieGroup[]"
+                                                                value="external-media"
+                                                                 checked                                                                                                                                data-borlabs-cookie-checkbox
+                                                            >
+                                                            <span class="_brlbs-checkbox-indicator"></span>
+                                                        </label>
+                                                    </li>
+                                                                                        </ul>
+                                    </fieldset>
+
+                                    
+                                                                    <p class="_brlbs-accept">
+                                        <a
+                                            href="#"
+                                            tabindex="0"
+                                            role="button"
+                                            class="_brlbs-btn _brlbs-btn-accept-all _brlbs-cursor"
+                                            data-cookie-accept-all
+                                        >
+                                            Alle akzeptieren                                        </a>
+                                    </p>
+
+                                    <p class="_brlbs-accept">
+                                        <a
+                                            href="#"
+                                            tabindex="0"
+                                            role="button"
+                                            id="CookieBoxSaveButton"
+                                            class="_brlbs-btn _brlbs-cursor"
+                                            data-cookie-accept
+                                        >
+                                            Speichern                                        </a>
+                                    </p>
+                                
+                                                                    <p class="_brlbs-refuse-btn">
+                                        <a
+                                            class="_brlbs-btn _brlbs-cursor"
+                                            href="#"
+                                            tabindex="0"
+                                            role="button"
+                                            data-cookie-refuse
+                                        >
+                                            Nur essenzielle Cookies akzeptieren                                        </a>
+                                    </p>
+                                
+                                <p class="_brlbs-manage-btn ">
+                                    <a href="#" class="_brlbs-cursor _brlbs-btn " tabindex="0" role="button" data-cookie-individual>
+                                        Individuelle Datenschutzeinstellungen                                    </a>
+                                </p>
+
+                                <p class="_brlbs-legal">
+                                    <a href="#" class="_brlbs-cursor" tabindex="0" role="button" data-cookie-individual>
+                                        Cookie-Details                                    </a>
+
+                                                                            <span class="_brlbs-separator"></span>
+                                        <a href="https://www.ostwuerttemberg.org/datenschutzerklaerung/" tabindex="0" role="button">
+                                            Datenschutzerklärung                                        </a>
+                                    
+                                                                            <span class="_brlbs-separator"></span>
+                                        <a href="https://www.ostwuerttemberg.org/impressum/" tabindex="0" role="button">
+                                            Impressum                                        </a>
+                                                                    </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+    class="cookie-preference"
+    aria-hidden="true"
+    role="dialog"
+    aria-describedby="CookiePrefDescription"
+    aria-modal="true"
+>
+    <div class="container not-visible">
+        <div class="row no-gutters">
+            <div class="col-12">
+                <div class="row no-gutters align-items-top">
+                    <div class="col-12">
+                        <div class="_brlbs-flex-center">
+                                                    <span role="heading" aria-level="3" class="_brlbs-h3">Datenschutzeinstellungen</span>
+                        </div>
+
+                        <p id="CookiePrefDescription">
+                            <span class="_brlbs-paragraph _brlbs-text-confirm-age">Wenn Sie unter 16 Jahre alt sind und Ihre Zustimmung zu freiwilligen Diensten geben möchten, müssen Sie Ihre Erziehungsberechtigten um Erlaubnis bitten.</span> <span class="_brlbs-paragraph _brlbs-text-technology">Wir verwenden Cookies und andere Technologien auf unserer Website. Einige von ihnen sind essenziell, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern.</span> <span class="_brlbs-paragraph _brlbs-text-personal-data">Personenbezogene Daten können verarbeitet werden (z. B. IP-Adressen), z. B. für personalisierte Anzeigen und Inhalte oder Anzeigen- und Inhaltsmessung.</span> <span class="_brlbs-paragraph _brlbs-text-more-information">Weitere Informationen über die Verwendung Ihrer Daten finden Sie in unserer  <a class="_brlbs-cursor" href="https://www.ostwuerttemberg.org/datenschutzerklaerung/">Datenschutzerklärung</a>.</span> <span class="_brlbs-paragraph _brlbs-text-description">Hier finden Sie eine Übersicht über alle verwendeten Cookies. Sie können Ihre Einwilligung zu ganzen Kategorien geben oder sich weitere Informationen anzeigen lassen und so nur bestimmte Cookies auswählen.</span>                        </p>
+
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-12 col-sm-10">
+                                <p class="_brlbs-accept">
+                                                                            <a
+                                            href="#"
+                                            class="_brlbs-btn _brlbs-btn-accept-all _brlbs-cursor"
+                                            tabindex="0"
+                                            role="button"
+                                            data-cookie-accept-all
+                                        >
+                                            Alle akzeptieren                                        </a>
+                                        
+                                    <a
+                                        href="#"
+                                        id="CookiePrefSave"
+                                        tabindex="0"
+                                        role="button"
+                                        class="_brlbs-btn _brlbs-cursor"
+                                        data-cookie-accept
+                                    >
+                                        Speichern                                    </a>
+
+                                                                            <a
+                                            href="#"
+                                            class="_brlbs-btn _brlbs-refuse-btn _brlbs-cursor"
+                                            tabindex="0"
+                                            role="button"
+                                            data-cookie-refuse
+                                        >
+                                            Nur essenzielle Cookies akzeptieren                                        </a>
+                                                                    </p>
+                            </div>
+
+                            <div class="col-12 col-sm-2">
+                                <p class="_brlbs-refuse">
+                                    <a
+                                        href="#"
+                                        class="_brlbs-cursor"
+                                        tabindex="0"
+                                        role="button"
+                                        data-cookie-back
+                                    >
+                                        Zurück                                    </a>
+
+                                                                    </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div data-cookie-accordion>
+                                            <fieldset>
+                            <legend class="sr-only">Datenschutzeinstellungen</legend>
+
+                                                                                                <div class="bcac-item">
+                                        <div class="d-flex flex-row">
+                                            <label class="w-75">
+                                                <span role="heading" aria-level="4" class="_brlbs-h4">Essenziell (1)</span>
+                                            </label>
+
+                                            <div class="w-25 text-right">
+                                                                                            </div>
+                                        </div>
+
+                                        <div class="d-block">
+                                            <p>Essenzielle Cookies ermöglichen grundlegende Funktionen und sind für die einwandfreie Funktion der Website erforderlich.</p>
+
+                                            <p class="text-center">
+                                                <a
+                                                    href="#"
+                                                    class="_brlbs-cursor d-block"
+                                                    tabindex="0"
+                                                    role="button"
+                                                    data-cookie-accordion-target="essential"
+                                                >
+                                                    <span data-cookie-accordion-status="show">
+                                                        Cookie-Informationen anzeigen                                                    </span>
+
+                                                    <span data-cookie-accordion-status="hide" class="borlabs-hide">
+                                                        Cookie-Informationen ausblenden                                                    </span>
+                                                </a>
+                                            </p>
+                                        </div>
+
+                                        <div
+                                            class="borlabs-hide"
+                                            data-cookie-accordion-parent="essential"
+                                        >
+                                                                                            <table>
+                                                    
+                                                    <tr>
+                                                        <th scope="row">Name</th>
+                                                        <td>
+                                                            <label>
+                                                                Borlabs Cookie                                                            </label>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th scope="row">Anbieter</th>
+                                                        <td>Eigentümer dieser Website<span>, </span><a href="https://www.ostwuerttemberg.org/impressum/">Impressum</a></td>
+                                                    </tr>
+
+                                                                                                            <tr>
+                                                            <th scope="row">Zweck</th>
+                                                            <td>Speichert die Einstellungen der Besucher, die in der Cookie Box von Borlabs Cookie ausgewählt wurden.</td>
+                                                        </tr>
+                                                        
+                                                    
+                                                    
+                                                                                                            <tr>
+                                                            <th scope="row">Cookie Name</th>
+                                                            <td>borlabs-cookie</td>
+                                                        </tr>
+                                                        
+                                                                                                            <tr>
+                                                            <th scope="row">Cookie Laufzeit</th>
+                                                            <td>1 Jahr</td>
+                                                        </tr>
+                                                                                                        </table>
+                                                                                        </div>
+                                    </div>
+                                                                                                                                                                                                                                                                        <div class="bcac-item">
+                                        <div class="d-flex flex-row">
+                                            <label class="w-75">
+                                                <span role="heading" aria-level="4" class="_brlbs-h4">Externe Medien (1)</span>
+                                            </label>
+
+                                            <div class="w-25 text-right">
+                                                                                                    <label class="_brlbs-btn-switch">
+                                                        <span class="sr-only">Externe Medien</span>
+                                                        <input
+                                                            tabindex="0"
+                                                            id="borlabs-cookie-group-external-media"
+                                                            type="checkbox"
+                                                            name="cookieGroup[]"
+                                                            value="external-media"
+                                                             checked                                                            data-borlabs-cookie-switch
+                                                        />
+                                                        <span class="_brlbs-slider"></span>
+                                                        <span
+                                                            class="_brlbs-btn-switch-status"
+                                                            data-active="An"
+                                                            data-inactive="Aus">
+                                                        </span>
+                                                    </label>
+                                                                                                </div>
+                                        </div>
+
+                                        <div class="d-block">
+                                            <p>Inhalte von Videoplattformen und Social-Media-Plattformen werden standardmäßig blockiert. Wenn Cookies von externen Medien akzeptiert werden, bedarf der Zugriff auf diese Inhalte keiner manuellen Einwilligung mehr.</p>
+
+                                            <p class="text-center">
+                                                <a
+                                                    href="#"
+                                                    class="_brlbs-cursor d-block"
+                                                    tabindex="0"
+                                                    role="button"
+                                                    data-cookie-accordion-target="external-media"
+                                                >
+                                                    <span data-cookie-accordion-status="show">
+                                                        Cookie-Informationen anzeigen                                                    </span>
+
+                                                    <span data-cookie-accordion-status="hide" class="borlabs-hide">
+                                                        Cookie-Informationen ausblenden                                                    </span>
+                                                </a>
+                                            </p>
+                                        </div>
+
+                                        <div
+                                            class="borlabs-hide"
+                                            data-cookie-accordion-parent="external-media"
+                                        >
+                                                                                            <table>
+                                                                                                            <tr>
+                                                            <th scope="row">Akzeptieren</th>
+                                                            <td>
+                                                                <label class="_brlbs-btn-switch _brlbs-btn-switch--textRight">
+                                                                    <span class="sr-only">Google Maps</span>
+                                                                    <input
+                                                                        id="borlabs-cookie-googlemaps"
+                                                                        tabindex="0"
+                                                                        type="checkbox" data-cookie-group="external-media"
+                                                                        name="cookies[external-media][]"
+                                                                        value="googlemaps"
+                                                                         checked                                                                        data-borlabs-cookie-switch
+                                                                    />
+
+                                                                    <span class="_brlbs-slider"></span>
+
+                                                                    <span
+                                                                        class="_brlbs-btn-switch-status"
+                                                                        data-active="An"
+                                                                        data-inactive="Aus"
+                                                                        aria-hidden="true">
+                                                                    </span>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        
+                                                    <tr>
+                                                        <th scope="row">Name</th>
+                                                        <td>
+                                                            <label>
+                                                                Google Maps                                                            </label>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th scope="row">Anbieter</th>
+                                                        <td>Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland</td>
+                                                    </tr>
+
+                                                                                                            <tr>
+                                                            <th scope="row">Zweck</th>
+                                                            <td>Wird zum Entsperren von Google Maps-Inhalten verwendet.</td>
+                                                        </tr>
+                                                        
+                                                                                                            <tr>
+                                                            <th scope="row">Datenschutzerklärung</th>
+                                                            <td class="_brlbs-pp-url">
+                                                                <a
+                                                                    href="https://policies.google.com/privacy"
+                                                                    target="_blank"
+                                                                    rel="nofollow noopener noreferrer"
+                                                                >
+                                                                    https://policies.google.com/privacy                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        
+                                                                                                            <tr>
+                                                            <th scope="row">Host(s)</th>
+                                                            <td>.google.com</td>
+                                                        </tr>
+                                                        
+                                                                                                            <tr>
+                                                            <th scope="row">Cookie Name</th>
+                                                            <td>NID</td>
+                                                        </tr>
+                                                        
+                                                                                                            <tr>
+                                                            <th scope="row">Cookie Laufzeit</th>
+                                                            <td>6 Monate</td>
+                                                        </tr>
+                                                                                                        </table>
+                                                                                        </div>
+                                    </div>
+                                                                                                </fieldset>
+                                        </div>
+
+                <div class="d-flex justify-content-between">
+                    <p class="_brlbs-branding flex-fill">
+                                                    <a
+                                href="https://de.borlabs.io/borlabs-cookie/"
+                                target="_blank"
+                                rel="nofollow noopener noreferrer"
+                            >
+                                <img src="https://www.ostwuerttemberg.org/wp-content/plugins/borlabs-cookie/assets/images/borlabs-cookie-icon-black.svg" alt="Borlabs Cookie" width="16" height="16">
+                                                                 powered by Borlabs Cookie                            </a>
+                                                </p>
+
+                    <p class="_brlbs-legal flex-fill">
+                                                    <a href="https://www.ostwuerttemberg.org/datenschutzerklaerung/">
+                                Datenschutzerklärung                            </a>
+                            
+                                                    <span class="_brlbs-separator"></span>
+                            
+                                                    <a href="https://www.ostwuerttemberg.org/impressum/">
+                                Impressum                            </a>
+                                                </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+</script></div><!--googleon: all--><script id="wp-hooks-js" src="https://www.ostwuerttemberg.org/wp-includes/js/dist/hooks.min.js?ver=4d63a3d491d11ffd8ac6" type="text/javascript"></script>
+<script id="wp-i18n-js" src="https://www.ostwuerttemberg.org/wp-includes/js/dist/i18n.min.js?ver=5e580eb46a90c2b997e6" type="text/javascript"></script>
+<script id="wp-i18n-js-after" type="text/javascript">
+/* <![CDATA[ */
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+/* ]]> */
+</script>
+<script id="swv-js" src="https://www.ostwuerttemberg.org/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=6.1.1" type="text/javascript"></script>
+<script id="contact-form-7-js-translations" type="text/javascript">
+/* <![CDATA[ */
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "contact-form-7", {"translation-revision-date":"2025-08-16 03:40:03+0000","generator":"GlotPress\/4.0.1","domain":"messages","locale_data":{"messages":{"":{"domain":"messages","plural-forms":"nplurals=2; plural=n != 1;","lang":"de"},"This contact form is placed in the wrong place.":["Dieses Kontaktformular wurde an der falschen Stelle platziert."],"Error:":["Fehler:"]}},"comment":{"reference":"includes\/js\/index.js"}} );
+/* ]]> */
+</script>
+<script id="contact-form-7-js-before" type="text/javascript">
+/* <![CDATA[ */
+var wpcf7 = {
+    "api": {
+        "root": "https:\/\/www.ostwuerttemberg.org\/wp-json\/",
+        "namespace": "contact-form-7\/v1"
+    }
+};
+/* ]]> */
+</script>
+<script id="contact-form-7-js" src="https://www.ostwuerttemberg.org/wp-content/plugins/contact-form-7/includes/js/index.js?ver=6.1.1" type="text/javascript"></script>
+<script id="jquery-core-js" src="https://www.ostwuerttemberg.org/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" type="text/javascript"></script>
+<script id="borlabs-cookie-js-extra" type="text/javascript">
+/* <![CDATA[ */
+var borlabsCookieConfig = {"ajaxURL":"https:\/\/www.ostwuerttemberg.org\/wp-admin\/admin-ajax.php","language":"de","animation":"1","animationDelay":"","animationIn":"_brlbs-fadeInDown","animationOut":"_brlbs-flipOutX","blockContent":"1","boxLayout":"box","boxLayoutAdvanced":"1","automaticCookieDomainAndPath":"","cookieDomain":"www.ostwuerttemberg.org","cookiePath":"\/","cookieSameSite":"Lax","cookieSecure":"1","cookieLifetime":"182","cookieLifetimeEssentialOnly":"182","crossDomainCookie":[],"cookieBeforeConsent":"","cookiesForBots":"1","cookieVersion":"1","hideCookieBoxOnPages":[],"respectDoNotTrack":"","reloadAfterConsent":"","reloadAfterOptOut":"1","showCookieBox":"1","cookieBoxIntegration":"javascript","ignorePreSelectStatus":"1","cookies":{"essential":["borlabs-cookie"],"statistics":[],"marketing":[],"external-media":["googlemaps"]}};
+var borlabsCookieCookies = {"essential":{"borlabs-cookie":{"cookieNameList":{"borlabs-cookie":"borlabs-cookie"},"settings":{"blockCookiesBeforeConsent":"0","prioritize":"0"}}},"external-media":{"googlemaps":{"cookieNameList":{"NID":"NID"},"settings":{"blockCookiesBeforeConsent":"0","prioritize":"0"},"optInJS":"PHNjcmlwdD5pZih0eXBlb2Ygd2luZG93LkJvcmxhYnNDb29raWUgPT09ICJvYmplY3QiKSB7IHdpbmRvdy5Cb3JsYWJzQ29va2llLnVuYmxvY2tDb250ZW50SWQoImdvb2dsZW1hcHMiKTsgfTwvc2NyaXB0Pg==","optOutJS":""}}};
+/* ]]> */
+</script>
+<script id="borlabs-cookie-js" src="https://www.ostwuerttemberg.org/wp-content/plugins/borlabs-cookie/assets/javascript/borlabs-cookie.min.js?ver=2.3.3" type="text/javascript"></script>
+<script id="borlabs-cookie-js-after" type="text/javascript">
+/* <![CDATA[ */
+document.addEventListener("DOMContentLoaded", function (e) {
+var borlabsCookieContentBlocker = {"facebook": {"id": "facebook","global": function (contentBlockerData) {  },"init": function (el, contentBlockerData) { if(typeof FB === "object") { FB.XFBML.parse(el.parentElement); } },"settings": {"executeGlobalCodeBeforeUnblocking":false}},"default": {"id": "default","global": function (contentBlockerData) {  },"init": function (el, contentBlockerData) {  },"settings": {"executeGlobalCodeBeforeUnblocking":false}},"googlemaps": {"id": "googlemaps","global": function (contentBlockerData) {  },"init": function (el, contentBlockerData) {  },"settings": {"executeGlobalCodeBeforeUnblocking":false}},"instagram": {"id": "instagram","global": function (contentBlockerData) {  },"init": function (el, contentBlockerData) { if (typeof instgrm === "object") { instgrm.Embeds.process(); } },"settings": {"executeGlobalCodeBeforeUnblocking":false}},"openstreetmap": {"id": "openstreetmap","global": function (contentBlockerData) {  },"init": function (el, contentBlockerData) {  },"settings": {"executeGlobalCodeBeforeUnblocking":false}},"twitter": {"id": "twitter","global": function (contentBlockerData) {  },"init": function (el, contentBlockerData) {  },"settings": {"executeGlobalCodeBeforeUnblocking":false}},"vimeo": {"id": "vimeo","global": function (contentBlockerData) {  },"init": function (el, contentBlockerData) {  },"settings": {"executeGlobalCodeBeforeUnblocking":false,"saveThumbnails":false,"autoplay":false,"videoWrapper":false}},"youtube": {"id": "youtube","global": function (contentBlockerData) {  },"init": function (el, contentBlockerData) {  },"settings": {"executeGlobalCodeBeforeUnblocking":false,"changeURLToNoCookie":true,"saveThumbnails":false,"autoplay":false,"thumbnailQuality":"maxresdefault","videoWrapper":false}}};
+    var BorlabsCookieInitCheck = function () {
+
+    if (typeof window.BorlabsCookie === "object" && typeof window.jQuery === "function") {
+
+        if (typeof borlabsCookiePrioritized !== "object") {
+            borlabsCookiePrioritized = { optInJS: {} };
+        }
+
+        window.BorlabsCookie.init(borlabsCookieConfig, borlabsCookieCookies, borlabsCookieContentBlocker, borlabsCookiePrioritized.optInJS);
+    } else {
+        window.setTimeout(BorlabsCookieInitCheck, 50);
+    }
+};
+
+BorlabsCookieInitCheck();});
+/* ]]> */
+</script>
+<script>
+		$(function() {
+			$('.sh').matchHeight();
+		});    
+
+		$(document).ready(function(e) {
+	    $('img[usemap]').rwdImageMaps();
+		});	
+
+$('.slick').slick({
+
+  arrows: true,
+  infinite:true,
+  slidesToShow: 3,
+  responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 1
+      }
+    }
+  ]
+}); 
+
+
+		
+    </script>
+</body>]]></description>
+</item>
+</channel></rss>
