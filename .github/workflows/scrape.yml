@@ -1,97 +1,142 @@
 name: scrape-feeds
-
 on:
   schedule:
-    - cron: "*/30 * * * *"   # UTC-basiert
+    - cron: "*/30 * * * *"   
   workflow_dispatch: {}
-
 permissions:
   contents: write
   pages: write
   id-token: write
-
 concurrency:
   group: pages-deploy
   cancel-in-progress: false
-
+  
 jobs:
   scrape:
     runs-on: ubuntu-latest
     steps:
+    
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
+          
       - name: Show workspace (before)
         run: |
           echo "PWD=$(pwd)"
           ls -lah
-
+          # State-Info anzeigen falls vorhanden
+          if [ -f data/state.json ]; then
+            echo "=== Existing state.json ==="
+            echo "Size: $(wc -c < data/state.json) bytes"
+            echo "Sites: $(jq '.sites | length' data/state.json 2>/dev/null || echo 'N/A')"
+            echo "Items: $(jq '.items | length' data/state.json 2>/dev/null || echo 'N/A')"
+          else
+            echo "No existing state.json found"
+          fi
+          
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          cache: "pip"               # <<< schneller dank Cache
+          cache: "pip"
           cache-dependency-path: requirements.txt
-
+          
       - name: Install deps
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
+          # jq für JSON-Debugging installieren
+          sudo apt-get update && sudo apt-get install -y jq libxml2-utils
+          
+      - name: Prepare directories (preserve state.json!)
+        run: |
+          rm -rf feeds logs
+          mkdir -p data feeds logs
+          echo "State preservation check:"
+          ls -la data/ || echo "No data directory yet"
+          
       - name: Run scraper
         env:
           PYTHONUNBUFFERED: "1"
         run: |
           set -euxo pipefail
-          rm -rf data feeds logs
-          mkdir -p data feeds logs
           python scraper.py --once
-          test -n "$(ls -A feeds || true)" || { echo "No feeds generated"; exit 1; }
-
-      - name: Show workspace (after)
+          # Prüfen ob Feeds generiert wurden
+          if [ ! -d "feeds" ] || [ -z "$(ls -A feeds 2>/dev/null)" ]; then
+            echo "ERROR: No feeds generated!"
+            exit 1
+          fi
+          echo "Feeds generated: $(ls feeds | wc -l) files"
+          
+      - name: Show workspace (after scraping)
         run: |
+          echo "=== AFTER SCRAPING ==="
           echo "== data =="
           ls -lah data || true
           echo "== feeds =="
           ls -lah feeds || true
           echo "== logs =="
           ls -lah logs || true
-          [ -f data/state.json ] && head -n 20 data/state.json || true
-
-      - name: Upload logs (artifact)
-        if: always()              # <<< auch bei Fehlern hochladen
-        uses: actions/upload-artifact@v4
-        with:
-          name: logs
-          path: logs
-          if-no-files-found: warn
-
-      - name: Commit state.json (only)
-        run: |
-          set -euxo pipefail
+          
+          # State.json Details
           if [ -f data/state.json ]; then
-            git config user.name "github-actions"
-            git config user.email "actions@github.com"
-            git add data/state.json
-            git commit -m "Update state.json [skip ci]" || echo "no changes to commit"
-            git push || true
+            echo "=== state.json stats ==="
+            echo "Size: $(wc -c < data/state.json) bytes"
+            echo "Sites: $(jq '.sites | length' data/state.json)"
+            echo "Items: $(jq '.items | length' data/state.json)"
+            echo "Recent items:"
+            jq -r '.items[-3:] | .[] | "\(.name) - \(.first_seen // .fetched_at)"' data/state.json || true
           fi
-
-      # Optional: Validierung – wenn du nicht blockieren willst, setze '|| true'
+          
       - name: Validate XML feeds
         run: |
-          sudo apt-get update && sudo apt-get install -y libxml2-utils
-          xmllint --noout feeds/*.xml
-
+          echo "Validating $(ls feeds/*.xml | wc -l) XML feeds..."
+          for file in feeds/*.xml; do
+            if ! xmllint --noout "$file"; then
+              echo "❌ Invalid XML: $file"
+              head -20 "$file"
+              exit 1
+            fi
+          done
+          echo "All XML feeds valid"
+          
+      - name: Upload logs (artifact)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-${{ github.run_number }}
+          path: logs
+          if-no-files-found: warn
+          
+      - name: Commit updated state.json
+        run: |
+          set -euxo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Nur state.json committen wenn es Änderungen gibt
+          if [ -f data/state.json ]; then
+            git add data/state.json
+            if git diff --staged --quiet; then
+              echo "No changes in state.json"
+            else
+              git commit -m "Update state.json - $(date -u '+%Y-%m-%d %H:%M:%S UTC') [skip ci]"
+              git push
+              echo "state.json committed and pushed"
+            fi
+          else
+            echo "No state.json found to commit!"
+            exit 1
+          fi
+          
       - name: Setup Pages
         uses: actions/configure-pages@v5
-
       - name: Upload feeds artifact (for Pages)
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./feeds
-
+          
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
