@@ -521,7 +521,7 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
             "aenderungen_html": "<p><em>Erste Erfassung - Monitoring gestartet.</em></p>",
             "bisheriger_html": display_text,
         })
-        print(f"✅ {cfg.name}: Erste Erfassung")
+        print(f"{cfg.name}: Erste Erfassung")
 
         return {
             "site": cfg,
@@ -536,14 +536,14 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
 
         if h == last_hash:
             # Keine inhaltliche Änderung
-            print(f"⚫ {cfg.name}: Keine Änderung")
+            print(f"{cfg.name}: Keine Änderung")
             return None
 
         # ECHTE Änderung erkannt
         old_content = site_state.get("current_content", "")
         added_html = added_paragraphs_html(old_content, display_text, cfg.name)
 
-        print(f"🔄 {cfg.name}: ÄNDERUNG ERKANNT! Hash {str(last_hash)[:12]} -> {h[:12]}")
+        print(f"{cfg.name}: ÄNDERUNG ERKANNT! Hash {str(last_hash)[:12]} -> {h[:12]}")
 
         # State für Änderung aktualisieren
         state["sites"][slug].update({
@@ -668,7 +668,7 @@ def generate_feeds_from_state(state: Dict[str, Any], feeds_path: str, retention_
             last_build_date=build_ts_rfc2822,
         )
         bl_slug = slugify(bl)
-        write_text(os.path.join(feeds_path, f"DE-{bl_slug}.xml"), xml)
+        write_text(os.path.join(feeds_path, f"2_DE-{bl_slug}.xml"), xml)
 
 
 # ======================================================================================================================
