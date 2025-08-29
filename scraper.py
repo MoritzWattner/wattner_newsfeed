@@ -1,30 +1,49 @@
+#!/usr/bin/env python3
+"""
+DE-Plan Feed Watcher - Optimierte Website Change Detection
+"""
+
 import argparse
 import asyncio
-import contextlib
 import dataclasses
 import datetime as dt
 import hashlib
 import html
+import json
 import os
 import re
-import json
-from typing import List, Optional, Dict, Any
+from typing import Dict, List, Optional, Any
 
 import httpx
+import yaml
 from bs4 import BeautifulSoup, Comment
 
 # ======================================================================================================================
-### Input variables
+# Configuration
+# ======================================================================================================================
 
 DEFAULT_STORAGE = "./data"
 DEFAULT_FEEDS = "./feeds"
-STATE_FILENAME = "state.json"  # wird unter storage_path abgelegt
+STATE_FILENAME = "state.json"
+
+
+@dataclasses.dataclass
+class SiteConfig:
+    name: str
+    bundesland: str
+    url: str
+    selectors: List[str]
+    mode: str = "text"
+    update_frequency: str = "normal"  # fast, normal, slow
+    priority: str = "normal"  # high, normal, low
 
 
 # ======================================================================================================================
-### Helper functions
+# Utilities
+# ======================================================================================================================
 
 def slugify(value: str) -> str:
+    """Convert string to URL-safe slug"""
     value = value.lower()
     value = re.sub(r"[^a-z0-9]+", "-", value).strip("-")
     return re.sub(r"-+", "-", value)
@@ -34,664 +53,623 @@ def now_utc() -> dt.datetime:
     return dt.datetime.now(dt.timezone.utc)
 
 
-def ensure_dir(p: str):
-    os.makedirs(p, exist_ok=True)
+def ensure_dir(path: str) -> bool:
+    """Create directory if it doesn't exist. Return success status."""
+    if not path:
+        return False
+    try:
+        os.makedirs(path, exist_ok=True)
+        return True
+    except Exception as e:
+        print(f"ERROR: Could not create directory {path}: {e}")
+        return False
 
 
-def read_text(path: str) -> str:
-    with open(path, "r", encoding="utf-8") as f:
-        return f.read()
+def make_hash(text: str) -> str:
+    """Generate SHA256 hash of text"""
+    return hashlib.sha256(text.encode("utf-8", errors="ignore")).hexdigest()
 
 
-def write_text(path: str, txt: str):
-    ensure_dir(os.path.dirname(path))
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(txt)
+def short_hash(hash_str: str) -> str:
+    """Return first 12 chars of hash for display"""
+    return hash_str[:12] if hash_str else "None"
 
 
-def node_label(node) -> str:
-    if not node:
-        return "<None>"
-    tag = node.name or "<?>"
-    _id = f"#{node.get('id')}" if node and node.get("id") else ""
-    classes = node.get("class", []) if node else []
-    cls = "." + ".".join(classes) if classes else ""
-    return f"{tag}{_id}{cls}"
+# ======================================================================================================================
+# Content Processing
+# ======================================================================================================================
 
+def normalize_content(text: str) -> str:
+    """MINIMAL normalization - only remove technical artifacts"""
+    if not text:
+        return ""
 
-def append_log(line: str, path: str = "logs/selection.log"):
-    ensure_dir(os.path.dirname(path))
-    with open(path, "a", encoding="utf-8") as f:
-        f.write(line.rstrip() + "\n")
-
-
-def short_hash(text: str) -> str:
-    h = hashlib.sha256()
-    h.update(text.encode("utf-8", errors="ignore"))
-    return h.hexdigest()[:12]
-
-
-def normalize_for_hash(text: str) -> str:
-    """Verbesserte Content-Normalisierung für Change-Detection"""
-    # Whitespace komprimieren
+    # Basic whitespace normalization
     text = re.sub(r"\s+", " ", text).strip()
 
-    # Timestamps und Datumsangaben normalisieren (häufige False-Positive-Quelle)
-    text = re.sub(r'\b\d{1,2}\.\d{1,2}\.\d{4}\b', '[DATE]', text)  # DD.MM.YYYY
-    text = re.sub(r'\b\d{4}-\d{2}-\d{2}\b', '[DATE]', text)  # YYYY-MM-DD
-    text = re.sub(r'\b\d{1,2}:\d{2}(:\d{2})?\b', '[TIME]', text)  # HH:MM(:SS)
+    # Remove only clearly technical artifacts
+    text = re.sub(r'\b[a-f0-9]{32,}\b', '[ID]', text, flags=re.IGNORECASE)  # Long hex IDs
+    text = re.sub(r'\bsessionid=[a-f0-9]{16,}', 'sessionid=[SESSION]', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bjsessionid=[a-f0-9]{16,}', 'jsessionid=[SESSION]', text, flags=re.IGNORECASE)
 
-    # Session IDs und ähnliche dynamische Inhalte
-    text = re.sub(r'\bsid=[a-f0-9]+', 'sid=[SESSION]', text, flags=re.IGNORECASE)
-    text = re.sub(r'\bid=["\']?[a-f0-9-]{20,}["\']?', 'id="[ID]"', text, flags=re.IGNORECASE)
-
-    # "Zuletzt aktualisiert am..." Texte
-    text = re.sub(r'(zuletzt (aktualisiert|geändert|bearbeitet|gepflegt).*?\d{4})', '[LAST_UPDATED]', text,
-                  flags=re.IGNORECASE)
-    text = re.sub(r'(stand:?\s*\d{1,2}\.\d{1,2}\.\d{4})', '[STAND_DATE]', text, flags=re.IGNORECASE)
+    # Only very specific technical timestamps
+    text = re.sub(r'generiert am \d{2}\.\d{2}\.\d{4} um \d{2}:\d{2}:\d{2}', '[GENERATED]', text, flags=re.IGNORECASE)
+    text = re.sub(r'seitenaufruf um \d{2}:\d{2}:\d{2}', '[PAGE_LOAD]', text, flags=re.IGNORECASE)
 
     return text
 
 
-def split_paragraphs(text: str) -> list[str]:
-    # robuste Absatzliste aus Text mit \n
-    t = text.replace("\r\n", "\n").replace("\r", "\n")
-    # Mehrfach-Leerzeilen zu zwei \n zusammenfassen
-    t = re.sub(r"\n{3,}", "\n\n", t)
-    # an Leerzeilen trennen
-    parts = [p.strip() for p in t.split("\n\n")]
-    # ungeeignete leere Teile raus
-    return [p for p in parts if p]
+def extract_content(html_text: str, selectors: List[str], site_name: str = "") -> tuple[str, Dict[str, Any]]:
+    """Extract content from HTML using selectors with fallback strategy"""
+
+    soup = BeautifulSoup(html_text, "lxml")
+
+    # Remove unwanted elements
+    for tag in soup(["script", "style", "noscript", "iframe", "template"]):
+        tag.decompose()
+    for comment in soup.find_all(string=lambda x: isinstance(x, Comment)):
+        comment.extract()
+
+    # Try selectors with fallback chain
+    selected_nodes = []
+    used_selectors = []
+
+    for selector in selectors:
+        if selector.strip():
+            try:
+                nodes = soup.select(selector.strip())
+                if nodes:
+                    selected_nodes.extend(nodes)
+                    used_selectors.append(selector.strip())
+            except Exception as e:
+                print(f"WARNING: Invalid selector '{selector}' for {site_name}: {e}")
+
+    # Fallback strategy if no selectors worked
+    if not selected_nodes:
+        fallbacks = ["main", ".main-content", ".content", "#content", "#main"]
+        for fallback in fallbacks:
+            nodes = soup.select(fallback)
+            if nodes:
+                selected_nodes = nodes
+                used_selectors = [f"fallback:{fallback}"]
+                break
+
+        # Ultimate fallback
+        if not selected_nodes and soup.body:
+            selected_nodes = [soup.body]
+            used_selectors = ["fallback:body"]
+
+    # Extract text and HTML
+    if not selected_nodes:
+        return "", {"error": "No content found", "selectors_used": []}
+
+    content_html = ""
+    content_text = ""
+
+    for node in selected_nodes:
+        content_html += str(node) + "\n\n"
+        content_text += node.get_text(separator=" ", strip=True) + " "
+
+    # Normalize for hash comparison
+    normalized_text = normalize_content(content_text.strip())
+
+    return content_html.strip(), {
+        "content_text": content_text.strip(),
+        "normalized_text": normalized_text,
+        "selectors_used": used_selectors,
+        "node_count": len(selected_nodes),
+        "content_length": len(content_text),
+    }
 
 
-def paragraphs_to_html(paragraphs: list[str]) -> str:
-    # einfache, scrollbar-freie Darstellung als Fließtext-Blöcke
-    return "".join(f"<p>{html.escape(p)}</p>" for p in paragraphs)
-
-
-def added_paragraphs_html(old_text: str, new_text: str) -> str:
-    """Verbesserte Diff-Erkennung für Absätze"""
-    import difflib
+def calculate_content_diff(old_text: str, new_text: str) -> str:
+    """Calculate meaningful differences between old and new content"""
 
     if not old_text.strip():
-        # Erste Erfassung: keine "Änderungen" anzeigen
-        return "<p><em>Erste Erfassung - keine Änderungen zu vergleichen.</em></p>"
+        return "<p><em>Erste Erfassung - Überwachung gestartet.</em></p>"
 
-    old_pars = split_paragraphs(old_text)
-    new_pars = split_paragraphs(new_text)
+    # Split into paragraphs for comparison
+    def split_paragraphs(text: str) -> List[str]:
+        text = text.replace('\r\n', '\n').replace('\r', '\n')
+        text = re.sub(r'\n{3,}', '\n\n', text)
+        return [p.strip() for p in text.split('\n\n') if p.strip()]
 
-    # Absätze für Vergleich normalisieren (Timestamps etc. entfernen)
-    old_pars_norm = [normalize_for_hash(p) for p in old_pars]
-    new_pars_norm = [normalize_for_hash(p) for p in new_pars]
+    old_paragraphs = split_paragraphs(old_text)
+    new_paragraphs = split_paragraphs(new_text)
 
-    sm = difflib.SequenceMatcher(None, old_pars_norm, new_pars_norm)
-    added: list[str] = []
+    # Simple diff - find new paragraphs
+    old_set = set(normalize_content(p) for p in old_paragraphs)
+    new_content = []
 
-    for tag, i1, i2, j1, j2 in sm.get_opcodes():
-        if tag == "insert":
-            added.extend(new_pars[j1:j2])  # Original-Absätze verwenden, nicht normalisierte
-        elif tag == "replace":
-            # Nur ersetzte Absätze hinzufügen, die wirklich substantielle Änderungen haben
-            for old_idx, new_idx in zip(range(i1, i2), range(j1, j2)):
-                if old_idx < len(old_pars_norm) and new_idx < len(new_pars_norm):
-                    # Prüfen ob substantielle Änderung (mehr als nur Timestamps etc.)
-                    old_clean = re.sub(r'\[DATE\]|\[TIME\]|\[SESSION\]|\[ID\]|\[LAST_UPDATED\]|\[STAND_DATE\]', '',
-                                       old_pars_norm[old_idx])
-                    new_clean = re.sub(r'\[DATE\]|\[TIME\]|\[SESSION\]|\[ID\]|\[LAST_UPDATED\]|\[STAND_DATE\]', '',
-                                       new_pars_norm[new_idx])
+    for p in new_paragraphs:
+        normalized_p = normalize_content(p)
+        if normalized_p not in old_set and len(normalized_p) > 10:  # Ignore very short changes
+            new_content.append(p)
 
-                    if old_clean.strip() != new_clean.strip():
-                        added.append(new_pars[new_idx])
+    if not new_content:
+        return "<p><em>Keine neuen Inhalte erkannt (möglicherweise nur Formatierungsänderungen).</em></p>"
 
-    if not added:
-        return "<p><em>Keine neuen oder substantiell geänderten Inhalte erkannt.</em></p>"
+    # Format as HTML
+    html_parts = []
+    for content in new_content[:5]:  # Limit to 5 changes
+        html_parts.append(f"<p>{html.escape(content)}</p>")
 
-    return paragraphs_to_html(added)
+    if len(new_content) > 5:
+        html_parts.append(f"<p><em>... und {len(new_content) - 5} weitere Änderungen</em></p>")
 
-
-# ======================================================================================================================
-
-def rss_escape(s: str) -> str:
-    return html.escape(s, quote=True)
-
-
-def make_rss(channel_title: str, channel_link: str, channel_desc: str, items: List[Dict[str, str]], *,
-             last_build_date: Optional[str] = None) -> str:
-    rss = ['<?xml version="1.0" encoding="UTF-8"?>',
-           '<rss version="2.0">',
-           "<channel>",
-           f"<title>{rss_escape(channel_title)}</title>",
-           f"<link>{rss_escape(channel_link)}</link>",
-           f"<description>{rss_escape(channel_desc)}</description>"]
-    if last_build_date:
-        rss.append(f"<lastBuildDate>{rss_escape(last_build_date)}</lastBuildDate>")
-    for it in items:
-        desc = it.get("description", "")
-        # WICHTIG: CDATA sicher wrappen
-        desc_cdata = cdata_wrap(desc)
-        rss.append("<item>")
-        rss.append(f"<title>{rss_escape(it.get('title', ''))}</title>")
-        rss.append(f"<link>{rss_escape(it.get('link', ''))}</link>")
-        rss.append(f"<guid isPermaLink=\"false\">{rss_escape(it.get('guid', ''))}</guid>")
-        rss.append(f"<pubDate>{rss_escape(it.get('pubDate', ''))}</pubDate>")
-        rss.append(f"<description>{desc_cdata}</description>")
-        rss.append("</item>")
-    rss.append("</channel></rss>")
-    return "\n".join(rss)
-
-
-def xml_sanitize(text: str) -> str:
-    """
-    Entfernt alle Zeichen, die in XML 1.0 nicht erlaubt sind.
-    Erlaubt sind: Tab, LF, CR, U+0020..U+D7FF, U+E000..U+FFFD (und bei UCS-4 Python auch > U+10000).
-    """
-    if not text:
-        return text
-    out_chars = []
-    for ch in text:
-        cp = ord(ch)
-        if (
-                cp == 0x9 or cp == 0xA or cp == 0xD or
-                (0x20 <= cp <= 0xD7FF) or
-                (0xE000 <= cp <= 0xFFFD) or
-                (0x10000 <= cp <= 0x10FFFF)
-        ):
-            out_chars.append(ch)
-        # sonst: drop
-    return "".join(out_chars)
-
-
-def cdata_wrap(html_payload: str) -> str:
-    """
-    Verpackt beliebiges HTML sicher in CDATA:
-    - entfernt script/style/noscript/iframe/template und HTML-Kommentare
-    - entfernt ungültige XML-Zeichen
-    - entschärft ']]>' innerhalb des Inhalts
-    """
-    if not html_payload:
-        return "<![CDATA[]]>"
-
-    try:
-        soup = BeautifulSoup(html_payload, "lxml")
-
-        # Störende Tags raus
-        for bad in soup(["script", "style", "noscript", "iframe", "template"]):
-            bad.decompose()
-
-        # HTML-Kommentare entfernen (die enthalten manchmal heikle Sequenzen)
-        for c in soup.find_all(string=lambda t: isinstance(t, Comment)):
-            c.extract()
-
-        html_payload = str(soup)
-    except Exception:
-        # falls BS4 fehlschlägt, mit raw-String weiterarbeiten
-        pass
-
-    # Ungültige XML-Zeichen entfernen
-    html_payload = xml_sanitize(html_payload)
-
-    # ']]>' im Inhalt splitten, damit CDATA nicht frühzeitig endet
-    html_payload = html_payload.replace("]]>", "]]]]><![CDATA[>")
-
-    # (Optional) sichtbaren CDATA-Start neutralisieren
-    html_payload = html_payload.replace("<![CDATA[", "<![C DATA[")
-
-    return f"<![CDATA[{html_payload}]]>"
+    return "".join(html_parts)
 
 
 # ======================================================================================================================
-### Configuration of yml for scraping logic
-
-try:
-    import yaml  # type: ignore
-
-    HAVE_YAML = True
-except Exception:
-    HAVE_YAML = False
-
-
-def load_config(path: str) -> Dict[str, Any]:
-    raw = read_text(path)
-    if HAVE_YAML:
-        return yaml.safe_load(raw)
-    # minimal YAML->dict fallback (very limited). Recommend installing PyYAML.
-    import json as _json
-    with contextlib.suppress(Exception):
-        return _json.loads(raw)
-    raise RuntimeError("Install pyyaml (pip install pyyaml) or provide JSON config.")
-
-
+# State Management
 # ======================================================================================================================
-### Storage of websites state
-
-def state_path(storage_path: str) -> str:
-    ensure_dir(storage_path or DEFAULT_STORAGE)
-    return os.path.join(storage_path or DEFAULT_STORAGE, STATE_FILENAME)
 
 def load_state(storage_path: str) -> Dict[str, Any]:
-    path = state_path(storage_path)
-    if os.path.exists(path):
-        with open(path, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {
-        "sites": {},  # slug -> {name,bundesland,url,hash,excerpt,last_change}
-        "items": []  # Historie der Änderungen (Events)
-    }
+    """Load state from JSON file"""
+    state_file = os.path.join(storage_path, STATE_FILENAME)
 
-def save_state(storage_path: str, state: Dict[str, Any]):
-    path = state_path(storage_path)
-    ensure_dir(os.path.dirname(path))
-    tmp = path + ".tmp"
-    with open(tmp, "w", encoding="utf-8") as f:
-        json.dump(state, f, ensure_ascii=False, indent=2)
-    os.replace(tmp, path)
+    if not os.path.exists(state_file):
+        return {"sites": {}, "items": [], "metadata": {"version": "2.0", "created": now_utc().isoformat()}}
 
-
-# ======================================================================================================================
-### OOP with class structured data storage for fetching websites
-
-@dataclasses.dataclass
-class SiteCfg:
-    name: str
-    bundesland: str
-    url: str
-    selectors: List[str]
-    mode: str = "text"  # or "html"
-
-
-async def fetch(client: httpx.AsyncClient, url: str, timeout: int) -> Optional[str]:
     try:
-        r = await client.get(url, timeout=timeout, follow_redirects=True)
-        r.raise_for_status()
-        r.encoding = r.encoding or "utf-8"
-        return r.text
-    except Exception:
+        with open(state_file, 'r', encoding='utf-8') as f:
+            state = json.load(f)
+            # Ensure metadata exists
+            if "metadata" not in state:
+                state["metadata"] = {"version": "2.0", "migrated": now_utc().isoformat()}
+            return state
+    except Exception as e:
+        print(f"ERROR: Could not load state file: {e}")
+        return {"sites": {}, "items": [], "metadata": {"version": "2.0", "error_recovery": now_utc().isoformat()}}
+
+
+def save_state(storage_path: str, state: Dict[str, Any]) -> bool:
+    """Save state to JSON file with atomic write"""
+    state_file = os.path.join(storage_path, STATE_FILENAME)
+    temp_file = state_file + ".tmp"
+
+    try:
+        state["metadata"]["last_save"] = now_utc().isoformat()
+
+        with open(temp_file, 'w', encoding='utf-8') as f:
+            json.dump(state, f, ensure_ascii=False, indent=2)
+
+        os.replace(temp_file, state_file)
+        return True
+    except Exception as e:
+        print(f"ERROR: Could not save state: {e}")
+        if os.path.exists(temp_file):
+            os.remove(temp_file)
+        return False
+
+
+# ======================================================================================================================
+# Website Fetching
+# ======================================================================================================================
+
+async def fetch_website(client: httpx.AsyncClient, url: str, timeout: int = 30) -> Optional[str]:
+    """Fetch website content with error handling"""
+    try:
+        response = await client.get(url, timeout=timeout, follow_redirects=True)
+        response.raise_for_status()
+        response.encoding = response.encoding or "utf-8"
+        return response.text
+    except httpx.TimeoutException:
+        print(f"TIMEOUT: {url}")
+    except httpx.HTTPStatusError as e:
+        print(f"HTTP {e.response.status_code}: {url}")
+    except Exception as e:
+        print(f"FETCH ERROR {url}: {e}")
+    return None
+
+
+# ======================================================================================================================
+# Site Processing
+# ======================================================================================================================
+
+async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, site: SiteConfig) -> Optional[Dict[str, Any]]:
+    """Process a single website and detect changes"""
+
+    # Fetch website content
+    html_content = await fetch_website(client, site.url)
+    if not html_content:
         return None
 
-
-# ======================================================================================================================
-### Analyse textual difference from website <-> state.json last screening
-
-def make_hash(text: str) -> str:
-    h = hashlib.sha256()
-    h.update(text.encode("utf-8", errors="ignore"))
-    return h.hexdigest()
-
-
-def text_diff(old: str, new: str, max_lines: int = 200) -> str:
-    import difflib
-    old_lines = old.split()
-    new_lines = new.split()
-    diff = difflib.unified_diff(old_lines, new_lines, fromfile="prev", tofile="curr", lineterm="")
-    lines = list(diff)[:max_lines]
-    return "<pre>" + html.escape("\n".join(lines)) + "</pre>"
-
-
-def added_lines_html(old: str, new: str, max_lines: int = 80) -> str:
-    import difflib
-    old_lines = old.split()
-    new_lines = new.split()
-    added = []
-    for ln in difflib.unified_diff(old_lines, new_lines, lineterm=""):
-        if ln.startswith("+") and not ln.startswith("+++"):
-            added.append(ln[1:])
-        if len(added) >= max_lines:
-            break
-    if not added:
-        return "<p><em>Keine reinen Hinzufügungen erkennbar.</em></p>"
-    body = html.escape("\n".join(added))
-    return f"<pre>{body}</pre>"
-
-
-# ======================================================================================================================
-### Extract textual html information from website and log process steps
-
-def extract(html_text: str, selectors: List[str], mode: str, *, site_name: str = "", site_url: str = "") -> tuple[
-    str, Dict[str, Any]]:
-    soup = BeautifulSoup(html_text, "lxml")
-    # Störende Tags entfernen
-    for bad in soup(["script", "style", "noscript", "iframe", "template"]):
-        bad.decompose()
-    # Kommentare raus
-    for c in soup.find_all(string=lambda t: isinstance(t, Comment)):
-        c.extract()
-    sel_list = [s.strip() for s in (selectors or []) if s and s.strip()]
-
-    matches = []
-    for sel in sel_list:
-        for node in soup.select(sel):
-            matches.append(node)
-
-    if matches:
-        used_strategy = f"selectors({', '.join(sel_list)})"
-        used_nodes = matches
-    else:
-        node = soup.select_one("main")
-        if node:
-            used_strategy = "fallback:main"
-            used_nodes = [node]
-        elif soup.body:
-            used_strategy = "fallback:body"
-            used_nodes = [soup.body]
-        else:
-            used_strategy = "fallback:soup"
-            used_nodes = [soup]
-
-    # Inhalte extrahieren
-    display_chunks = []
-    hash_chunks = []
-    for node in used_nodes:
-        if mode == "html":
-            t = str(node)  # HTML 1:1 übernehmen
-        else:
-            # Plaintext optional, aber für deine Anforderung besser auch HTML
-            t = str(node)
-        display_chunks.append(t)
-        # Für Hash: Plaintext + Normalisierung für robuste Change-Detection
-        plaintext = node.get_text(separator=" ", strip=True)
-        hash_chunks.append(normalize_for_hash(plaintext))
-
-    display_text = "\n\n".join(display_chunks).strip()
-    hash_text = " ".join(hash_chunks)
-
-    ts = now_utc().isoformat()
-    node_labels = ", ".join(node_label(n) for n in used_nodes[:3])
-    if len(used_nodes) > 3:
-        node_labels += f" (+{len(used_nodes) - 3} more)"
-    selectors_pretty = "[" + ", ".join(sel_list) + "]" if sel_list else "[]"
-
-    log_block = (
-        f"[{ts}] site={site_name}\n"
-        f"  url={site_url}\n"
-        f"  strategy={used_strategy}\n"
-        f"  selectors={selectors_pretty}\n"
-        f"  matches={len(matches)}\n"
-        f"  used_nodes={node_labels}\n"
-        f"  text_len={len(display_text)} hash={short_hash(hash_text)}\n"
-    )
-    append_log(log_block)
-
-    meta = {
-        "checked_at": ts,
-        "strategy": used_strategy,
-        "selectors": sel_list,
-        "selectors_used": sel_list if matches else [used_strategy.replace("fallback:", "(fallback: ") + ")"],
-        "used_nodes": node_labels,
-        "display_text": display_text,  # für Darstellung/Absätze
-        "hash_text": hash_text,  # für Hash/Abgleich
-    }
-    # return: (anzeige-text, meta) – der anzeige-text ist mit absätzen
-    return display_text, meta
-
-
-# ======================================================================================================================
-### Build elements of RSS Article
-
-def build_item_description(ev: Dict[str, Any]) -> str:
-    def _fmt(ts: str) -> str:
-        try:
-            return rfc2822(ts)
-        except Exception:
-            return ts or ""
-
-    # KORREKTUR: first_seen vs. fetched_at verwenden
-    first_seen = ev.get('first_seen', ev.get('fetched_at', ''))  # Fallback für Kompatibilität
-    checked_at = ev.get('checked_at', '')
-    selectors_used = ev.get('selectors_used') or ev.get('selectors') or []
-    selectors_txt = ", ".join(selectors_used) if selectors_used else "–"
-    used_nodes = ev.get('used_nodes', '')
-
-    header = (
-        f"<p><strong>Stand (Inhalt):</strong> {rss_escape(_fmt(first_seen))}<br>"
-        f"<strong>Zuletzt geprüft:</strong> {rss_escape(_fmt(checked_at))}<br>"
-        f"<strong>Selektoren:</strong> {rss_escape(selectors_txt)}<br>"
-        f"<strong>Genutzte Elemente:</strong> {rss_escape(used_nodes)}</p>"
-    )
-
-    changes_block = ""
-    if ev.get("aenderungen_html"):
-        changes_block = "<h3>Änderungen (neue Inhalte)</h3>" + ev["aenderungen_html"]
-
-    previous_block = ""
-    if ev.get("bisheriger_html"):
-        previous_block = "<h3>Bisheriger Inhalt</h3>" + ev["bisheriger_html"]
-
-    return header + "<hr/>" + changes_block + "<hr/>" + previous_block
-
-
-# ======================================================================================================================
-### Single website procesing
-
-async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: SiteCfg, timeout: int) -> Optional[
-    Dict[str, Any]]:
-    html_text = await fetch(client, cfg.url, timeout)
-    if not html_text:
+    # Extract content using selectors
+    content_html, meta = extract_content(html_content, site.selectors, site.name)
+    if meta.get("error"):
+        print(f"EXTRACTION ERROR {site.name}: {meta['error']}")
         return None
 
-    display_text, meta = extract(html_text, cfg.selectors, cfg.mode, site_name=cfg.name, site_url=cfg.url)
+    # Calculate content hash
+    content_hash = make_hash(meta["normalized_text"])
+    slug = slugify(site.name)
+    now_iso = now_utc().isoformat()
 
-    # Hash nur auf normalisiertem Text
-    h = make_hash(meta["hash_text"])
-    slug = slugify(cfg.name)
-
+    # Get current site state
     site_state = state["sites"].get(slug, {})
     last_hash = site_state.get("hash")
 
-    # KORREKTUR: previous_content statt falscher Schlüssel
-    last_full = site_state.get("previous_content", "")
-    now_iso = now_utc().isoformat()
-
-    # State immer aktualisieren (für "zuletzt geprüft")
+    # Always update last_checked
     if slug not in state["sites"]:
-        # Erste Erfassung
+        # First time seeing this site
         state["sites"][slug] = {
-            "name": cfg.name,
-            "bundesland": cfg.bundesland,
-            "url": cfg.url,
-            "hash": h,
-            "current_content": display_text,
-            "previous_content": "",  # noch kein Vorgänger-Content
-            "first_seen": now_iso,  # KORREKTUR: ersten Zeitpunkt merken
-            "last_change": now_iso,
+            "name": site.name,
+            "bundesland": site.bundesland,
+            "url": site.url,
+            "hash": content_hash,
+            "first_seen": now_iso,
             "last_checked": now_iso,
+            "last_change": now_iso,
+            "current_content": content_html,
+            "content_length": meta["content_length"],
+            "selectors_used": meta["selectors_used"],
         }
 
-        # Für erste Erfassung: einen "Info"-Artikel erstellen, aber nicht als "Änderung"
+        # Add initial item
         state["items"].append({
+            "id": f"{slug}:{now_iso}",
             "slug": slug,
-            "name": cfg.name,
-            "bundesland": cfg.bundesland,
-            "url": cfg.url,
-            "first_seen": now_iso,
-            "checked_at": meta["checked_at"],
-            "selectors": meta["selectors"],
+            "name": site.name,
+            "bundesland": site.bundesland,
+            "url": site.url,
+            "timestamp": now_iso,
+            "change_type": "initial",
+            "changes_html": "<p><em>Erste Erfassung - Überwachung gestartet.</em></p>",
+            "content_preview": content_html[:500] + "..." if len(content_html) > 500 else content_html,
             "selectors_used": meta["selectors_used"],
-            "used_nodes": meta["used_nodes"],
-            "aenderungen_html": "<p><em>Erste Erfassung - Monitoring gestartet.</em></p>",
-            "bisheriger_html": display_text,
         })
 
-        return {
-            "site": cfg,
-            "fetched_at": now_iso,
-            "hash": h,
-            "excerpt": meta["display_text"][:2000],
-            "diff_html": "",
-        }
+        print(f"NEW: {site.name}")
+        return {"type": "initial", "site": site, "hash": content_hash}
+
     else:
-        # Update für bestehende Site
+        # Update existing site
         state["sites"][slug]["last_checked"] = now_iso
 
-        if h == last_hash:
-            # Keine inhaltliche Änderung
+        if content_hash == last_hash:
+            # No change detected
             return None
 
-        # ECHTE Änderung erkannt
+        # Change detected!
         old_content = site_state.get("current_content", "")
-        added_html = added_paragraphs_html(old_content, display_text)
+        changes_html = calculate_content_diff(old_content, content_html)
 
-        # State für Änderung aktualisieren
+        # Update site state
         state["sites"][slug].update({
-            "hash": h,
-            "previous_content": old_content,  # alten Content als "previous" speichern
-            "current_content": display_text,  # neuen Content
+            "hash": content_hash,
             "last_change": now_iso,
-        })
-
-        # Nur bei echten Änderungen einen RSS-Item erstellen
-        state["items"].append({
-            "slug": slug,
-            "name": cfg.name,
-            "bundesland": cfg.bundesland,
-            "url": cfg.url,
-            "first_seen": site_state.get("first_seen", now_iso),  # ursprünglichen Zeitpunkt beibehalten
-            "checked_at": meta["checked_at"],
-            "selectors": meta["selectors"],
+            "previous_content": old_content,
+            "current_content": content_html,
+            "content_length": meta["content_length"],
             "selectors_used": meta["selectors_used"],
-            "used_nodes": meta["used_nodes"],
-            "aenderungen_html": added_html,
-            "bisheriger_html": old_content,
         })
 
-        if len(state["items"]) > 2000:
-            state["items"] = state["items"][-2000:]
+        # Add change item
+        state["items"].append({
+            "id": f"{slug}:{now_iso}",
+            "slug": slug,
+            "name": site.name,
+            "bundesland": site.bundesland,
+            "url": site.url,
+            "timestamp": now_iso,
+            "change_type": "update",
+            "changes_html": changes_html,
+            "content_preview": content_html[:500] + "..." if len(content_html) > 500 else content_html,
+            "selectors_used": meta["selectors_used"],
+        })
 
-        return {
-            "site": cfg,
-            "fetched_at": now_iso,
-            "hash": h,
-            "excerpt": meta["display_text"][:2000],
-            "diff_html": added_html,
-        }
+        # Cleanup old items (keep last 1000)
+        if len(state["items"]) > 1000:
+            state["items"] = state["items"][-1000:]
 
-
-def rfc2822(ts_iso: str) -> str:
-    dt_obj = dt.datetime.fromisoformat(ts_iso)
-    from email.utils import format_datetime
-    if dt_obj.tzinfo is None:
-        dt_obj = dt_obj.replace(tzinfo=dt.timezone.utc)
-    return format_datetime(dt_obj)
+        print(f"CHANGE: {site.name} (hash: {short_hash(last_hash)} -> {short_hash(content_hash)})")
+        return {"type": "change", "site": site, "hash": content_hash, "changes": changes_html}
 
 
 # ======================================================================================================================
-### Generate single feeds for each screened website
+# RSS Feed Generation
+# ======================================================================================================================
 
-def generate_feeds_from_state(state: Dict[str, Any], feeds_path: str, retention_days: int, active_slugs: List[str]):
-    ensure_dir(feeds_path)
-    if not active_slugs:
-        return
+def escape_xml(text: str) -> str:
+    """Escape text for XML"""
+    return html.escape(text, quote=True)
 
-    cutoff_dt = now_utc() - dt.timedelta(days=retention_days)
-    build_ts_rfc2822 = rfc2822(now_utc().isoformat())
 
-    # --- Per-Site-Feeds nur für aktive Slugs
+def wrap_cdata(content: str) -> str:
+    """Wrap content in CDATA section"""
+    if not content:
+        return "<![CDATA[]]>"
+
+    # Escape ]]> sequences
+    content = content.replace("]]>", "]]]]><![CDATA[>")
+    return f"<![CDATA[{content}]]>"
+
+
+def format_rfc2822(iso_timestamp: str) -> str:
+    """Convert ISO timestamp to RFC2822 format"""
+    try:
+        dt_obj = dt.datetime.fromisoformat(iso_timestamp)
+        if dt_obj.tzinfo is None:
+            dt_obj = dt_obj.replace(tzinfo=dt.timezone.utc)
+        from email.utils import format_datetime
+        return format_datetime(dt_obj)
+    except Exception:
+        return iso_timestamp
+
+
+def build_rss_description(item: Dict[str, Any], site_info: Dict[str, Any]) -> str:
+    """Build RSS item description"""
+
+    timestamp = item.get("timestamp", "")
+    first_seen = site_info.get("first_seen", timestamp)
+    selectors = ", ".join(item.get("selectors_used", []))
+
+    header = f"""
+    <p>
+        <strong>Erste Erfassung:</strong> {escape_xml(format_rfc2822(first_seen))}<br>
+        <strong>Letzte Änderung:</strong> {escape_xml(format_rfc2822(timestamp))}<br>
+        <strong>Selektoren:</strong> {escape_xml(selectors)}<br>
+    </p>
+    <hr>
+    """
+
+    changes_section = ""
+    if item.get("changes_html"):
+        changes_section = f"<h3>Erkannte Änderungen</h3>{item['changes_html']}<hr>"
+
+    preview_section = f"<h3>Content-Vorschau</h3>{item.get('content_preview', '')}"
+
+    return header + changes_section + preview_section
+
+
+def generate_site_feed(slug: str, site_info: Dict[str, Any], items: List[Dict[str, Any]]) -> str:
+    """Generate RSS feed for a single site"""
+
+    name = site_info.get("name", slug)
+    url = site_info.get("url", "")
+
+    # Sort items by timestamp (newest first)
+    sorted_items = sorted(items, key=lambda x: x.get("timestamp", ""), reverse=True)
+
+    # Build RSS items
+    rss_items = []
+    for item in sorted_items[:20]:  # Limit to 20 items
+        timestamp = item.get("timestamp", "")
+        rss_items.append(f"""
+        <item>
+            <title>{escape_xml(f"{name} - Aktualisierung")}</title>
+            <link>{escape_xml(url)}</link>
+            <guid isPermaLink="false">{escape_xml(item.get("id", f"{slug}:{timestamp}"))}</guid>
+            <pubDate>{escape_xml(format_rfc2822(timestamp))}</pubDate>
+            <description>{wrap_cdata(build_rss_description(item, site_info))}</description>
+        </item>
+        """)
+
+    # Build complete RSS
+    now_rfc = format_rfc2822(now_utc().isoformat())
+
+    rss = f"""<?xml version="1.0" encoding="UTF-8"?>
+    <rss version="2.0">
+        <channel>
+            <title>{escape_xml(f"Änderungen: {name}")}</title>
+            <link>{escape_xml(url)}</link>
+            <description>{escape_xml(f"Änderungsfeed für {name}")}</description>
+            <lastBuildDate>{escape_xml(now_rfc)}</lastBuildDate>
+            <language>de-DE</language>
+            {"".join(rss_items)}
+        </channel>
+    </rss>"""
+
+    return rss
+
+
+def generate_bundesland_feed(bundesland: str, items: List[Dict[str, Any]],
+                             site_infos: Dict[str, Dict[str, Any]]) -> str:
+    """Generate aggregated RSS feed for a Bundesland"""
+
+    # Sort items by timestamp (newest first)
+    sorted_items = sorted(items, key=lambda x: x.get("timestamp", ""), reverse=True)
+
+    # Build RSS items
+    rss_items = []
+    for item in sorted_items[:50]:  # Limit to 50 items
+        site_info = site_infos.get(item.get("slug", ""), {})
+        timestamp = item.get("timestamp", "")
+
+        rss_items.append(f"""
+        <item>
+            <title>{escape_xml(f"{item.get('name', 'Unbekannt')} - Update")}</title>
+            <link>{escape_xml(item.get('url', ''))}</link>
+            <guid isPermaLink="false">{escape_xml(item.get("id", f"item:{timestamp}"))}</guid>
+            <pubDate>{escape_xml(format_rfc2822(timestamp))}</pubDate>
+            <description>{wrap_cdata(build_rss_description(item, site_info))}</description>
+        </item>
+        """)
+
+    # Build complete RSS
+    now_rfc = format_rfc2822(now_utc().isoformat())
+
+    rss = f"""<?xml version="1.0" encoding="UTF-8"?>
+    <rss version="2.0">
+        <channel>
+            <title>{escape_xml(f"Regionalplanung {bundesland}")}</title>
+            <link>https://example.invalid/</link>
+            <description>{escape_xml(f"Aggregierte Änderungen für {bundesland}")}</description>
+            <lastBuildDate>{escape_xml(now_rfc)}</lastBuildDate>
+            <language>de-DE</language>
+            {"".join(rss_items)}
+        </channel>
+    </rss>"""
+
+    return rss
+
+
+def generate_all_feeds(state: Dict[str, Any], feeds_path: str, active_slugs: List[str]) -> bool:
+    """Generate all RSS feeds"""
+
+    if not ensure_dir(feeds_path):
+        return False
+
+    sites = state.get("sites", {})
+    items = state.get("items", [])
+
+    # Filter items to only active sites and recent items (last 120 days)
+    cutoff_date = now_utc() - dt.timedelta(days=120)
+    active_items = []
+
+    for item in items:
+        if item.get("slug") in active_slugs:
+            try:
+                item_date = dt.datetime.fromisoformat(item.get("timestamp", ""))
+                if item_date >= cutoff_date:
+                    active_items.append(item)
+            except Exception:
+                continue
+
+    # Generate per-site feeds
     items_by_slug: Dict[str, List[Dict[str, Any]]] = {}
-    for ev in state.get("items", []):
-        if ev["slug"] in active_slugs:
-            # KORREKTUR: first_seen für Datum verwenden, falls vorhanden
-            event_date = ev.get("first_seen", ev.get("fetched_at", ""))
-            if event_date:
-                ev_dt = dt.datetime.fromisoformat(event_date)
-                if ev_dt >= cutoff_dt:
-                    items_by_slug.setdefault(ev["slug"], []).append(ev)
+    for item in active_items:
+        slug = item.get("slug")
+        if slug:
+            items_by_slug.setdefault(slug, []).append(item)
 
-    for slug, evs in items_by_slug.items():
-        evs.sort(key=lambda e: e.get("first_seen", e.get("fetched_at", "")), reverse=True)
-        meta = state["sites"].get(slug, {})
-        name = meta.get("name", slug)
-        url = meta.get("url", "")
-        rss_items = []
-        for ev in evs:
-            event_date = ev.get("first_seen", ev.get("fetched_at", ""))
-            rss_items.append({
-                "title": f"Aktualisierung: {name} ({event_date[:19]}Z)",
-                "link": url,
-                "guid": f"{slug}:{event_date}",
-                "pubDate": rfc2822(event_date),
-                "description": build_item_description(ev),
-            })
-        xml = make_rss(
-            channel_title=f"Aktualisierungen – {name}",
-            channel_link=url,
-            channel_desc=f"Änderungsfeed für {name}",
-            items=rss_items,
-            last_build_date=build_ts_rfc2822,
-        )
-        write_text(os.path.join(feeds_path, f"site_{slug}.xml"), xml)
+    site_feeds_generated = 0
+    for slug, site_items in items_by_slug.items():
+        if slug in sites:
+            try:
+                feed_content = generate_site_feed(slug, sites[slug], site_items)
+                feed_file = os.path.join(feeds_path, f"site_{slug}.xml")
 
-    # --- Aggregation pro Bundesland (nur aktive Slugs)
-    ev_all: List[Dict[str, Any]] = []
-    for ev in state.get("items", []):
-        if ev["slug"] in active_slugs:
-            event_date = ev.get("first_seen", ev.get("fetched_at", ""))
-            if event_date:
-                ev_dt = dt.datetime.fromisoformat(event_date)
-                if ev_dt >= cutoff_dt:
-                    ev_all.append(ev)
-    ev_all.sort(key=lambda e: e.get("first_seen", e.get("fetched_at", "")), reverse=True)
+                with open(feed_file, 'w', encoding='utf-8') as f:
+                    f.write(feed_content)
+                site_feeds_generated += 1
+            except Exception as e:
+                print(f"ERROR generating feed for {slug}: {e}")
 
-    by_bl: Dict[str, List[Dict[str, Any]]] = {}
-    for ev in ev_all:
-        by_bl.setdefault(ev["bundesland"], []).append(ev)
+    # Generate Bundesland feeds
+    items_by_bundesland: Dict[str, List[Dict[str, Any]]] = {}
+    for item in active_items:
+        bl = item.get("bundesland")
+        if bl:
+            items_by_bundesland.setdefault(bl, []).append(item)
 
-    for bl, evs in by_bl.items():
-        rss_items = []
-        for ev in evs:
-            event_date = ev.get("first_seen", ev.get("fetched_at", ""))
-            rss_items.append({
-                "title": f"{ev['name']} – Update {event_date[:19]}Z",
-                "link": ev["url"],
-                "guid": f"{ev['slug']}:{event_date}",
-                "pubDate": rfc2822(event_date),
-                "description": build_item_description(ev),
-            })
-        xml = make_rss(
-            channel_title=f"Regional-/Entwicklungspläne – {bl}",
-            channel_link="https://example.invalid/",
-            channel_desc=f"Aggregierter Feed für {bl}",
-            items=rss_items,
-            last_build_date=build_ts_rfc2822,
-        )
-        bl_slug = slugify(bl)
-        write_text(os.path.join(feeds_path, f"DE-{bl_slug}.xml"), xml)
+    bl_feeds_generated = 0
+    for bundesland, bl_items in items_by_bundesland.items():
+        try:
+            feed_content = generate_bundesland_feed(bundesland, bl_items, sites)
+            feed_file = os.path.join(feeds_path, f"DE-{slugify(bundesland)}.xml")
+
+            with open(feed_file, 'w', encoding='utf-8') as f:
+                f.write(feed_content)
+            bl_feeds_generated += 1
+        except Exception as e:
+            print(f"ERROR generating feed for {bundesland}: {e}")
+
+    print(f"Generated {site_feeds_generated} site feeds, {bl_feeds_generated} Bundesland feeds")
+    return True
 
 
 # ======================================================================================================================
-### Main logic query
+# Main Application
+# ======================================================================================================================
 
-async def main(args):
-    cfg = load_config("config.yml")
+def load_config(config_path: str = "config.yml") -> Dict[str, Any]:
+    """Load configuration from YAML file"""
+    try:
+        with open(config_path, 'r', encoding='utf-8') as f:
+            return yaml.safe_load(f)
+    except Exception as e:
+        print(f"ERROR: Could not load config: {e}")
+        return {}
 
-    storage_path = cfg.get("storage_path", DEFAULT_STORAGE)
-    feeds_path = cfg.get("feeds_path", DEFAULT_FEEDS)
-    ensure_dir("logs")
-    ensure_dir(storage_path)
-    ensure_dir(feeds_path)
 
+async def main():
+    """Main application entry point"""
+    parser = argparse.ArgumentParser(description="DE-Plan Feed Watcher")
+    parser.add_argument("--once", action="store_true", help="Run once and exit")
+    parser.add_argument("--config", default="config.yml", help="Config file path")
+    args = parser.parse_args()
+
+    # Load configuration
+    config = load_config(args.config)
+    if not config:
+        print("ERROR: Could not load configuration")
+        return 1
+
+    storage_path = config.get("storage_path", DEFAULT_STORAGE)
+    feeds_path = config.get("feeds_path", DEFAULT_FEEDS)
+
+    # Create directories
+    if not ensure_dir(storage_path) or not ensure_dir(feeds_path):
+        print("ERROR: Could not create required directories")
+        return 1
+
+    # Load state
     state = load_state(storage_path)
+    initial_sites = len(state.get("sites", {}))
+    initial_items = len(state.get("items", []))
+    print(f"Loaded state: {initial_sites} sites, {initial_items} items")
 
-    headers = {"User-Agent": cfg.get("user_agent", "DE-Plan-Feed-Watcher/1.0")}
-    timeout = int(cfg.get("site_timeout_sec", 30))
+    # Parse site configurations
+    site_configs = []
+    for site_data in config.get("sites", []):
+        if site_data.get("url") and site_data.get("name"):  # Skip empty entries
+            site_configs.append(SiteConfig(
+                name=site_data["name"],
+                bundesland=site_data.get("bundesland", "Unknown"),
+                url=site_data["url"],
+                selectors=site_data.get("selectors", []),
+                mode=site_data.get("mode", "text"),
+                update_frequency=site_data.get("update_frequency", "normal"),
+                priority=site_data.get("priority", "normal"),
+            ))
+
+    if not site_configs:
+        print("ERROR: No valid site configurations found")
+        return 1
+
+    print(f"Processing {len(site_configs)} sites...")
+
+    # Process all sites
+    user_agent = config.get("user_agent", "DE-Plan-Feed-Watcher/2.0")
+    timeout = config.get("site_timeout_sec", 30)
+
+    headers = {"User-Agent": user_agent}
+    changes_detected = 0
+
     async with httpx.AsyncClient(headers=headers) as client:
-        tasks = []
-        for s in cfg["sites"]:
-            scfg = SiteCfg(name=s["name"], bundesland=s["bundesland"], url=s["url"],
-                           selectors=s.get("selectors", []), mode=s.get("mode", "text"))
-            tasks.append(process_site(state, client, scfg, timeout))
+        tasks = [process_site(state, client, site) for site in site_configs]
         results = await asyncio.gather(*tasks, return_exceptions=True)
-        changed = [r for r in results if isinstance(r, dict)]
-        print(f"Checked {len(tasks)} sites – changes: {len(changed)}")
 
-    # Speichern
-    save_state(storage_path, state)
+        for result in results:
+            if isinstance(result, dict):
+                changes_detected += 1
+            elif isinstance(result, Exception):
+                print(f"ERROR: {result}")
 
-    # Feeds erzeugen (nur aktive Slugs aus aktueller Config)
-    active_slugs = [slugify(s["name"]) for s in cfg["sites"]]
-    generate_feeds_from_state(state, feeds_path, int(cfg.get("feed_retention_days", 120)), active_slugs)
+    print(f"Changes detected: {changes_detected}")
+
+    # Save state
+    if not save_state(storage_path, state):
+        print("ERROR: Could not save state")
+        return 1
+
+    # Generate RSS feeds
+    active_slugs = [slugify(site.name) for site in site_configs]
+    if not generate_all_feeds(state, feeds_path, active_slugs):
+        print("ERROR: Could not generate feeds")
+        return 1
+
+    final_sites = len(state.get("sites", {}))
+    final_items = len(state.get("items", []))
+    print(f"Final state: {final_sites} sites, {final_items} items")
+    print("Scraping completed successfully")
+
+    return 0
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--once", action="store_true", help="Einmalig ausführen und beenden")
-    args = parser.parse_args()
-    asyncio.run(main(args))
+    import sys
+
+    sys.exit(asyncio.run(main()))
