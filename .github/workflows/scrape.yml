@@ -94,7 +94,7 @@ jobs:
           echo "Validating $(ls feeds/*.xml | wc -l) XML feeds..."
           for file in feeds/*.xml; do
             if ! xmllint --noout "$file"; then
-              echo "❌ Invalid XML: $file"
+              echo "Invalid XML: $file"
               head -20 "$file"
               exit 1
             fi
