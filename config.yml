@@ -4,7 +4,8 @@
 storage_path: "./data"
 feeds_path: "./feeds"
 feed_retention_days: 120
-user_agent: "DE-Plan-Feed-Watcher/1.0 (kontakt@example.de)"
+user_agent: "DE-Plan-Feed-Watcher/2.0 (+https://github.com/username/repo)"
+site_timeout_sec: 30
 
 # Hinweis: Bundesland ist frei wählbar (String). Nutze konsistent die offiziellen Namen.
 sites:
@@ -16,13 +17,17 @@ sites:
     url: "https://www.zdfheute.de/nachrichtenticker-100.html"
     selectors: ["main"]
     mode: "text"
+    update_frequency: "fast"
+    priority: "normal"
 
   - name: "Merkur - Nachrichtenticker"
     bundesland: "Deutschland"
     url: "https://www.merkur.de/nachrichtenticker/"
     selectors: ["#id-top"]
     mode: "text"
-
+    update_frequency: "fast"
+    priority: "normal"
+    
 # ------------------------------------------------------ RROP Niedersachsen ------------------------------------------------------
 
   - name: "Landkreis Luechow-Dannenberg - Regionaler Raumordnungsplan"
@@ -30,49 +35,65 @@ sites:
     url: "https://www.luechow-dannenberg.de/portal/meldungen/neuaufstellung-des-regionalen-raumordnungsprogramms-rrop--900000258-38100.html"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Landkreis Uelzen - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.landkreis-uelzen.de/home/bauen-umwelt-tiere-und-lebensmittel/bauen/regionalplanung/neuaufstellung-des-regionalen-raumordnungsprogrammes-rrop-fuer-den-landkreis-uelzen-2019.aspx"
     selectors: ["#ctl01_contentpane"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Landkreis Lueneburg - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.landkreis-lueneburg.de/fuer-unsere-buergerinnen-und-buerger/bauen-und-planen/regionalplanung/neuaufstellung-des-regionalen-raumordnungsprogramms.html"
     selectors: ["#MainContent"] # alternativ .Main oder .Column.neos-contentcollection
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+    
   - name: "Landkreis Harburg - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.landkreis-harburg.de/portal/seiten/regionales-raumordnungsprogramm-rrop-2025-fuer-den-landkreis-harburg-901000407-20100.html"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Heidekreis - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.heidekreis.de/bauen-planen/regional-und-bauleitplanung.html"
     selectors: ["main"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Celle - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.landkreis-celle.de/index.php?ModID=7&FID=3314.15511.1&object=tx|3314.15511.1"
     selectors: ["main.site-content.wrapper"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Regionalverband Braunschweig - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.regionalverband-braunschweig.de/region-raum/planung-verfahren/regionalplanung/rrop-neuaufstelllung"
     selectors: ["#page-content"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Regionalverband Hannover- Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.hannover.de/Leben-in-der-Region-Hannover/Planen,-Bauen,-Wohnen/Raumordnung-Regionalentwicklung/Regionalplanung"
     selectors: [".main-content-wrapper"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Hildesheim - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.landkreishildesheim.de/Politik-Verwaltung/Verwaltung/Projekte/RROP/"
@@ -84,157 +105,211 @@ sites:
     url: "https://www.landkreis-holzminden.de/portal/seiten/regionales-raumordnungsprogramm-rrop--900000126-25600.html"
     selectors: ["#middle"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Northeim - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.landkreis-northeim.de/portal/seiten/neuaufstellung-des-regionalen-raumordnungsprogramms-fuer-den-landkreis-northeim-900000239-23900.html"
     selectors: ["#nolis_content"]
     mode: "text"  # "text" (standard) oder "html"
-   
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Goettingen - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.landkreisgoettingen.de/Themen-Leistungen/Bauen-Infrastruktur/Regionalplanung/Neuaufstellung-Regionales-Raumordnungsprogramm/"
     selectors: [".site-main.wrapper"]
     mode: "text"  # "text" (standard) oder "html"
-   
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Hameln-Pyrmont - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.hameln-pyrmont.de/Wirtschaft-Klima/Weitere-Themen/Regionalplanung-/"
     selectors: [".inhalt"]
     mode: "text"  # "text" (standard) oder "html"
-   
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Schaumburg - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.serviceportal-schaumburg.de/buergerservice/dienstleistungen/raumordnung-landesplanung-und-regionalplanung-900000734-24500.html"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
-   
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Nienburg-Weser - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.lk-nienburg.de/politik-verwaltung/planen-bauen/regionalplanung/neuaufstellung-rrop/"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
-   
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Emsland - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.emsland.de/wirtschaft-struktur/raumplanung-und-bauen/regionalplanung/regionalplanung.html"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
-   
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Grafschaft Bentheim  - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.grafschaft-bentheim.de/grafschaft/buergerservice/?ansicht=dienstleistung&eintrag=316"
     selectors: ["#blockBody"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Vechta  - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.landkreis-vechta.de/bauen-und-umwelt/planen-und-bauen/raumordnung/rrop.html"
     selectors: ["#col3"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Osnabrueck  - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.landkreis-osnabrueck.de/fachthemen/bauen/regionales-raumordnungsprogramm-rrop"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Friesland - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.friesland.de/buergerservice/dienstleistungen/regionalplanung-regionales-raumordnungsprogramm-rrop--901001864-0.html"
     selectors: ["#middle"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Aurich - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.landkreis-aurich.de/bildung-wirtschaft/regionalplanung-und-kreisentwicklung/raumordnung/neuaufstellung-des-regionalen-raumordnungsprogramms-rrop.html"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Leer - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.landkreis-leer.de/Themen/Bauen-Umwelt/Planung/Regionale-Raumordnung/"
     selectors: ["#readthis"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Wittmund - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.landkreis-wittmund.de/Leben-Wohnen/Wohnen/Bauen-und-Planen/Regionalplanung/"
     selectors: [".site-content.wrapper"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Ammerland - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.ammerland.de/Service/Von-A-Z/Dienstleistungen/Regionalplanung-Regionales-Raumordnungsprogramm-RROP-.php?ModID=10&FID=2843.2080.1"
     selectors: [".column-md-1.column-4x5"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Cloppenburg - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.lkclp.de/unser-landkre/bauen--umwel/plane/raumordnung/regionales-raumordnungsprogramm-rrop"
     selectors: [".main-inner"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Oldenburg - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.oldenburg-kreis.de/planen-und-bauen/raumordnung-und-bauleitplanung/regionales-raumordnungsprogramm/neuaufstellung-des-regionalen-raumordnungsprogrammes-rrop-/"
     selectors: ["#nolis_content"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Wesermarsch - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://wesermarsch.de/services/bauen-planen/regionale-raumordnung/"
     selectors: [".post-content"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Diepholz - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.diepholz.de/portal/seiten/regionalplanung-regionalentwicklung-1000571-21750.html"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Verden - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.landkreis-verden.de/abfall-bauen-umwelt/regionalplanung/rrop-2016/"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Stade - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.landkreis-stade.de/portal/seiten/neuaufstellung-des-regionalen-raumordnungsprogramms-901001078-20350.html"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Cuxhaven - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.landkreis-cuxhaven.de/Themenbereiche/Bauen-Planen/Regionalplanung/"
     selectors: [".inhalt.column-2.clearfix"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Cuxhaven - Regionaler Raumordnungsplan - Neuaufstellungen"
     bundesland: "Niedersachsen"
     url: "https://www.landkreis-cuxhaven.de/Themenbereiche/Bauen-Planen/Regionalplanung/Neuaufstellung-des-RROP/"
     selectors: [".inhalt.column-2.clearfix"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Cuxhaven - Regionaler Raumordnungsplan - RROP2012"
     bundesland: "Niedersachsen"
     url: "https://www.landkreis-cuxhaven.de/Themenbereiche/Bauen-Planen/Regionalplanung/RROP-2012/"
     selectors: [".inhalt.column-2.clearfix"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Rotenburg-Wuemme - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.lk-row.de/portal/seiten/regionales-raumordnungsprogramm-rrop-des-landkreises-1072-23700.html"
     selectors: ["#nolis_content"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis Osterholz - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.lk-row.de/portal/seiten/regionales-raumordnungsprogramm-rrop-des-landkreises-1072-23700.html"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
-  
+    update_frequency: "fast"
+    priority: "high"
+        
   # ------------------------------------------------------ RROP Nordrhein-Westfalen -----------------------------------------------------
   
   - name: "Landkreis  - Regionaler Raumordnungsplan"
@@ -242,13 +317,17 @@ sites:
     url: ""
     selectors: [""]
     mode: "text"  # "text" (standard) oder "html"
-  
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landkreis  - Regionaler Raumordnungsplan"
     bundesland: "Nordrhein-Westfalen"
     url: ""
     selectors: [""]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   # ------------------------------------------------------ RROP Saarland ---------------------------------------------------------------
   
   - name: "Saarland - Landesentwicklungsplan"
@@ -256,25 +335,33 @@ sites:
     url: "https://www.saarland.de/mibs/DE/portale/landesplanung/informationen/verteilerseite_landesentwicklungsplan/landesentwicklungsplan_node"
     selectors: ["#rs_start"]
     mode: "text"  # "text" (standard) oder "html"
-  
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Saarland - Landesentwicklungsplan Neuaufstellung"
     bundesland: "Saarland"
     url: "https://www.saarland.de/mibs/DE/portale/landesplanung/informationen/verteilerseite_neuaufstellung_lep/neuaufstellung-lep_node"
     selectors: ["#rs_start"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Saarland - Landesentwicklungsplan Medieninformationen"
     bundesland: "Saarland"
     url: "https://www.saarland.de/mibs/DE/aktuelles/newsletter/medieninformationen/_documents/2023/pm139_2023-08-22-LEP"
     selectors: ["#rs_start"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Saarland - Landesentwicklungsplan Klim, ROK und Windkraft"
     bundesland: "Saarland"
     url: "https://www.saarland.de/mibs/DE/portale/landesplanung/informationen/verteilerseite_klima_rok_windkraft/klima-rok-windkraft_node"
     selectors: ["#rs_start"]
     mode: "text"  # "text" (standard) oder "html"
-  
+    update_frequency: "fast"
+    priority: "high"
+        
   # ------------------------------------------------------ RROP Hessen -----------------------------------------------------------------
 
   - name: "Planregion NordOst-Hessen - Regionaler Raumordnungsplan"
@@ -282,97 +369,129 @@ sites:
     url: "https://landesplanung.hessen.de/regionalplanung/nordosthessen"
     selectors: ["#main"] 
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Regierungspräsidium Kassel - Nordosthessen (Regionalplanung & Landesentwicklung)"
     bundesland: "Hessen"
     url: "https://rp-kassel.hessen.de/landesentwicklung"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html" 
-   
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Regionalplan Nordhessen - Geoportal Nordhessen"
     bundesland: "Hessen"
     url: "https://www.geoportalnordhessen.de/de/regionalplan-nordhessen.html"
     selectors: [".col-12.order-1"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
         
   - name: "Landesplanung Hessen - Mittelhessen RP und Teilplan Energie"
     bundesland: "Hessen"
     url: "https://landesplanung.hessen.de/regionalplanung/mittelhessen"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Regierungspräsidium Gießen - Regionalplan Mittelhessen"
     bundesland: "Hessen"
     url: "https://rp-giessen.hessen.de/wirtschaft-und-planung/regionalplanung/regionalplan-mittelhessen"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
-      
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landesplanung Hessen - Südhessen Regionalplanung"
     bundesland: "Hessen"
     url: "https://landesplanung.hessen.de/regionalplanung/suedhessen"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
-      
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Regierungspräsidium Darmstadt - Regionalplan Südhessen"
     bundesland: "Hessen"
     url: "https://rp-darmstadt.hessen.de/infrastruktur-und-wirtschaft/regionalplanung/regionalplan-suedhessen"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
-      
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Regierungspräsidium Darmstadt - Regionalplan Südhessen Neuaufstellung"
     bundesland: "Hessen"
     url: "https://rp-darmstadt.hessen.de/infrastruktur-und-wirtschaft/regionalplanung/regionalplan-suedhessen/neuaufstellung"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
-     
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Regierungspräsidium Darmstadt - Regionalplan Südhessen & Teilplan EE und 1. Änderung"
     bundesland: "Hessen"
     url: "https://rp-darmstadt.hessen.de/infrastruktur-und-wirtschaft/regionalplanung/regionalplan-suedhessen/teilplan-erneuerbare-energien-2019"
     selectors: ["#main-content"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Regierungspräsidium Darmstadt - Regionalplan Südhessen & Regionaler Flächennutzungsplan"
     bundesland: "Hessen"
     url: "https://rp-darmstadt.hessen.de/infrastruktur-und-wirtschaft/regionalplanung/regionalplan-suedhessen/regionalplan-suedhessen-regionaler-flaechennutzungsplan"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Region FrankfurtRheinMain - Regionaler Flächennutzungsplan & Teilplan EE 2019"
     bundesland: "Hessen"
     url: "https://www.region-frankfurt.de/Unsere-Themen-Leistungen/Regionaler-Fl%C3%A4chennutzungsplan/Beteiligung-und-aktueller-Stand-/Der-g%C3%BCltige-RegFNP-2010/"
     selectors: ["#jump-content"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Regierungspräsidium Kassel - Erneuerbare Energien und Solarenergienutzung"
     bundesland: "Hessen"
     url: "https://rp-kassel.hessen.de/landesentwicklung/erneuerbare-energien/solarenergienutzung"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landesplanung Hessen - Potenzialflächenkataster"
     bundesland: "Hessen"
     url: "https://landesplanung.hessen.de/potenzialflaechenkataster"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landesplanung Hessen - Geodaten Regionalpläne"
     bundesland: "Hessen"
     url: "https://landesplanung.hessen.de/geodaten/regionalplaene"
     selectors: ["#main-content"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Regierungspräsidium Gießen - Regionalplanung Rundbriefe Regionalversammlung"
     bundesland: "Hessen"
     url: "https://rp-giessen.hessen.de/wirtschaft-und-planung/regionalplanung/rundbriefe-regionalversammlung"
     selectors: ["#main-content"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Landesplanung Hessen - Regionalplanung"
     bundesland: "Hessen"
     url: "https://landesplanung.hessen.de/regionalplanung"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+        
 # ------------------------------------------------------ RROP Rheinland-Pfalz ------------------------------------------------------
  
   - name: "Ministerium des Innern und für Sport - Regionalplanung"
@@ -380,13 +499,17 @@ sites:
     url: "https://ris.rlp.de/service/regionale-raumordnungsplaene"
     selectors: ["#c31628"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Planungsgemeinschaft Mittelrhein-Westerwald"
     bundesland: "Rheinland-Pfalz"
     url: "https://www.mittelrhein-westerwald.de/index.php/veroeffentlichungen/raumordnungsplan"
     selectors: ["#contentWrapper"]
     mode: "text"  # "text" (standard) oder "html"
-  
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Planungsgemeinschaft Mittelrhein-Westerwald - Teilfortschreibung Erneuerbare Energien"
     bundesland: "Rheinland-Pfalz"
     url: "https://www.mittelrhein-westerwald.de/index.php/teilfortschreibung-erneuerbare-energien"
@@ -398,96 +521,128 @@ sites:
     url: "https://www.mittelrhein-westerwald.de/index.php/veroeffentlichungen/raumordnungsbericht"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
-      
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Planungsgemeinschaft Rheinhessen-Nahe - Fortschreibung"
     bundesland: "Rheinland-Pfalz"
     url: "https://www.pg-rheinhessen-nahe.de/projekte/fortschreibungen-rop/"
     selectors: ["body"]
     mode: "text"  # "text" (standard) oder "html"
-      
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Planungsgemeinschaft Rheinhessen-Nahe - Regionaler Raumordnungsplan 2014"
     bundesland: "Rheinland-Pfalz"
     url: "https://www.pg-rheinhessen-nahe.de/projekte/reg-raumordnungsplan-2014/"
     selectors: ["body"]
     mode: "text"  # "text" (standard) oder "html"
-      
+    update_frequency: "fast"    
+    priority: "high"
+        
   - name: "Planungsgemeinschaft Rheinhessen-Nahe - Raumordnungsbericht"
     bundesland: "Rheinland-Pfalz"
     url: "https://www.pg-rheinhessen-nahe.de/projekte/reg-raumordnungsbericht/"
     selectors: ["body"]
     mode: "text"  # "text" (standard) oder "html"
-      
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Metropolregion Rhein-Neckar - Einheitlicher Regionalplan"
     bundesland: "Rheinland-Pfalz"
     url: "https://planungsregion.m-r-n.com/regionalplan/einheitlicher-regionalplan/"
     selectors: ["div.grid__item--twothirds.content"]
     mode: "text"  # "text" (standard) oder "html"
-     
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Metropolregion Rhein-Neckar - Teilregionalplan Windenergie"
     bundesland: "Rheinland-Pfalz"
     url: "https://planungsregion.m-r-n.com/regionalplan/teilregionalplan-windenergie/"
     selectors: ["div.grid__item--twothirds.content"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Metropolregion Rhein-Neckar - Fortschreibung Teilregionalplan Windenergie"
     bundesland: "Rheinland-Pfalz"
     url: "https://planungsregion.m-r-n.com/regionalplan/fortschreibung-des-teilregionalplans-windenergie/"
     selectors: ["div.grid__item--twothirds.content"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Metropolregion Rhein-Neckar - Aufstellung Teilregionalplan Freiflächenphotovoltaik"
     bundesland: "Rheinland-Pfalz"
     url: "https://planungsregion.m-r-n.com/regionalplan/teilregionalplan-photovoltaik/"
     selectors: ["div.grid__item--twothirds.content"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Planungsgemeinschaft Region Trier - Bekanntmachungen"
     bundesland: "Rheinland-Pfalz"
     url: "https://www.plg-region-trier.de/index.php/aktuelles/bekanntmachungen"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Planungsgemeinschaft Region Trier - Regionalplan"
     bundesland: "Rheinland-Pfalz"
     url: "https://www.plg-region-trier.de/index.php/materialien/regionalplan"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Planungsgemeinschaft Region Trier - Neuaufstellung Regionalplan"
     bundesland: "Rheinland-Pfalz"
     url: "https://www.plg-region-trier.de/index.php/materialien/neuaufstellung-regionalplan"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+        
   - name: "Planungsgemeinschaft Region Trier - Materialien / Verfahren / Projekte"
     bundesland: "Rheinland-Pfalz"
     url: "https://www.plg-region-trier.de/index.php/materialien/info-hefte"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"    
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Planungsgemeinschaft Westpfalz - Raumordnungsplan"
     bundesland: "Rheinland-Pfalz"
     url: "https://www.pg-westpfalz.de/regionalplanung/raumordnungsplan/"
     selectors: ["#page"]
     mode: "text"  # "text" (standard) oder "html"   
-   
+    update_frequency: "fast"
+    priority: "high"
+    
   - name: "Planungsgemeinschaft Westpfalz - Regionalstatistik & Raumbeobachtung"
     bundesland: "Rheinland-Pfalz"
     url: "https://www.pg-westpfalz.de/regionalplanung/regionalstatistik/"
     selectors: ["#page"]
     mode: "text"  # "text" (standard) oder "html"   
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Planungsgemeinschaft Westpfalz - Aktuelles & Bekanntmachungen"
     bundesland: "Rheinland-Pfalz"
     url: "https://www.pg-westpfalz.de/pgw/aktuelles-bekanntmachungen/"
     selectors: ["#page"]
     mode: "text"  # "text" (standard) oder "html"  
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Planungsgemeinschaft Westpfalz - Themen Regionalplanung & Regionalentwicklung"
     bundesland: "Rheinland-Pfalz"
     url: "https://www.pg-westpfalz.de/regionalplanung/themen/"
     selectors: ["#page"]
     mode: "text"  # "text" (standard) oder "html"  
+    update_frequency: "fast"
+    priority: "high"
     
 # --------------------------------------------------- Baden-Württemberg -------------------------------------------------
 
@@ -496,156 +651,208 @@ sites:
     url: "https://www.rvbo.de/Planung/Fortschreibung-Regionalplan"
     selectors: ["body"]
     mode: "text"  # "text" (standard) oder "html"
-    
+    update_frequency: "fast"
+    priority: "high"
+  
   - name: "Regionalplan Bodensee-Oberschwaben"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.rvbo.de/"
     selectors: [".main-container"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Bodensee-Oberschwaben - Kurznachrichten"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.rvbo.de/Kurznachrichten"
     selectors: [".blog"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Donau-Iller - Beteiligungsverfahren"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.rvdi.de/regionalplanung/beteiligungsverfahren"
     selectors: [".content"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Donau-Iller - Regionalplanung"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.rvdi.de/regionalplanung"
     selectors: [".content"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Heilbronn-Franken - Teilfortschreibung Solarenergie"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.rvhnf.de/tfs-solarenergie"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Heilbronn-Franken - ROP2020 Änderung"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.rvhnf.de/rp2020-aenderungen"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Hochrhein-Bodensee - Gesamtfortschreibung"
     bundesland: "Baden-Wuerttemberg"
     url: "https://hochrhein-bodensee.de/regionalplanung/regionalplan-gesamtfortschreibung/"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Hochrhein-Bodensee - Erneuerbare Energien"
     bundesland: "Baden-Wuerttemberg"
     url: "https://hochrhein-bodensee.de/regionalplanung/erneuerbare-energien/"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Karlsruhe - Teilfortschreibungen"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.region-karlsruhe.de/regionalplan/teilfortschreibungen"
     selectors: ["#container-white"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Karlsruhe - Teilfortschreibung Solarenergie Detail "
     bundesland: "Baden-Wuerttemberg"
     url: "https://rvmo.raumordnung-online.de/verfahren/solarenergiervmo/public/detail"
     selectors: ["div.o-page__padded"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Karlsruhe - Teilfortschreibungen Solarenergie"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.region-karlsruhe.de/regionalplan/teilfortschreibungen/teilfortschreibung-solarenergie"
     selectors: [".whitebg"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Neckar-Alb - Überblick"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.rvna.de/Startseite/Regionalplanung/Regionalplan+Ueberblick.html"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Neckar-Alb - Teilfortschreibung Solarenergie"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.rvna.de/Startseite/Regionalplanung/teilfortschreibung+solarenergie.html"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Nordschwarzwald - Gesamtübersicht"
     bundesland: "Baden-Wuerttemberg"
     url: "https://nordschwarzwald-region.de/regionalplanung/regionalplan/"
     selectors: ["#page"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Nordschwarzwald - Teilfortschreibung Solarenergie"
     bundesland: "Baden-Wuerttemberg"
     url: "https://nordschwarzwald-region.de/regionalplanung/teilfortschreibungen/teilregionalplan-solarenergie/"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Ostwuerttemberg - Erneuerbare Energien 2025"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.ostwuerttemberg.org/regionalplanung/teilfortschreibungen/erneuerbare-energien-2025/"
     selectors: ["body"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Ostwuerttemberg - Teilfortschreibungen"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.ostwuerttemberg.org/regionalplanung/teilfortschreibungen/"
     selectors: ["body"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Schwarzwald-Baar-Heuberg - Gesamtübersicht"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.regionalverband-sbh.de/seite/587156/regionalplan-2003.html"
     selectors: ["main"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Schwarzwald-Baar-Heuberg - Gesamtplanfortschreibungen"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.regionalverband-sbh.de/seite/587136/gesamtplanfortschreibung.html"
     selectors: ["main"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Suedlicher Oberrhein - Gesamtübersicht"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.vrso.de/de/planung/regionalplan/"
     selectors: ["#blockMain"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Suedlicher Oberrhein - Teilfortschreibung Solar"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.vrso.de/de/regionalplanung/fortschreibung-regionalplan/index_VerfahrenSolar.php"
     selectors: ["#blockMain"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Rhein-Neckar - Gesamtübersicht"
     bundesland: "Baden-Wuerttemberg"
     url: "https://planungsregion.m-r-n.com/regionalplan/"
     selectors: [".content-block"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Rhein-Neckar - Teilregionalplan Photovoltaik"
     bundesland: "Baden-Wuerttemberg"
     url: "https://planungsregion.m-r-n.com/regionalplan/teilregionalplan-photovoltaik/"
     selectors: [".main-content"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Stuttgart - Teilregionalplan Solarenergie"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.region-stuttgart.org/de/bereiche-aufgaben/regionalplanung/solarenergie/"
     selectors: [".main"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Stuttgart - Abgeschlossene Änderungsverfahren"
     bundesland: "Baden-Wuerttemberg"
     url: "https://www.region-stuttgart.org/de/bereiche-aufgaben/regionalplanung/regionalplan/abgeschlossenen-aenderungsverfahren-des-regionalplans/"
     selectors: [".main"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
 # --------------------------------------------------------- Bayern ------------------------------------------------------
 
@@ -654,157 +861,209 @@ sites:
     url: "https://www.regierung.unterfranken.bayern.de/aufgaben/177666/177670/eigene_leistung/el_00223/index.html"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Region Wuerzburg - Gesamtüberischt"
     bundesland: "Bayern"
     url: "https://www.regierung.unterfranken.bayern.de/aufgaben/177666/177670/eigene_leistung/el_00276/index.html"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Region Main-Rhoen - Gesamtübersicht"
     bundesland: "Bayern"
     url: "https://www.regierung.unterfranken.bayern.de/aufgaben/177666/177670/eigene_leistung/el_00283/index.html"
     selectors: ["#main"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Oberfranken-West - Gesamtübersicht"
     bundesland: "Bayern"
     url: "https://www.oberfranken-west.de/Regionalplan/%C3%84nderungen/"
     selectors: [".main-content"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Oberfranken-Ost - Gesamtübersicht"
     bundesland: "Bayern"
     url: "https://www.planungsverband-oberfranken-ost.de/regionalplan/"
     selectors: ["body"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Oberfranken-Ost - Änderungen"
     bundesland: "Bayern"
     url: "https://www.planungsverband-oberfranken-ost.de/regionalplan/aenderungen/"
     selectors: ["body"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Oberfranken-Ost - Aktuelle Fortschreibungen"
     bundesland: "Bayern"
     url: "https://www.planungsverband-oberfranken-ost.de/regionalplan/aktuelle-fortschreibungen/"
     selectors: ["body"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Westmittelfranken - Änderungen"
     bundesland: "Bayern"
     url: "https://www.region-westmittelfranken.de/Regionalplan/Regionalplan-Aenderungen.html"
     selectors: [".center"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Region Nuernberg - Aktuelle Fortschreibungen"
     bundesland: "Bayern"
     url: "https://www.nuernberg.de/internet/pim/aktuellefortschreibungen.html"
     selectors: ["#main"] # auch möglich: ".main"
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Region Nuernberg - Bisherige Fortschreibungen"
     bundesland: "Bayern"
     url: "https://www.nuernberg.de/internet/pim/bisherigefortschreibungen.html"
     selectors: ["#main"] # auch möglich: ".main"
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Region Oberpfalz-Nord - Gesamtübersicht"
     bundesland: "Bayern"
     url: "https://www.regierung.oberpfalz.bayern.de/service/landes_und_regionalplanung/regionalplanung/index.html"
     selectors: ["#main"] # evtl. auch ".modContent" -> ohne Navigation auf der linken Seite
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Region Regensburg - Gesamtübersicht " # ist dieselbe URL wie Region Oberpfalz-Nord
     bundesland: "Bayern"
     url: "https://www.regierung.oberpfalz.bayern.de/service/landes_und_regionalplanung/regionalplanung/index.html"
     selectors: ["#main"] # evtl. auch ".modContent" -> ohne Navigation auf der linken Seite
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Region Augsburg - Fortschreibungen" 
     bundesland: "Bayern"
     url: "https://www.rpv-augsburg.de/regionalplan/fortschreibungen/"
     selectors: ["#ContentWrapper"] 
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Donau-Iller - Gesamtübersicht" 
     bundesland: "Bayern"
     url: "https://www.rvdi.de/regionalplanung/regionalplan"
     selectors: [".content"] 
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Donau-Iller - Beteiligungsverfahren" 
     bundesland: "Bayern"
     url: "https://www.rvdi.de/regionalplanung/beteiligungsverfahren"
     selectors: [".content"] 
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Donau-Iller - Basisinformationen" 
     bundesland: "Bayern"
     url: "https://www.rvdi.de/regionalplanung"
     selectors: [".content"] 
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Allgaeu - Fortschreibung" 
     bundesland: "Bayern"
     url: "https://www.region.allgaeu.org/regionalplan/regionalplan-fortschreibungen/"
     selectors: ["#after_section_1"] 
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Landshut - Fortschreibungen" 
     bundesland: "Bayern"
     url: "https://region.landshut.org/seite/547999/fortschreibungen.html"
     selectors: ["main"] 
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Landshut - Aktuelle Fortschreibungen" 
     bundesland: "Bayern"
     url: "https://region.landshut.org/seite/554522/aktuelle-fortschreibungen.html"
     selectors: ["main"] 
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Donau-Wald - Laufende Fortschreibungen" 
     bundesland: "Bayern"
     url: "https://www.region-donau-wald.de/regionalplan/laufende-fortschreibungen"
     selectors: ["body"] 
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Donau-Wald - Abgeschlossene Änderungen" 
     bundesland: "Bayern"
     url: "https://www.region-donau-wald.de/regionalplan/abgeschlossene-aenderungen"
     selectors: ["body"] 
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Donau-Wald - Gesamtübersicht" 
     bundesland: "Bayern"
     url: "https://www.region-donau-wald.de/regionalplan"
     selectors: ["body"] 
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Ingolstadt - Fortschreibungen" 
     bundesland: "Bayern"
     url: "https://www.region-ingolstadt.bayern.de/fortschreibungen/"
     selectors: ["body"] 
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Muenchen - Verfahren" 
     bundesland: "Bayern"
     url: "https://www.region-muenchen.com/verfahren"
     selectors: ["body"] 
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Region Suedostoberbayern - Fortschreibungen" 
     bundesland: "Bayern"
     url: "https://www.region-suedostoberbayern.bayern.de/fortschreibungen/"
     selectors: ["#content"] # wenn mehrere Ergebnisse, dann "body"
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionalplan Region Oberland - Fortschreibungen" 
     bundesland: "Bayern"
     url: "https://www.region-oberland.bayern.de/fortschreibungen/"
     selectors: ["#content"] # wenn mehrere Ergebnisse, dann "body"
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+    
 # ------------------------------------------------------ Thüringen ------------------------------------------------------
   
   - name: "Regionale Planungsgemeinschaft Nordthüringen - Änderung und Verfahrensstand RROP"
@@ -812,81 +1071,109 @@ sites:
     url: "https://regionalplanung.thueringen.de/nordthueringen/regionalplan-nordthueringen/aenderung-des-regionalplanes/verfahrensstand"
     selectors: ["div.th-content.th-rows"]
     mode: "text"  # "text" (standard) oder "html"
-  
+    update_frequency: "fast"
+    priority: "high"
+    
   - name: "Regionale Planungsgemeinschaft Nordthüringen - Regionalplan Nordthüringen 2012"
     bundesland: "Thüringen"
     url: "https://regionalplanung.thueringen.de/nordthueringen/regionalplan-nordthueringen/regionalplan-nordthueringen-2012"
     selectors: ["div.th-content.th-rows"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+    
   - name: "Regionale Planungsgemeinschaft Nordthüringen - Änderung RROP Entwurf "
     bundesland: "Thüringen"
     url: "https://regionalplanung.thueringen.de/nordthueringen/regionalplan-nordthueringen/aenderung-des-regionalplanes/entwurf"
     selectors: ["div.th-content.th-rows"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionale Planungsgemeinschaft Mittelthüringen - Regionalplan Mittelthüringen 2011"
     bundesland: "Thüringen"
     url: "https://regionalplanung.thueringen.de/mittelthueringen/regionalplan-mittelthueringen"
     selectors: ["div.th-content.th-rows"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+    
   - name: "Regionale Planungsgemeinschaft Mittelthüringen - Änderung und Verfahrensstand RROP/TP"
     bundesland: "Thüringen"
     url: "https://regionalplanung.thueringen.de/mittelthueringen/regionalplan-mittelthueringen/aenderung-des-regionalplanes/verfahrensstand"
     selectors: ["div.th-content.th-rows"]
     mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionale Planungsgemeinschaft Mittelthüringen - Änderung RROP Entwurf"
     bundesland: "Thüringen"
     url: "https://regionalplanung.thueringen.de/mittelthueringen/regionalplan-mittelthueringen/aenderung-des-regionalplanes/entwurf/entwurfsstand-092019"
     selectors: ["div.th-content.th-rows"]
     mode: "text"  # "text" (standard) oder "html"
-
+    update_frequency: "fast"
+    priority: "high"
+    
   - name: "Regionale Planungsgemeinschaft Mittelthüringen - Entwurf 2. sachlicher Teilplan Windenergie"
     bundesland: "Thüringen"
     url: "https://regionalplanung.thueringen.de/mittelthueringen/regionalplan-mittelthueringen/aufstellung-2stpwind/entwurfsstand-2stpwind-122023"
     selectors: ["div.th-content.th-rows"]
     mode: "text"  # "text" (standard) oder "html"   
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionale Planungsgemeinschaft Südwestthüringen - Regionalplan Südwestthüringen 2012"
     bundesland: "Thüringen"
     url: "https://regionalplanung.thueringen.de/suedwestthueringen/regionalplan-suedwestthueringen/regionalplan-suedwestthueringen-2012"
     selectors: ["div.th-content.th-rows"]
     mode: "text"  # "text" (standard) oder "html"   
-       
+    update_frequency: "fast"
+    priority: "high"
+    
   - name: "Regionale Planungsgemeinschaft Südwestthüringen - Änderung und Verfahrensstand RROP"
     bundesland: "Thüringen"
     url: "https://regionalplanung.thueringen.de/suedwestthueringen/regionalplan-suedwestthueringen/aenderung-des-regionalplanes/verfahrensstand"
     selectors: ["div.th-content.th-rows"]
     mode: "text"  # "text" (standard) oder "html"    
+    update_frequency: "fast"
+    priority: "high"
     
   - name: "Regionale Planungsgemeinschaft Südwestthüringen - Änderung RROP Entwurf"
     bundesland: "Thüringen"
     url: "https://regionalplanung.thueringen.de/suedwestthueringen/regionalplan-suedwestthueringen/aenderung-des-regionalplanes/entwurf"
     selectors: ["div.th-content.th-rows"]
     mode: "text"  # "text" (standard) oder "html"   
+    update_frequency: "fast"
+    priority: "high"
 
   - name: "Regionale Planungsgemeinschaft Ostthüringen - Regionalplan Ostthüringen 2012"
     bundesland: "Thüringen"
     url: "https://regionalplanung.thueringen.de/ostthueringen/regionalplan-ostthueringen/regionalplan-ostthueringen-2012"
     selectors: ["div.th-content.th-rows"]
     mode: "text"  # "text" (standard) oder "html"  
-
+    update_frequency: "fast"
+    priority: "high"
+    
   - name: "Regionale Planungsgemeinschaft Ostthüringen - Änderung und Verfahrensstand RROP"
     bundesland: "Thüringen"
     url: "https://regionalplanung.thueringen.de/ostthueringen/regionalplan-ostthueringen/aenderung-des-regionalplanes/verfahrensstand"
     selectors: ["div.th-content.th-rows"]
     mode: "text"  # "text" (standard) oder "html"  
-
+    update_frequency: "fast"
+    priority: "high"
+    
   - name: "Regionale Planungsgemeinschaft Ostthüringen - Änderung RROP Entwurf"
     bundesland: "Thüringen"
     url: "https://regionalplanung.thueringen.de/ostthueringen/regionalplan-ostthueringen/aenderung-des-regionalplanes/entwurf"
     selectors: ["div.th-content.th-rows"]
     mode: "text"  # "text" (standard) oder "html"  
-
+    update_frequency: "fast"
+    priority: "high"
+    
   - name: "Regionale Planungsgemeinschaft Ostthüringen - Sachlicher Teilplan Windenergie 2020"
     bundesland: "Thüringen"
     url: "https://regionalplanung.thueringen.de/ostthueringen/regionalplan-ostthueringen/sachlicher-teilplan-windenergie-2020"
     selectors: ["div.th-content.th-rows"]
-    mode: "text"  # "text" (standard) oder "html"  
+    mode: "text"  # "text" (standard) oder "html"
+    update_frequency: "fast"
+    priority: "high"
