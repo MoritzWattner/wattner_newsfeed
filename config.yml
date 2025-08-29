@@ -9,6 +9,20 @@ user_agent: "DE-Plan-Feed-Watcher/1.0 (kontakt@example.de)"
 # Hinweis: Bundesland ist frei wählbar (String). Nutze konsistent die offiziellen Namen.
 sites:
 
+# ------------------------------------------------------ Test Sites ------------------------------------------------------
+
+  - name: "ZDF - Nachrichtenticker"
+    bundesland: "Deutschland"
+    url: "https://www.zdfheute.de/nachrichtenticker-100.html"
+    selectors: ["main"]
+    mode: "text"
+
+  - name: "Merkur - Nachrichtenticker"
+    bundesland: "Deutschland"
+    url: "https://www.merkur.de/nachrichtenticker/"
+    selectors: ["#id-top"]
+    mode: "text"
+
 # ------------------------------------------------------ RROP Niedersachsen ------------------------------------------------------
 
   - name: "Landkreis Luechow-Dannenberg - Regionaler Raumordnungsplan"
