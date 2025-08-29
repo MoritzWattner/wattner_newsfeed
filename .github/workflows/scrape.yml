@@ -299,9 +299,9 @@ jobs:
           
           # Check if feeds are accessible
           if curl -f -s -I "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/DE-deutschland.xml" > /dev/null; then
-            echo "✅ Deutschland feed accessible"
+            echo "Deutschland feed accessible"
           else
-            echo "❌ Deutschland feed not accessible"
+            echo "Deutschland feed not accessible"
           fi
           
           # Basic statistics
@@ -314,8 +314,8 @@ jobs:
           
           # Report success/failure
           if [[ "${{ needs.scrape.result }}" == "success" ]]; then
-            echo "✅ Workflow completed successfully"
+            echo "Workflow completed successfully"
           else
-            echo "❌ Workflow had issues - check logs"
+            echo "Workflow had issues - check logs"
             exit 1
           fi
