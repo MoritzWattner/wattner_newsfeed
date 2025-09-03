@@ -199,39 +199,14 @@ def xml_sanitize(text: str) -> str:
 
 
 def cdata_wrap(html_payload: str) -> str:
-    """
-    Verpackt beliebiges HTML sicher in CDATA:
-    - entfernt script/style/noscript/iframe/template und HTML-Kommentare
-    - entfernt ungültige XML-Zeichen
-    - entschärft ']]>' innerhalb des Inhalts
-    """
     if not html_payload:
         return "<![CDATA[]]>"
 
-    try:
-        soup = BeautifulSoup(html_payload, "lxml")
-
-        # Störende Tags raus
-        for bad in soup(["script", "style", "noscript", "iframe", "template"]):
-            bad.decompose()
-
-        # HTML-Kommentare entfernen (die enthalten manchmal heikle Sequenzen)
-        for c in soup.find_all(string=lambda t: isinstance(t, Comment)):
-            c.extract()
-
-        html_payload = str(soup)
-    except Exception:
-        # falls BS4 fehlschlägt, mit raw-String weiterarbeiten
-        pass
-
-    # Ungültige XML-Zeichen entfernen
+    # XML-ungültige Zeichen entfernen
     html_payload = xml_sanitize(html_payload)
 
-    # ']]>' im Inhalt splitten, damit CDATA nicht frühzeitig endet
+    # Existierende CDATA-Sequenzen escapen
     html_payload = html_payload.replace("]]>", "]]]]><![CDATA[>")
-
-    # (Optional) sichtbaren CDATA-Start neutralisieren
-    html_payload = html_payload.replace("<![CDATA[", "<![C DATA[")
 
     return f"<![CDATA[{html_payload}]]>"
 
