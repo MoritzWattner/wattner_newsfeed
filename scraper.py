@@ -77,19 +77,15 @@ def short_hash(text: str) -> str:
 
 
 def normalize_for_hash(text: str) -> str:
-    """MINIMAL-Normalisierung - nur echte technische Artefakte entfernen"""
     # Nur Whitespace normalisieren
     text = re.sub(r"\s+", " ", text).strip()
 
-    # Nur eindeutige technische Session-IDs entfernen (sehr lang und hexadezimal)
+    # NUR rein technische IDs entfernen
     text = re.sub(r'\b[a-f0-9]{32,}\b', '[TECH_ID]', text, flags=re.IGNORECASE)
-    text = re.sub(r'\bsessionid=[a-f0-9]{20,}', 'sessionid=[SESSION]', text, flags=re.IGNORECASE)
-    text = re.sub(r'\bjsessionid=[a-f0-9]{20,}', 'jsessionid=[SESSION]', text, flags=re.IGNORECASE)
+    text = re.sub(r'[?&]sessionid=[a-f0-9]{20,}', '', text, flags=re.IGNORECASE)
 
-    # NUR sehr spezifische, eindeutig technische Zeitstempel normalisieren
-    # z.B. "Seitenaufruf um 14:35:22" aber NICHT "Sitzung am 20.09.2025"
-    text = re.sub(r'(Seitenaufruf um \d{2}:\d{2}:\d{2})', '[SEITENAUFRUF]', text, flags=re.IGNORECASE)
-    text = re.sub(r'(generiert am \d{2}\.\d{2}\.\d{4} um \d{2}:\d{2})', '[GENERIERUNG]', text, flags=re.IGNORECASE)
+    # Zeitstempel NICHT entfernen, außer es sind eindeutig technische
+    text = re.sub(r'(Seitenaufruf um \d{2}:\d{2}:\d{2})', '[PAGELOAD]', text)
 
     return text
 
@@ -472,102 +468,169 @@ def build_item_description(ev: Dict[str, Any]) -> str:
 
 async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: SiteCfg, timeout: int) -> Optional[
     Dict[str, Any]]:
-    html_text = await fetch(client, cfg.url, timeout)
-    if not html_text:
-        return None
-
-    display_text, meta = extract(html_text, cfg.selectors, cfg.mode, site_name=cfg.name, site_url=cfg.url)
-
-    # Hash nur auf normalisiertem Text
-    h = make_hash(meta["hash_text"])
     slug = slugify(cfg.name)
-
-    site_state = state["sites"].get(slug, {})
-    last_hash = site_state.get("hash")
-
-    # KORREKTUR: previous_content statt falscher Schlüssel
-    last_full = site_state.get("previous_content", "")
     now_iso = now_utc().isoformat()
 
-    # DEBUG: Hash-Vergleich ausgeben
-    print(f"DEBUG {cfg.name}: current_hash={h[:12]}, stored_hash={str(last_hash)[:12] if last_hash else 'None'}")
-
-    # State immer aktualisieren (für "zuletzt geprüft")
+    # Basis-State für diese Site sicherstellen
     if slug not in state["sites"]:
-        # Erste Erfassung
         state["sites"][slug] = {
             "name": cfg.name,
             "bundesland": cfg.bundesland,
             "url": cfg.url,
-            "hash": h,
-            "current_content": display_text,
-            "previous_content": "",  # noch kein Vorgänger-Content
-            "first_seen": now_iso,  # KORREKTUR: ersten Zeitpunkt merken
-            "last_change": now_iso,
-            "last_checked": now_iso,
-        }
-
-        # Für erste Erfassung: einen "Info"-Artikel erstellen, aber nicht als "Änderung"
-        state["items"].append({
-            "slug": slug,
-            "name": cfg.name,
-            "bundesland": cfg.bundesland,
-            "url": cfg.url,
+            "hash": None,
+            "current_content": None,
             "first_seen": now_iso,
-            "checked_at": meta["checked_at"],
-            "selectors": meta["selectors"],
-            "selectors_used": meta["selectors_used"],
-            "used_nodes": meta["used_nodes"],
-            "aenderungen_html": "<p><em>Erste Erfassung - Monitoring gestartet.</em></p>",
-            "bisheriger_html": display_text,
-        })
-        print(f"{cfg.name}: Erste Erfassung")
-
-        return {
-            "site": cfg,
-            "fetched_at": now_iso,
-            "hash": h,
-            "excerpt": meta["display_text"][:2000],
-            "diff_html": "",
+            "last_checked": now_iso,
+            "last_change": None,
+            "consecutive_errors": 0,
+            "last_error": None,
+            "last_error_time": None
         }
-    else:
+
+    site_state = state["sites"][slug]
+
+    try:
+        # Fetch mit Fehlerbehandlung
+        html_text = await fetch(client, cfg.url, timeout)
+
+        if not html_text:
+            # Fetch fehlgeschlagen - Error tracking
+            site_state["consecutive_errors"] = site_state.get("consecutive_errors", 0) + 1
+            site_state["last_error"] = "Fetch returned empty content"
+            site_state["last_error_time"] = now_iso
+            site_state["last_checked"] = now_iso
+
+            print(f"WARNING {cfg.name}: Fetch failed (attempt #{site_state['consecutive_errors']})")
+
+            # Nach 3 Fehlversuchen einen Fehler-Item erstellen
+            if site_state["consecutive_errors"] == 3:
+                state["items"].append({
+                    "slug": slug,
+                    "name": cfg.name,
+                    "bundesland": cfg.bundesland,
+                    "url": cfg.url,
+                    "first_seen": now_iso,
+                    "checked_at": now_iso,
+                    "selectors": cfg.selectors,
+                    "selectors_used": [],
+                    "used_nodes": "",
+                    "aenderungen_html": f"<p><strong>⚠️ Website nicht erreichbar</strong><br>Die Seite konnte 3x in Folge nicht abgerufen werden.</p>",
+                    "bisheriger_html": "",
+                })
+
+            return None
+
+        # Erfolgreich gefetcht - Error counter zurücksetzen
+        if site_state.get("consecutive_errors", 0) > 0:
+            print(f"INFO {cfg.name}: Site wieder erreichbar nach {site_state['consecutive_errors']} Fehlversuchen")
+            site_state["consecutive_errors"] = 0
+            site_state["last_error"] = None
+            site_state["last_error_time"] = None
+
+        # Content extraction mit Fehlerbehandlung
+        try:
+            display_text, meta = extract(html_text, cfg.selectors, cfg.mode,
+                                         site_name=cfg.name, site_url=cfg.url)
+        except Exception as e:
+            print(f"ERROR {cfg.name}: Extraction failed: {e}")
+            site_state["last_error"] = f"Extraction error: {str(e)[:200]}"
+            site_state["last_error_time"] = now_iso
+            site_state["last_checked"] = now_iso
+            return None
+
+        # Hash berechnen
+        h = make_hash(meta["hash_text"])
+        last_hash = site_state.get("hash")
+
+        # DEBUG: Hash-Vergleich
+        print(f"DEBUG {cfg.name}: current_hash={h[:12]}, stored_hash={str(last_hash)[:12] if last_hash else 'None'}")
+
+        # Erste Erfassung dieser Site
+        if last_hash is None:
+            state["sites"][slug].update({
+                "hash": h,
+                "current_content": display_text,
+                # WICHTIG: previous_content NICHT setzen bei erster Erfassung
+                "first_seen": now_iso,
+                "last_change": now_iso,
+                "last_checked": now_iso,
+            })
+
+            # Info-Item für erste Erfassung
+            state["items"].append({
+                "slug": slug,
+                "name": cfg.name,
+                "bundesland": cfg.bundesland,
+                "url": cfg.url,
+                "first_seen": now_iso,
+                "checked_at": meta["checked_at"],
+                "selectors": meta["selectors"],
+                "selectors_used": meta["selectors_used"],
+                "used_nodes": meta["used_nodes"],
+                "aenderungen_html": "<p><em>✓ Erste Erfassung - Monitoring gestartet.</em></p>",
+                "bisheriger_html": f"<div style='max-height:400px;overflow-y:auto'>{display_text}</div>",
+            })
+
+            print(f"{cfg.name}: Erste Erfassung erfolgreich")
+
+            return {
+                "site": cfg,
+                "fetched_at": now_iso,
+                "hash": h,
+                "excerpt": display_text[:2000],
+                "diff_html": "",
+                "is_initial": True
+            }
+
         # Update für bestehende Site
         state["sites"][slug]["last_checked"] = now_iso
 
+        # Keine Änderung
         if h == last_hash:
-            # Keine inhaltliche Änderung
             print(f"{cfg.name}: Keine Änderung")
             return None
 
-        # ECHTE Änderung erkannt
+        # ÄNDERUNG ERKANNT
         old_content = site_state.get("current_content", "")
-        added_html = added_paragraphs_html(old_content, display_text, cfg.name)
+
+        # Sicherheitscheck: Wenn old_content leer aber last_hash existiert -> Dateninkonsistenz
+        if not old_content and last_hash:
+            print(f"WARNING {cfg.name}: Inkonsistenter State - Hash vorhanden aber kein Content")
+            old_content = "<p><em>Vorheriger Inhalt nicht verfügbar (Dateninkonsistenz)</em></p>"
+
+        # Änderungen berechnen
+        try:
+            added_html = added_paragraphs_html(old_content, display_text, cfg.name)
+        except Exception as e:
+            print(f"WARNING {cfg.name}: Diff-Berechnung fehlgeschlagen: {e}")
+            added_html = "<p><em>Änderungen konnten nicht berechnet werden</em></p>"
 
         print(f"{cfg.name}: ÄNDERUNG ERKANNT! Hash {str(last_hash)[:12]} -> {h[:12]}")
 
-        # State für Änderung aktualisieren
+        # State aktualisieren
         state["sites"][slug].update({
             "hash": h,
-            "previous_content": old_content,  # alten Content als "previous" speichern
-            "current_content": display_text,  # neuen Content
+            "previous_content": old_content,
+            "current_content": display_text,
             "last_change": now_iso,
         })
 
-        # Nur bei echten Änderungen einen RSS-Item erstellen
+        # RSS-Item für Änderung
         state["items"].append({
             "slug": slug,
             "name": cfg.name,
             "bundesland": cfg.bundesland,
             "url": cfg.url,
-            "first_seen": site_state.get("first_seen", now_iso),  # ursprünglichen Zeitpunkt beibehalten
+            "first_seen": site_state.get("first_seen", now_iso),
             "checked_at": meta["checked_at"],
             "selectors": meta["selectors"],
             "selectors_used": meta["selectors_used"],
             "used_nodes": meta["used_nodes"],
             "aenderungen_html": added_html,
-            "bisheriger_html": old_content,
+            "bisheriger_html": f"<div style='max-height:400px;overflow-y:auto'>{old_content}</div>",
         })
 
+        # Items-Liste begrenzen (effizienter mit deque wäre besser)
         if len(state["items"]) > 2000:
             state["items"] = state["items"][-2000:]
 
@@ -575,9 +638,39 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
             "site": cfg,
             "fetched_at": now_iso,
             "hash": h,
-            "excerpt": meta["display_text"][:2000],
+            "excerpt": display_text[:2000],
             "diff_html": added_html,
+            "is_change": True
         }
+
+    except httpx.TimeoutException:
+        print(f"ERROR {cfg.name}: Timeout nach {timeout}s")
+        site_state["consecutive_errors"] = site_state.get("consecutive_errors", 0) + 1
+        site_state["last_error"] = f"Timeout after {timeout}s"
+        site_state["last_error_time"] = now_iso
+        site_state["last_checked"] = now_iso
+        return None
+
+    except httpx.HTTPStatusError as e:
+        print(f"ERROR {cfg.name}: HTTP {e.response.status_code}")
+        site_state["consecutive_errors"] = site_state.get("consecutive_errors", 0) + 1
+        site_state["last_error"] = f"HTTP {e.response.status_code}"
+        site_state["last_error_time"] = now_iso
+        site_state["last_checked"] = now_iso
+        return None
+
+    except Exception as e:
+        # Unerwarteter Fehler
+        print(f"CRITICAL ERROR {cfg.name}: {type(e).__name__}: {e}")
+        site_state["last_error"] = f"Unexpected: {type(e).__name__}"
+        site_state["last_error_time"] = now_iso
+        site_state["last_checked"] = now_iso
+
+        # Bei kritischen Fehlern trotzdem State speichern
+        import traceback
+        traceback.print_exc()
+
+        return None
 
 
 def rfc2822(ts_iso: str) -> str:
