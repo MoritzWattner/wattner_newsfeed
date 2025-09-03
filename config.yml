@@ -9,19 +9,15 @@ user_agent: "DE-Plan-Feed-Watcher/1.0 (kontakt@example.de)"
 # Hinweis: Bundesland ist frei wählbar (String). Nutze konsistent die offiziellen Namen.
 sites:
 
-# ------------------------------------------------------ Test Sites ------------------------------------------------------
+# ------------------------------------------------------ Deutschland Batterie Monitoring ------------------------------------------------------
 
-  - name: "ZDF - Nachrichtenticker"
-    bundesland: "Deutschland"
-    url: "https://www.zdfheute.de/nachrichtenticker-100.html"
-    selectors: ["main"]
+  - name: "N-Energie Netz - Ausschreibung "
+    bundesland: "Deutschland-BESS"
+    url: "https://www.n-ergie-netz.de/n-ergie-netz/unternehmen/energiespeicher/!ut/p/z1/pZHLDoIwEEU_qdMhtLCkDZKiPCoq0I1hZZooujB-v8JKElJR726ScyaTO8SQhpi-e9hTd7fXvju_5tawY15SlaQVZMEu94GV4YZpLtPA56QegUxJoKKALGGxD3oVIRbrmGuFxPzjI__Sh_zAQMeUVhIr6oVsmQ-TRCC2KDyApMBf_PdNy3wHYNzra2JGxPUBJzBUPAVmOpy5YlrSpzNvl_2QBqyyT9dIxEM!/dz/d5/L2dBISEvZ0FBIS9nQSEh/"
+    selectors: [".component-container.id-Z7_NP1IGJS0M8TN506P9L6Q7CJ8L5"]
     mode: "text"
-
-  - name: "Merkur - Nachrichtenticker"
-    bundesland: "Deutschland"
-    url: "https://www.merkur.de/nachrichtenticker/"
-    selectors: ["#id-top"]
-    mode: "text"
+    update_frequency: "fast"
+    priority: "normal"
 
 # ------------------------------------------------------ RROP Niedersachsen ------------------------------------------------------
 
