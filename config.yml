@@ -878,12 +878,6 @@ sites:
     mode: "text"  # "text" (standard) oder "html"  
 
 # ------------------------------------------------------ RROP Nordrhein-Westfalen ------------------------------------------------------
-
-  - name: "Stadt Paderborn - Kommunale Wärmeplanung"
-    bundesland: "Nordrhein-Westfalen"
-    url: "https://www.paderborn.de/microsite/klima/klimaschutz/kommunale-waermeplanung-stadt-paderborn.php"
-    selectors: ["article.SP-Content"]
-    mode: "text"  # "text" (standard) oder "html"
  
   - name: "Regionalplan Düsseldorf - Regionalplanung"
     bundesland: "Nordrhein-Westfalen"
