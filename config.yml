@@ -234,20 +234,6 @@ sites:
     url: "https://www.lk-row.de/portal/seiten/regionales-raumordnungsprogramm-rrop-des-landkreises-1072-23700.html"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
-  
-  # ------------------------------------------------------ RROP Nordrhein-Westfalen -----------------------------------------------------
-  
-  - name: "Landkreis  - Regionaler Raumordnungsplan"
-    bundesland: "Nordrhein-Westfalen"
-    url: ""
-    selectors: [""]
-    mode: "text"  # "text" (standard) oder "html"
-  
-  - name: "Landkreis  - Regionaler Raumordnungsplan"
-    bundesland: "Nordrhein-Westfalen"
-    url: ""
-    selectors: [""]
-    mode: "text"  # "text" (standard) oder "html"
     
   # ------------------------------------------------------ RROP Saarland ---------------------------------------------------------------
   
@@ -950,7 +936,7 @@ sites:
   - name: "Regionalplan Münsterland - Aktuelle Bekanntmachungen"
     bundesland: "Nordrhein-Westfalen"
     url: "https://www.giscloud.nrw.de/regionalplan-muensterland.html"
-    selectors: ["div.jsx-376953814.story""]
+    selectors: ["div.jsx-376953814.story"]
     mode: "text"  # "text" (standard) oder "html"
         
   - name: "Regionalplan Arnsberg - Aktueller Stand"
