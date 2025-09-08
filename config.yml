@@ -226,7 +226,7 @@ sites:
   - name: "Landkreis Rotenburg-Wuemme - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.lk-row.de/portal/seiten/regionales-raumordnungsprogramm-rrop-des-landkreises-1072-23700.html"
-    selectors: ["#nolis_content"]0
+    selectors: ["#nolis_content"]
     mode: "text"  # "text" (standard) oder "html"
 
   - name: "Landkreis Osterholz - Regionaler Raumordnungsplan"
