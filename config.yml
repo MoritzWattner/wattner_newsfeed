@@ -9,12 +9,18 @@ user_agent: "DE-Plan-Feed-Watcher/1.0 (kontakt@example.de)"
 # Hinweis: Bundesland ist frei wählbar (String). Nutze konsistent die offiziellen Namen.
 sites:
 
-# ------------------------------------------------------ Deutschland Batterie Monitoring ------------------------------------------------------
+# ------------------------------------------------------ Deutschland Batterie/BESS Monitoring ------------------------------------------------------
 
   - name: "N-Energie Netz - Ausschreibung "
     bundesland: "Deutschland-BESS"
     url: "https://www.n-ergie-netz.de/n-ergie-netz/unternehmen/energiespeicher/!ut/p/z1/pZHLDoIwEEU_qdMhtLCkDZKiPCoq0I1hZZooujB-v8JKElJR726ScyaTO8SQhpi-e9hTd7fXvju_5tawY15SlaQVZMEu94GV4YZpLtPA56QegUxJoKKALGGxD3oVIRbrmGuFxPzjI__Sh_zAQMeUVhIr6oVsmQ-TRCC2KDyApMBf_PdNy3wHYNzra2JGxPUBJzBUPAVmOpy5YlrSpzNvl_2QBqyyT9dIxEM!/dz/d5/L2dBISEvZ0FBIS9nQSEh/"
     selectors: [".component-container.id-Z7_NP1IGJS0M8TN506P9L6Q7CJ8L5"]
+    mode: "text"
+    
+  - name: "Stadt Paderborn - Wärmeplanung "
+    bundesland: "Deutschland-BESS"
+    url: "https://www.paderborn.de/microsite/klima/klimaschutz/kommunale-waermeplanung-stadt-paderborn.php"
+    selectors: ["#SP-Content"]
     mode: "text"
 
 # ------------------------------------------------------ RROP Niedersachsen ------------------------------------------------------
@@ -884,3 +890,187 @@ sites:
     url: "https://regionalplanung.thueringen.de/ostthueringen/regionalplan-ostthueringen/sachlicher-teilplan-windenergie-2020"
     selectors: ["div.th-content.th-rows"]
     mode: "text"  # "text" (standard) oder "html"  
+
+# ------------------------------------------------------ RROP Nordrhein-Westfalen ------------------------------------------------------
+
+  - name: "Stadt Paderborn - Kommunale Wärmeplanung"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.paderborn.de/microsite/klima/klimaschutz/kommunale-waermeplanung-stadt-paderborn.php"
+    selectors: ["article.SP-Content"]
+    mode: "text"  # "text" (standard) oder "html"
+ 
+  - name: "Regionalplan Düsseldorf - Regionalplanung"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.brd.nrw.de/Themen/Planen-Bauen/Regionalplanung/Regionalplan-Duesseldorf-RPD-Planwerk-und-Aenderungsverfahren-2"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+     
+  - name: "Regionalplan Düsseldorf - Regionalplan Änderungen"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.brd.nrw.de/Themen/Planen-Bauen/Regionalplanung/Aenderungen-des-Regionalplans-Duesseldorf-RPD"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+     
+  - name: "Regionalplan Düsseldorf - Verfahren- und Verfahrensbeteiligungen"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.brd.nrw.de/Themen/Planen-Bauen/Regionalplanung/Verfahren-und-Verfahrensbeteiligungen"
+    selectors: ["div.col-sm-12"]
+    mode: "text"  # "text" (standard) oder "html"
+     
+  - name: "Regionalplan Ostwestfalen-Lippe - Aktueller Stand"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bezreg-detmold.nrw.de/wir-ueber-uns/organisationsstruktur/abteilung-3/dezernat-32/regionalplan-owl"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+      
+  - name: "Regionalplan Ostwestfalen-Lippe - Regionalentwicklung"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bezreg-detmold.nrw.de/wir-ueber-uns/organisationsstruktur/abteilung-3/dezernat-32"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html" 
+      
+  - name: "Regionalplan Ostwestfalen-Lippe - 3. Änderung (Letzte Änderung)"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bezreg-detmold.nrw.de/wir-ueber-uns/organisationsstruktur/abteilung-3/dezernat-32/3-aenderung-des-regionalplans-owl"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+         
+  - name: "Regionalplan Ostwestfalen-Lippe - Neuaufstellung ROP"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bezreg-detmold.nrw.de/wir-ueber-uns/organisationsstruktur/abteilung-3/dezernat-32/neuaufstellung-regionalplan-owl"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+    
+  - name: "Regionalplan Münsterland - Aktueller Plan"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bezreg-muenster.de/themen/regionalplanung-und-regionalrat/regionalplan-muensterland"
+    selectors: ["div.region.region-content"]
+    mode: "text"  # "text" (standard) oder "html"
+        
+  - name: "Regionalplan Münsterland - Aktuelle Bekanntmachungen"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.giscloud.nrw.de/regionalplan-muensterland.html"
+    selectors: ["div.jsx-376953814.story""]
+    mode: "text"  # "text" (standard) oder "html"
+        
+  - name: "Regionalplan Arnsberg - Aktueller Stand"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bra.nrw.de/kommunalaufsicht-planung-verkehr/regionalrat-und-regionalentwicklung/regionalplan-arnsberg"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+        
+  - name: "Regionalplan Arnsberg - Teilplan Märk/Olpe/Siegen"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bra.nrw.de/kommunalaufsicht-planung-verkehr/regionalrat-und-regionalentwicklung/regionalplan-arnsberg/raeumlicher-teilplan-maerkischer-kreis-kreis-olpe-siegen-wittgenstein"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+            
+  - name: "Regionalplan Arnsberg - Teilplan Märk/Olpe/Siegen Rechtswirksam"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bra.nrw.de/kommunalaufsicht-planung-verkehr/regionalrat-und-regionalentwicklung/regionalplan-arnsberg/raeumlicher-teilplan-maerkischer-kreis-kreis-olpe-siegen-wittgenstein/der-rechtswirksame-regionalplan"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+             
+  - name: "Regionalplan Arnsberg - Teilplan Märk/Olpe/Siegen Aufstellungsverfahren"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bra.nrw.de/kommunalaufsicht-planung-verkehr/regionalrat-und-regionalentwicklung/regionalplan-arnsberg/raeumlicher-teilplan-maerkischer-kreis-kreis-olpe-siegen-wittgenstein/das-aufstellungsverfahren"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+              
+  - name: "Regionalplan Arnsberg - Teilplan Soest/Hochsauerland"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bra.nrw.de/kommunalaufsicht-planung-verkehr/regionalrat-und-regionalentwicklung/regionalplan-arnsberg/raeumlicher-teilabschnitt-kreis-soest-und-hochsauerlandkreis"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+                  
+  - name: "Regionalplan Arnsberg - Teilplan Soest/Hochsauerland Rechtswirksam"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bra.nrw.de/kommunalaufsicht-planung-verkehr/regionalrat-und-regionalentwicklung/regionalplan-arnsberg/raeumlicher-teilabschnitt-kreis-soest-und-hochsauerlandkreis/der-rechtswirksame-regionalplan"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+                  
+  - name: "Regionalplan Arnsberg - Teilplan Soest/Hochsauerland Aufstellungsverfahren"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bra.nrw.de/kommunalaufsicht-planung-verkehr/regionalrat-und-regionalentwicklung/regionalplan-arnsberg/raeumlicher-teilabschnitt-kreis-soest-und-hochsauerlandkreis/aenderungsverfahren-fuer-den-regionalplan"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+    
+  - name: "Regionalplan Arnsberg - Teilplan Regionalverband Ruhr"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.rvr.ruhr/themen/staatliche-regionalplanung/aufstellungsverfahren-des-regionalplans-ruhr/"
+    selectors: ["main.main-content"]
+    mode: "text"  # "text" (standard) oder "html"
+        
+  - name: "Regionalplan Köln - Aktueller ROP"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bezreg-koeln.nrw.de/themen/kommunales-planung-bauen-und-verkehr/regionalplanung/neuaufstellung-regionalplan-koeln-0"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"    
+    
+  - name: "Regionalplan Köln - Neuaufstellung ROP"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bezreg-koeln.nrw.de/themen/kommunales-planung-bauen-und-verkehr/regionalplanung/neuaufstellung-regionalplan-koeln"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+            
+  - name: "Regionalplan Köln - Sachlicher Teilplan Erneuerbare Energien"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bezreg-koeln.nrw.de/themen/kommunales-planung-bauen-und-verkehr/regionalplanung/neuaufstellung-regionalplan-koeln-6"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+            
+  - name: "Regionalplan Köln - Aktuelle Informationen"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.giscloud.nrw.de/arcgis/apps/experiencebuilder/template/?id=a0e76e7cbf3346a2a62f5a786d53bdba&page=Home"
+    selectors: ["#app"]
+    mode: "text"  # "text" (standard) oder "html"
+                
+  - name: "Regionalplan Köln - Teilplan Köln"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bezreg-koeln.nrw.de/themen/kommunales-planung-bauen-und-verkehr/regionalplanung/aktueller-regionalplan/teilabschnitt-1"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+                
+  - name: "Regionalplan Köln - Teilplan Aachen"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bezreg-koeln.nrw.de/themen/kommunales-planung-bauen-und-verkehr/regionalplanung/aktueller-regionalplan/teilabschnitt"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+                    
+  - name: "Regionalplan Köln - Teilplan Bonn"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bezreg-koeln.nrw.de/themen/kommunales-planung-bauen-und-verkehr/regionalplanung/aktueller-regionalplan/teilabschnitt-0"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+                        
+  - name: "Regionalplan Köln - Verfahren und Bekanntmachungen"
+    bundesland: "Nordrhein-Westfalen"
+    url: "https://www.bezreg-koeln.nrw.de/themen/kommunales-planung-bauen-und-verkehr/regionalplanung/aktueller-regionalplan/teilabschnitt-0"
+    selectors: ["div.col-sm-9"]
+    mode: "text"  # "text" (standard) oder "html"
+    
+# ------------------------------------------------------ RROP Sachsen ------------------------------------------------------
+
+  - name: "Regionalplan "
+    bundesland: "Sachsen"
+    url: ""
+    selectors: [""]
+    mode: "text"  # "text" (standard) oder "html" 
+        
+# ------------------------------------------------------ RROP Brandenburg ------------------------------------------------------
+
+  - name: "Regionalplan "
+    bundesland: "Brandenburg"
+    url: ""
+    selectors: [""]
+    mode: "text"  # "text" (standard) oder "html" 
+
+# ------------------------------------------------------ RROP Sachsen-Anhalt ------------------------------------------------------
+
+  - name: "Regionalplan "
+    bundesland: "Sachsen-Anhalt"
+    url: ""
+    selectors: [""]
+    mode: "text"  # "text" (standard) oder "html" 
+
+# ---------------------------------------------------------------------------------------------------------------------------------
