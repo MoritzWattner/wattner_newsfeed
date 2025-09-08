@@ -226,7 +226,7 @@ sites:
   - name: "Landkreis Rotenburg-Wuemme - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.lk-row.de/portal/seiten/regionales-raumordnungsprogramm-rrop-des-landkreises-1072-23700.html"
-    selectors: ["#nolis_content"]
+    selectors: ["#nolis_content"]0
     mode: "text"  # "text" (standard) oder "html"
 
   - name: "Landkreis Osterholz - Regionaler Raumordnungsplan"
@@ -710,7 +710,7 @@ sites:
   - name: "Regionalplan Region Augsburg - Fortschreibungen" 
     bundesland: "Bayern"
     url: "https://www.rpv-augsburg.de/regionalplan/fortschreibungen/"
-    selectors: ["#ContentWrapper"] 
+    selectors: ["#Content"] 
     mode: "text"  # "text" (standard) oder "html"
     
   - name: "Regionalplan Donau-Iller - Gesamtübersicht" 
@@ -930,7 +930,7 @@ sites:
   - name: "Regionalplan Münsterland - Aktuelle Bekanntmachungen"
     bundesland: "Nordrhein-Westfalen"
     url: "https://www.giscloud.nrw.de/regionalplan-muensterland.html"
-    selectors: ["div.jsx-376953814.story"]
+    selectors: ["figure.jsx-3794216292.jsx-611104042"]
     mode: "text"  # "text" (standard) oder "html"
         
   - name: "Regionalplan Arnsberg - Aktueller Stand"
@@ -1002,7 +1002,7 @@ sites:
   - name: "Regionalplan Köln - Aktuelle Informationen"
     bundesland: "Nordrhein-Westfalen"
     url: "https://www.giscloud.nrw.de/arcgis/apps/experiencebuilder/template/?id=a0e76e7cbf3346a2a62f5a786d53bdba&page=Home"
-    selectors: ["#app"]
+    selectors: ["div.layout.d-flex.app-root-emotion-cache-ltr-g0ctsp"]
     mode: "text"  # "text" (standard) oder "html"
                 
   - name: "Regionalplan Köln - Teilplan Köln"
