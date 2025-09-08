@@ -9,6 +9,14 @@ user_agent: "DE-Plan-Feed-Watcher/1.0 (kontakt@example.de)"
 # Hinweis: Bundesland ist frei wählbar (String). Nutze konsistent die offiziellen Namen.
 sites:
 
+# ------------------------------------------------------ Testwebsites ------------------------------------------------------
+
+  - name: "Saarland - Medieninformationen "
+    bundesland: "Testwebsites"
+    url: "https://www.saarland.de/mbk/DE/aktuelles/medieninformationen"
+    selectors: ["div.content.small-12.columns"]
+    mode: "text"
+
 # ------------------------------------------------------ Deutschland Batterie/BESS Monitoring ------------------------------------------------------
 
   - name: "N-Energie Netz - Ausschreibung "
