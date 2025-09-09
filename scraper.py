@@ -89,6 +89,28 @@ def normalize_for_hash(text: str) -> str:
 
     return text
 
+"""
+# Erweiterte Normalisierung von Hash um technische Änderungen die eine Referenz im Selektorblock haben auszuschließen 
+### weniger falls errors?? 
+def normalize_for_hash(text: str) -> str:
+    text = re.sub(r"\s+", " ", text).strip()
+    
+    # ASP.NET spezifische Artefakte
+    text = re.sub(r'DependencyHandler\.ashx\?[^"\'>\s]*', '[DEPENDENCY_HANDLER]', text)
+    text = re.sub(r'WebResource\.ashx\?[^"\'>\s]*', '[WEB_RESOURCE]', text)
+    text = re.sub(r'ScriptResource\.ashx\?[^"\'>\s]*', '[SCRIPT_RESOURCE]', text)
+    
+    # Cache-Buster und Versionshashes
+    text = re.sub(r'[?&]v=[a-f0-9]{8,}', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'[?&]t=\d{10,}', '', text)  # Unix timestamps
+    
+    # Bestehende Regeln...
+    text = re.sub(r'\b[a-f0-9]{32,}\b', '[TECH_ID]', text, flags=re.IGNORECASE)
+    text = re.sub(r'[?&]sessionid=[a-f0-9]{20,}', '', text, flags=re.IGNORECASE)
+    
+    return text
+"""
+
 
 def split_paragraphs(text: str) -> list[str]:
     # robuste Absatzliste aus Text mit \n
@@ -145,6 +167,26 @@ def added_paragraphs_html(old_text: str, new_text: str, site_name: str = "") -> 
 
     return paragraphs_to_html(added)
 
+
+def rfc2822(ts_iso: str) -> str:
+    dt_obj = dt.datetime.fromisoformat(ts_iso)
+    from email.utils import format_datetime
+    if dt_obj.tzinfo is None:
+        dt_obj = dt_obj.replace(tzinfo=dt.timezone.utc)
+    return format_datetime(dt_obj)
+
+
+def _safe_rfc2822(ts: Optional[str]) -> str:
+    if not ts:
+        return ""
+    try:
+        return rfc2822(ts)
+    except Exception:
+        return ts  # Fallback, um nicht hart zu crashen
+
+
+def _event_ts(ev: Dict[str, Any]) -> Optional[str]:
+    return ev.get("detected_at") or ev.get("checked_at") or ev.get("first_seen") or ev.get("fetched_at")
 
 # ======================================================================================================================
 
@@ -407,22 +449,26 @@ def extract(html_text: str, selectors: List[str], mode: str, *, site_name: str =
 ### Build elements of RSS Article
 
 def build_item_description(ev: Dict[str, Any]) -> str:
-    def _fmt(ts: str) -> str:
+    def _fmt(ts: Optional[str]) -> str:
+        if not ts:
+            return ""
         try:
             return rfc2822(ts)
         except Exception:
-            return ts or ""
+            return ts  # Fallback: ungeparst anzeigen
 
-    # KORREKTUR: first_seen vs. fetched_at verwenden
-    first_seen = ev.get('first_seen', ev.get('fetched_at', ''))  # Fallback für Kompatibilität
-    checked_at = ev.get('checked_at', '')
-    selectors_used = ev.get('selectors_used') or ev.get('selectors') or []
-    selectors_txt = ", ".join(selectors_used) if selectors_used else "–"
-    used_nodes = ev.get('used_nodes', '')
+    detected_at = ev.get("detected_at")
+    checked_at  = ev.get("checked_at")
+    first_seen  = ev.get("first_seen")  # seit wann überwacht
+
+    selectors_used = ev.get("selectors_used") or ev.get("selectors") or []
+    selectors_txt  = ", ".join(selectors_used) if selectors_used else "–"
+    used_nodes     = ev.get("used_nodes", "")
 
     header = (
-        f"<p><strong>Stand (Inhalt):</strong> {rss_escape(_fmt(first_seen))}<br>"
+        f"<p><strong>Erkannt (Änderung):</strong> {rss_escape(_fmt(detected_at))}<br>"
         f"<strong>Zuletzt geprüft:</strong> {rss_escape(_fmt(checked_at))}<br>"
+        f"<strong>Seit Monitoring:</strong> {rss_escape(_fmt(first_seen))}<br>"
         f"<strong>Selektoren:</strong> {rss_escape(selectors_txt)}<br>"
         f"<strong>Genutzte Elemente:</strong> {rss_escape(used_nodes)}</p>"
     )
@@ -455,6 +501,7 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
             "hash": None,
             "current_content": None,
             "first_seen": now_iso,
+            "detected_at": now_iso,
             "last_checked": now_iso,
             "last_change": None,
             "consecutive_errors": 0,
@@ -485,11 +532,12 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
                     "bundesland": cfg.bundesland,
                     "url": cfg.url,
                     "first_seen": now_iso,
+                    "detected_at": now_iso,
                     "checked_at": now_iso,
                     "selectors": cfg.selectors,
                     "selectors_used": [],
                     "used_nodes": "",
-                    "aenderungen_html": f"<p><strong>⚠️ Website nicht erreichbar</strong><br>Die Seite konnte 3x in Folge nicht abgerufen werden.</p>",
+                    "aenderungen_html": f"<p><strong>Website nicht erreichbar</strong><br>Die Seite konnte 3x in Folge nicht abgerufen werden.</p>",
                     "bisheriger_html": "",
                 })
 
@@ -538,11 +586,12 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
                 "bundesland": cfg.bundesland,
                 "url": cfg.url,
                 "first_seen": now_iso,
+                "detected_at": now_iso,
                 "checked_at": meta["checked_at"],
                 "selectors": meta["selectors"],
                 "selectors_used": meta["selectors_used"],
                 "used_nodes": meta["used_nodes"],
-                "aenderungen_html": "<p><em>✓ Erste Erfassung - Monitoring gestartet.</em></p>",
+                "aenderungen_html": "<p><em>Erste Erfassung - Monitoring gestartet.</em></p>",
                 "bisheriger_html": f"<div style='max-height:400px;overflow-y:auto'>{display_text}</div>",
             })
 
@@ -580,7 +629,8 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
             print(f"WARNING {cfg.name}: Diff-Berechnung fehlgeschlagen: {e}")
             added_html = "<p><em>Änderungen konnten nicht berechnet werden</em></p>"
 
-        print(f"{cfg.name}: ÄNDERUNG ERKANNT! Hash {str(last_hash)[:12]} -> {h[:12]}")
+        print(f"{cfg.name}: ÄNDERUNG ERKANNT! Hash {str(last_hash)[:12]} -> {h[:12]}"
+              f"Änderung besteht aus: {added_html}")
 
         # State aktualisieren
         state["sites"][slug].update({
@@ -597,6 +647,7 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
             "bundesland": cfg.bundesland,
             "url": cfg.url,
             "first_seen": site_state.get("first_seen", now_iso),
+            "detected_at": now_iso,
             "checked_at": meta["checked_at"],
             "selectors": meta["selectors"],
             "selectors_used": meta["selectors_used"],
@@ -648,14 +699,6 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
         return None
 
 
-def rfc2822(ts_iso: str) -> str:
-    dt_obj = dt.datetime.fromisoformat(ts_iso)
-    from email.utils import format_datetime
-    if dt_obj.tzinfo is None:
-        dt_obj = dt_obj.replace(tzinfo=dt.timezone.utc)
-    return format_datetime(dt_obj)
-
-
 # ======================================================================================================================
 ### Generate single feeds for each screened website
 
@@ -671,28 +714,32 @@ def generate_feeds_from_state(state: Dict[str, Any], feeds_path: str, retention_
     items_by_slug: Dict[str, List[Dict[str, Any]]] = {}
     for ev in state.get("items", []):
         if ev["slug"] in active_slugs:
-            # KORREKTUR: first_seen für Datum verwenden, falls vorhanden
-            event_date = ev.get("first_seen", ev.get("fetched_at", ""))
-            if event_date:
-                ev_dt = dt.datetime.fromisoformat(event_date)
+            ts = _event_ts(ev)
+            if ts:
+                ev_dt = dt.datetime.fromisoformat(ts)
                 if ev_dt >= cutoff_dt:
                     items_by_slug.setdefault(ev["slug"], []).append(ev)
 
     for slug, evs in items_by_slug.items():
-        evs.sort(key=lambda e: e.get("first_seen", e.get("fetched_at", "")), reverse=True)
+        # Sortiere nach Ereigniszeit absteigend
+        evs.sort(key=lambda e: _event_ts(e) or "", reverse=True)
+
         meta = state["sites"].get(slug, {})
         name = meta.get("name", slug)
         url = meta.get("url", "")
         rss_items = []
+
         for ev in evs:
-            event_date = ev.get("first_seen", ev.get("fetched_at", ""))
+            ts = _event_ts(ev) or now_utc().isoformat()
+            ts_human = ts[:19] + "Z" if "T" in ts else ts
             rss_items.append({
-                "title": f"Aktualisierung: {name} ({event_date[:19]}Z)",
+                "title": f"Aktualisierung: {name} ({ts_human})",
                 "link": url,
-                "guid": f"{slug}:{event_date}",
-                "pubDate": rfc2822(event_date),
+                "guid": f"{slug}:{ts}",  # GUID stabil auf Event-Zeit
+                "pubDate": _safe_rfc2822(ts),
                 "description": build_item_description(ev),
             })
+
         xml = make_rss(
             channel_title=f"Aktualisierungen – {name}",
             channel_link=url,
@@ -706,12 +753,13 @@ def generate_feeds_from_state(state: Dict[str, Any], feeds_path: str, retention_
     ev_all: List[Dict[str, Any]] = []
     for ev in state.get("items", []):
         if ev["slug"] in active_slugs:
-            event_date = ev.get("first_seen", ev.get("fetched_at", ""))
-            if event_date:
-                ev_dt = dt.datetime.fromisoformat(event_date)
+            ts = _event_ts(ev)
+            if ts:
+                ev_dt = dt.datetime.fromisoformat(ts)
                 if ev_dt >= cutoff_dt:
                     ev_all.append(ev)
-    ev_all.sort(key=lambda e: e.get("first_seen", e.get("fetched_at", "")), reverse=True)
+
+    ev_all.sort(key=lambda e: _event_ts(e) or "", reverse=True)
 
     by_bl: Dict[str, List[Dict[str, Any]]] = {}
     for ev in ev_all:
@@ -720,14 +768,16 @@ def generate_feeds_from_state(state: Dict[str, Any], feeds_path: str, retention_
     for bl, evs in by_bl.items():
         rss_items = []
         for ev in evs:
-            event_date = ev.get("first_seen", ev.get("fetched_at", ""))
+            ts = _event_ts(ev) or now_utc().isoformat()
+            ts_human = ts[:19] + "Z" if "T" in ts else ts
             rss_items.append({
-                "title": f"{ev['name']} – Update {event_date[:19]}Z",
+                "title": f"{ev['name']} – Update {ts_human}",
                 "link": ev["url"],
-                "guid": f"{ev['slug']}:{event_date}",
-                "pubDate": rfc2822(event_date),
+                "guid": f"{ev['slug']}:{ts}",
+                "pubDate": _safe_rfc2822(ts),
                 "description": build_item_description(ev),
             })
+
         xml = make_rss(
             channel_title=f"Regional-/Entwicklungspläne – {bl}",
             channel_link="https://example.invalid/",
