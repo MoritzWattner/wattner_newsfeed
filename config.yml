@@ -17,6 +17,17 @@ sites:
     selectors: ["div.content.small-12.columns"]
     mode: "text"
 
+  - name: "Wesermarsch - News/Presse "
+    bundesland: "Testwebsites"
+    url: "https://wesermarsch.de/aktuelles/allgemein/"
+    selectors: ["section#content.full-width"]
+    mode: "text"
+    
+  - name: "Landkreis München - Nachrichten "
+    bundesland: "Testwebsites"
+    url: "https://www.landkreis-muenchen.de/nachrichten/"
+    selectors: ["div#rs_read_this.maincontent"]
+    mode: "text"
 # ------------------------------------------------------ Deutschland Batterie/BESS Monitoring ------------------------------------------------------
 
   - name: "N-Energie Netz - Ausschreibung "
@@ -248,25 +259,25 @@ sites:
   - name: "Saarland - Landesentwicklungsplan"
     bundesland: "Saarland"
     url: "https://www.saarland.de/mibs/DE/portale/landesplanung/informationen/verteilerseite_landesentwicklungsplan/landesentwicklungsplan_node"
-    selectors: ["#rs_start"]
+    selectors: ["main#rs_start.main"]
     mode: "text"  # "text" (standard) oder "html"
   
   - name: "Saarland - Landesentwicklungsplan Neuaufstellung"
     bundesland: "Saarland"
     url: "https://www.saarland.de/mibs/DE/portale/landesplanung/informationen/verteilerseite_neuaufstellung_lep/neuaufstellung-lep_node"
-    selectors: ["#rs_start"]
+    selectors: ["main#rs_start.main"]
     mode: "text"  # "text" (standard) oder "html"
 
   - name: "Saarland - Landesentwicklungsplan Medieninformationen"
     bundesland: "Saarland"
     url: "https://www.saarland.de/mibs/DE/aktuelles/newsletter/medieninformationen/_documents/2023/pm139_2023-08-22-LEP"
-    selectors: ["#rs_start"]
+    selectors: ["main#rs_start.main"]
     mode: "text"  # "text" (standard) oder "html"
     
   - name: "Saarland - Landesentwicklungsplan Klim, ROK und Windkraft"
     bundesland: "Saarland"
     url: "https://www.saarland.de/mibs/DE/portale/landesplanung/informationen/verteilerseite_klima_rok_windkraft/klima-rok-windkraft_node"
-    selectors: ["#rs_start"]
+    selectors: ["main#rs_start.main"]
     mode: "text"  # "text" (standard) oder "html"
   
   # ------------------------------------------------------ RROP Hessen -----------------------------------------------------------------
