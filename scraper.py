@@ -136,8 +136,24 @@ def added_paragraphs_html(old_text: str, new_text: str, site_name: str = "") -> 
         # Erste Erfassung: keine "Änderungen" anzeigen
         return "<p><em>Erste Erfassung - keine Änderungen zu vergleichen.</em></p>"
 
-    old_pars = split_paragraphs(old_text)
-    new_pars = split_paragraphs(new_text)
+    # --- NEU: Eingaben vereinheitlichen -> Plaintext (HTML-Tags entfernen)
+    def _to_plain(s: str) -> str:
+        if not s:
+            return ""
+        if "<" in s and ">" in s:
+            try:
+                from bs4 import BeautifulSoup
+                return BeautifulSoup(s, "lxml").get_text(separator="\n", strip=True)
+            except Exception:
+                pass
+        return s
+
+    old_plain = _to_plain(old_text)
+    new_plain = _to_plain(new_text)
+
+    # Ab hier wie gehabt – aber mit Plaintext weiterarbeiten
+    old_pars = split_paragraphs(old_plain)
+    new_pars = split_paragraphs(new_plain)
 
     # Einheitliche minimale Normalisierung für alle Sites
     old_pars_norm = [normalize_for_hash(p) for p in old_pars]
@@ -148,24 +164,19 @@ def added_paragraphs_html(old_text: str, new_text: str, site_name: str = "") -> 
 
     for tag, i1, i2, j1, j2 in sm.get_opcodes():
         if tag == "insert":
-            added.extend(new_pars[j1:j2])  # Original-Absätze verwenden, nicht normalisierte
+            added.extend(new_pars[j1:j2])  # Original-Absätze (Plaintext) verwenden
         elif tag == "replace":
-            # Alle ersetzten Absätze als potentielle Änderung betrachten
-            # Aber prüfen ob substantiell (mehr als nur tech. Artefakte geändert)
             for old_idx, new_idx in zip(range(i1, i2), range(j1, j2)):
                 if old_idx < len(old_pars_norm) and new_idx < len(new_pars_norm):
-                    old_clean = re.sub(r'\[TECH_ID\]|\[SESSION\]|\[SEITENAUFRUF\]|\[GENERIERUNG\]', '',
-                                       old_pars_norm[old_idx])
-                    new_clean = re.sub(r'\[TECH_ID\]|\[SESSION\]|\[SEITENAUFRUF\]|\[GENERIERUNG\]', '',
-                                       new_pars_norm[new_idx])
-
+                    old_clean = re.sub(r'\[TECH_ID\]|\[SESSION\]|\[SEITENAUFRUF\]|\[GENERIERUNG\]', '', old_pars_norm[old_idx])
+                    new_clean = re.sub(r'\[TECH_ID\]|\[SESSION\]|\[SEITENAUFRUF\]|\[GENERIERUNG\]', '', new_pars_norm[new_idx])
                     if old_clean.strip() != new_clean.strip():
                         added.append(new_pars[new_idx])
 
     if not added:
         return "<p><em>Keine neuen oder substantiell geänderten Inhalte erkannt.</em></p>"
 
-    return paragraphs_to_html(added)
+    return paragraphs_to_html(added)  # <p>…</p> mit escapetem Text
 
 
 def rfc2822(ts_iso: str) -> str:
