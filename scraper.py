@@ -663,7 +663,7 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
             "selectors": meta["selectors"],
             "selectors_used": meta["selectors_used"],
             "used_nodes": meta["used_nodes"],
-            "aenderungen_html": added_html,
+            "aenderungen_html": f"<div style='max-height:400px;overflow-y:auto>{added_html}</div>",
             "bisheriger_html": f"<div style='max-height:400px;overflow-y:auto'>{old_content}</div>",
         })
 
