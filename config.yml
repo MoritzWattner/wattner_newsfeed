@@ -4,7 +4,7 @@
 storage_path: "./data"
 feeds_path: "./feeds"
 feed_retention_days: 120
-user_agent: "DE-Plan-Feed-Watcher/1.0 (kontakt@example.de)"
+user_agent: "DE-Plan-Feed-Watcher/1.0"
 
 # Hinweis: Bundesland ist frei wählbar (String). Nutze konsistent die offiziellen Namen.
 sites:
@@ -185,7 +185,7 @@ sites:
   - name: "Landkreis Ammerland - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
     url: "https://www.ammerland.de/Service/Von-A-Z/Dienstleistungen/Regionalplanung-Regionales-Raumordnungsprogramm-RROP-.php?ModID=10&FID=2843.2080.1"
-    selectors: [".column-md-1.column-4x5"]
+    selectors: ["div.column-3x4"]
     mode: "text"  # "text" (standard) oder "html"
 
   - name: "Landkreis Cloppenburg - Regionaler Raumordnungsplan"
@@ -250,7 +250,7 @@ sites:
 
   - name: "Landkreis Osterholz - Regionaler Raumordnungsplan"
     bundesland: "Niedersachsen"
-    url: "https://www.lk-row.de/portal/seiten/regionales-raumordnungsprogramm-rrop-des-landkreises-1072-23700.html"
+    url: "https://www.landkreis-osterholz.de/unser-landkreis/der-landkreis-im-ueberblick/daten-und-fakten/nutzungsstruktur/regionales-raumordnungsprogramm/"
     selectors: ["#content"]
     mode: "text"  # "text" (standard) oder "html"
     
