@@ -128,15 +128,18 @@ def paragraphs_to_html(paragraphs: list[str]) -> str:
     return "".join(f"<p>{html.escape(p)}</p>" for p in paragraphs)
 
 
-def added_paragraphs_html(old_text: str, new_text: str, site_name: str = "") -> str:
-    """Verbesserte Diff-Erkennung für Absätze - einheitlich für alle Sites"""
+def highlighted_content_html(old_text: str, new_text: str, site_name: str = "") -> str:
+    """
+    Gibt den AKTUELLEN Inhalt zurück, mit grün markierten Neuheiten.
+    """
     import difflib
 
     if not old_text.strip():
-        # Erste Erfassung: keine "Änderungen" anzeigen
-        return "<p><em>Erste Erfassung - keine Änderungen zu vergleichen.</em></p>"
+        # Erste Erfassung: Alles ist "neu", aber nicht markieren
+        new_pars = split_paragraphs(new_text)
+        return paragraphs_to_html(new_pars)
 
-    # --- NEU: Eingaben vereinheitlichen -> Plaintext (HTML-Tags entfernen)
+    # Zu Plaintext konvertieren
     def _to_plain(s: str) -> str:
         if not s:
             return ""
@@ -151,32 +154,45 @@ def added_paragraphs_html(old_text: str, new_text: str, site_name: str = "") -> 
     old_plain = _to_plain(old_text)
     new_plain = _to_plain(new_text)
 
-    # Ab hier wie gehabt – aber mit Plaintext weiterarbeiten
     old_pars = split_paragraphs(old_plain)
     new_pars = split_paragraphs(new_plain)
 
-    # Einheitliche minimale Normalisierung für alle Sites
+    # Normalisieren für Vergleich
     old_pars_norm = [normalize_for_hash(p) for p in old_pars]
     new_pars_norm = [normalize_for_hash(p) for p in new_pars]
 
     sm = difflib.SequenceMatcher(None, old_pars_norm, new_pars_norm)
-    added: list[str] = []
+
+    # HTML aufbauen: Alle Absätze des NEUEN Texts, neue markiert
+    result = []
 
     for tag, i1, i2, j1, j2 in sm.get_opcodes():
-        if tag == "insert":
-            added.extend(new_pars[j1:j2])  # Original-Absätze (Plaintext) verwenden
+        if tag == "equal":
+            # Unveränderte Absätze: Normal anzeigen
+            for idx in range(j1, j2):
+                result.append(f"<p>{html.escape(new_pars[idx])}</p>")
+
+        elif tag == "insert":
+            # Komplett neue Absätze: Grün markieren
+            for idx in range(j1, j2):
+                result.append(f"<p><mark style='background-color: #d4edda;'>{html.escape(new_pars[idx])}</mark></p>")
+
         elif tag == "replace":
+            # Geänderte Absätze: Prüfen ob substantiell geändert
             for old_idx, new_idx in zip(range(i1, i2), range(j1, j2)):
                 if old_idx < len(old_pars_norm) and new_idx < len(new_pars_norm):
-                    old_clean = re.sub(r'\[TECH_ID\]|\[SESSION\]|\[SEITENAUFRUF\]|\[GENERIERUNG\]', '', old_pars_norm[old_idx])
-                    new_clean = re.sub(r'\[TECH_ID\]|\[SESSION\]|\[SEITENAUFRUF\]|\[GENERIERUNG\]', '', new_pars_norm[new_idx])
+                    old_clean = re.sub(r'\[TECH_ID\]|\[SESSION\]|\[PAGELOAD\]', '', old_pars_norm[old_idx])
+                    new_clean = re.sub(r'\[TECH_ID\]|\[SESSION\]|\[PAGELOAD\]', '', new_pars_norm[new_idx])
+
                     if old_clean.strip() != new_clean.strip():
-                        added.append(new_pars[new_idx])
+                        # Substantielle Änderung: Markieren
+                        result.append(
+                            f"<p><mark style='background-color: #d4edda;'>{html.escape(new_pars[new_idx])}</mark></p>")
+                    else:
+                        # Nur technische Änderung: Normal
+                        result.append(f"<p>{html.escape(new_pars[new_idx])}</p>")
 
-    if not added:
-        return "<p><em>Keine neuen oder substantiell geänderten Inhalte erkannt.</em></p>"
-
-    return paragraphs_to_html(added)  # <p>…</p> mit escapetem Text
+    return "".join(result) if result else "<p><em>Keine Änderungen erkannt.</em></p>"
 
 
 def rfc2822(ts_iso: str) -> str:
@@ -466,14 +482,14 @@ def build_item_description(ev: Dict[str, Any]) -> str:
         try:
             return rfc2822(ts)
         except Exception:
-            return ts  # Fallback: ungeparst anzeigen
+            return ts
 
     detected_at = ev.get("detected_at")
     checked_at  = ev.get("checked_at")
-    first_seen  = ev.get("first_seen")  # seit wann überwacht
+    first_seen  = ev.get("first_seen")
 
     selectors_used = ev.get("selectors_used") or ev.get("selectors") or []
-    selectors_txt  = ", ".join(selectors_used) if selectors_used else "–"
+    selectors_txt  = ", ".join(selectors_used) if selectors_used else "—"
     used_nodes     = ev.get("used_nodes", "")
 
     header = (
@@ -484,15 +500,16 @@ def build_item_description(ev: Dict[str, Any]) -> str:
         f"<strong>Genutzte Elemente:</strong> {rss_escape(used_nodes)}</p>"
     )
 
-    changes_block = ""
-    if ev.get("aenderungen_html"):
-        changes_block = "<h3>Änderungen (neue Inhalte)</h3>" + ev["aenderungen_html"]
+    # NEU: Nur noch ein Block mit Highlighting
+    content_block = ""
+    if ev.get("highlighted_content_html"):
+        content_block = (
+            "<h3>Aktueller Inhalt</h3>"
+            "<p><em>(Grün markiert = neu hinzugefügt)</em></p>"
+            + ev["highlighted_content_html"]
+        )
 
-    previous_block = ""
-    if ev.get("bisheriger_html"):
-        previous_block = "<h3>Bisheriger Inhalt</h3>" + ev["bisheriger_html"]
-
-    return header + "<hr/>" + changes_block + "<hr/>" + previous_block
+    return header + "<hr/>" + content_block
 
 
 # ======================================================================================================================
@@ -535,8 +552,8 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
 
             print(f"WARNING {cfg.name}: Fetch failed (attempt #{site_state['consecutive_errors']})")
 
-            # Nach 3 Fehlversuchen einen Fehler-Item erstellen
-            if site_state["consecutive_errors"] == 3:
+            # Nach 5 Fehlversuchen einen Fehler-Item erstellen
+            if site_state["consecutive_errors"] == 5:
                 state["items"].append({
                     "slug": slug,
                     "name": cfg.name,
@@ -548,8 +565,7 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
                     "selectors": cfg.selectors,
                     "selectors_used": [],
                     "used_nodes": "",
-                    "aenderungen_html": f"<p><strong>Website nicht erreichbar</strong><br>Die Seite konnte 3x in Folge nicht abgerufen werden.</p>",
-                    "bisheriger_html": "",
+                    "highlighted_content_html": f"<p><strong>Website nicht erreichbar</strong><br>Die Seite konnte 5x in Folge nicht abgerufen werden.</p>",
                 })
 
             return None
@@ -602,8 +618,7 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
                 "selectors": meta["selectors"],
                 "selectors_used": meta["selectors_used"],
                 "used_nodes": meta["used_nodes"],
-                "aenderungen_html": "<p><em>Erste Erfassung - Monitoring gestartet.</em></p>",
-                "bisheriger_html": f"<div style='max-height:400px;overflow-y:auto'>{display_text}</div>",
+                "highlighted_content_html": f"<div style='max-height:600px;overflow-y:auto'><p><em>Erste Erfassung - Monitoring gestartet.</em></p>{display_text}</div>",
             })
 
             print(f"{cfg.name}: Erste Erfassung erfolgreich")
@@ -633,15 +648,14 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
             print(f"WARNING {cfg.name}: Inkonsistenter State - Hash vorhanden aber kein Content")
             old_content = "<p><em>Vorheriger Inhalt nicht verfügbar (Dateninkonsistenz)</em></p>"
 
-        # Änderungen berechnen
+        # Änderungen berechnen mit neuer Funktion
         try:
-            added_html = added_paragraphs_html(old_content, display_text, cfg.name)
+            highlighted_html = highlighted_content_html(old_content, display_text, cfg.name)
         except Exception as e:
             print(f"WARNING {cfg.name}: Diff-Berechnung fehlgeschlagen: {e}")
-            added_html = "<p><em>Änderungen konnten nicht berechnet werden</em></p>"
+            highlighted_html = f"<p>{html.escape(display_text[:2000])}</p>"
 
-        print(f"{cfg.name}: ÄNDERUNG ERKANNT! Hash {str(last_hash)[:12]} -> {h[:12]}"
-              f"Änderung besteht aus: {added_html}")
+        print(f"{cfg.name}: ÄNDERUNG ERKANNT! Hash {str(last_hash)[:12]} -> {h[:12]}")
 
         # State aktualisieren
         state["sites"][slug].update({
@@ -663,8 +677,7 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
             "selectors": meta["selectors"],
             "selectors_used": meta["selectors_used"],
             "used_nodes": meta["used_nodes"],
-            "aenderungen_html": f"<div style='max-height:400px;overflow-y:auto>{added_html}</div>",
-            "bisheriger_html": f"<div style='max-height:400px;overflow-y:auto'>{old_content}</div>",
+            "highlighted_content_html": f"<div style='max-height:600px;overflow-y:auto'>{highlighted_html}</div>",
         })
 
         # Items-Liste begrenzen (effizienter mit deque wäre besser)
@@ -676,7 +689,7 @@ async def process_site(state: Dict[str, Any], client: httpx.AsyncClient, cfg: Si
             "fetched_at": now_iso,
             "hash": h,
             "excerpt": display_text[:2000],
-            "diff_html": added_html,
+            "diff_html": highlighted_html,
             "is_change": True
         }
 
@@ -732,7 +745,7 @@ def generate_feeds_from_state(state: Dict[str, Any], feeds_path: str, retention_
                     items_by_slug.setdefault(ev["slug"], []).append(ev)
 
     for slug, evs in items_by_slug.items():
-        # Sortiere nach Ereigniszeit absteigend
+        # Sortiere nach Ereigniszeit DESC
         evs.sort(key=lambda e: _event_ts(e) or "", reverse=True)
 
         meta = state["sites"].get(slug, {})
